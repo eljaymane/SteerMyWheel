@@ -8,14 +8,18 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Logging;
 
 namespace SteerMyWheel.Reader
 {
      public class CronParser
     {
+        private static ILogger<CronParser> _logger;
         public static ReaderStateContext _context;
         public static IState Parse(String line)
         {
+            if (_logger == null) _logger = _context._loggerFactory.CreateLogger<CronParser>();
+            _logger.LogInformation("[{time}] CronParser => Parsing line : {line}", DateTime.UtcNow, line);
             if (ParserConfig.IsScript(line)) return new NewScriptState(new Script(_context.currentRole,GetCron(line), GetName(line), GetPath(line),GetExecCommand(line), ParserConfig.IsEnabled(line)));
             if (ParserConfig.IsRole(line)) return new NewRoleState(GetRole(line));
             return null;
