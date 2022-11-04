@@ -1,0 +1,112 @@
+### ajout sauvegarde journaliere crontab (pour YLA fucked up)
+00 01 * * * crontab -l > crontab.txt
+#Ansible: Get Ullink Users
+45 09 29 * * /home/kch-front/scripts/misc1/bin/CheckUllinkUsers/getUllinkUserReport.sh > /home/kch-front/scripts/misc1/bin/CheckUllinkUsers/log/GetUllinkReport_$(date +\%Y\%m\%d).log
+#Ansible: Check Ullink Users
+50 09 29 * * /home/kch-front/scripts/misc1/bin/CheckUllinkUsers/CheckUllinkUsers.py > /home/kch-front/scripts/misc1/bin/CheckUllinkUsers/log/CheckUllinkUsers_$(date +\%Y\%m\%d).log
+#Ansible: Milan Reports
+#30 16 * * 1-5 /home/kch-front/scripts/misc1/bin/MilanReports.sh > /home/kch-front/scripts/misc1/log/MilanReports_$(date +\%Y\%m\%d).log
+#Ansible: backupfront
+00 02 * * 2-6 /home/kch-front/scripts/common/ext/launch_script_with_env.sh /home/kch-front/scripts/Backupfront/bin/backupfront.py -b > /home/kch-front/scripts/MorningCheckScripts/crontab/backupfront_$(date +\%Y\%m\%d).log 2>&1
+#Ansible: backupfront cleanup
+00 21 * * * /home/kch-front/scripts/Backupfront/bin/cleanup.py > /home/kch-front/scripts/MorningCheckScripts/crontab/cleanup_$(date +\%Y\%m\%d).log 2>&1
+#Ansible: backupfront clean logs
+59 23 * * 2-6 /home/kch-front/scripts/Backupfront/bin/clean_logs.py > /home/kch-front/scripts/MorningCheckScripts/crontab/cleanup_log_$(date +\%Y\%m\%d).log 2>&1
+#Ansible: Recuperation des logs diamond
+00 05 * * 2-6 /home/kch-front/scripts/common/ext/launch_script_with_env.sh /home/kch-front/scripts/BackupDiamond/BackupDiamondLauncher.py > /home/kch-front/scripts/BackupDiamond/log/BackupDiamond_$(date +\%Y\%m\%d).log
+#Ansible: Compression des logs rappatries
+00 22 * * 1-5 /home/kch-front/scripts/common/ext/launch_script_with_env.sh /home/kch-front/scripts/ZipBackupedLogs/ZipBackupedLogsLauncher.py
+#Ansible: MC-31 RETAIL Doublons
+05 08 * * 1-5 /home/kch-front/scripts/common/ext/launch_script_with_env.sh /home/kch-front/scripts/RetailDuplicatedStreamOrders/RetailDuplicatedStreamOrdersLauncher.py
+#Ansible: USMicrocapLauncher
+15 16 * * 1-5 /home/kch-front/scripts/USMicrocap/USMicrocapLauncher.py
+#Ansible: Cash equity trade report recap
+55 17 * * 1-5 /home/kch-front/scripts/common/ext/launch_script_with_env.sh /home/kch-front/scripts/CashEquityTradeReportRecap/CashEquityTradeReportRecapLauncher.py
+#Ansible: script_tools move_logs
+30 00 * * 1-5 /home/kch-front/scripts/tools/move_logs 
+30 00 * * 1-5 /home/kch-front/tools/Log_Mgt/move_logs >> /home/kch-front/tools/Log_Mgt/log/move_log_$(date +\%Y\%m\%d).log 2>&1
+#Ansible: auditSelector
+30 23 * * 1-5 /home/kch-front/scripts/auditSelector/bin/auditSelector
+#Ansible: Rapprochement carnet retail quotidien
+#00 22 * * 1-5 /home/kch-front/scripts/common/ext/launch_script_with_env.sh /home/kch-front/scripts/RetailDailyReconciliation/RetailDailyReconciliationLauncher.py
+#Ansible: irisDailyConfig autodeploy
+#01 06 * * 1-5 /home/kch-front/scripts/ul_iris/bin/irisDailyConfig -autodeploy
+#Ansible: irisDailyConfig recovery
+06 06 * * 1-5 /home/kch-front/scripts/ul_iris/bin/irisDailyConfig -recovery
+#Ansible: irisMaxExposure
+30 06 * * 2-6 /home/kch-front/scripts/ul_iris/bin/irisMaxExposure > /home/kch-front/scripts/ul_iris/log/irisMaxExposure_script.log 2>&1
+#Ansible: irisChangeAudit
+40 06 * * 2-6 /home/kch-front/scripts/ul_iris/bin/irisChangeAudit > /home/kch-front/scripts/ul_iris/log/irisChangeAudit_script.log 2>&1
+#Ansible: POSTRADE REPORT IDBLINK
+*/4 08-17 * * 1-5 /home/kch-front/scripts/IDBPostTradeReport/bin/postTradeReport.pl
+
+#Git Bridges Synchronisation
+45 19 * * 1-5 /home/kch-front/scripts/GitBridges/bin/prod_all_git_sync.sh > /home/kch-front/scripts/GitBridges/log/prod_all_git_synch_$(date +\%Y\%m\%d).log 2>&1
+50 19 * * 1-5 /home/kch-front/scripts/GitBridges/bin/uat_all_git_sync.sh > /home/kch-front/scripts/GitBridges/log/uat_all_git_synch_$(date +\%Y\%m\%d).log 2>&1
+#Ansible: Load QuantHouse securities
+15 08 * * 1-5  cd /home/kch-front/scripts/quanthouse-security-enricher && java -jar -DenvTarget=prod -Xms1g -Xmx6g quanthouse-security-enricher-1.1.5.jar
+35 06 * * 1-5  cd /home/kch-front/scripts/quanthouse-security-enricher && java -jar -DenvTarget=prod -Xms1g -Xmx6g quanthouse-security-enricher-1.1.5.jar
+50 06 * * 1-5  cd /home/kch-front/scripts/quanthouse-security-enricher && java -jar -DenvTarget=prod -Xms1g -Xmx6g quanthouse-security-enricher-1.1.5.jar
+#PRE-PROD QH MASTER
+#30 09 * * 1-5  cd /home/kch-front/scripts/quanthouse-security-enricher && java -jar -DenvTarget=prod -Xms1g -Xmx6g quanthouse-security-enricher-2.0.0_FOR_TEST.jar
+
+#Ansible: MC-126 ULLINK Chargement des comptes et positions clients
+15 07 * * 1-5 /home/kch-front/scripts/MorningCheckScripts/IRIS/bin/irisMorningCheck.pl > /home/kch-front/scripts/MorningCheckScripts/IRIS/log/run_irisMorningCheck.log 2>&1
+#Ansible: Load Market Trade Export
+#45 17 * * 1-5  cd /home/kch-front/scripts/market-trade-export && java -jar -DenvTarget=prod -DlaunchFileToItiviti=True -DlaunchTradesEnricher=True -DlaunchMarketAbuseOrders=True -DlaunchMarketAbuseTrades=True -Xms1g -Xmx2g market-trade-export-0.0.8.jar
+
+#MarketTradeExport: Clement
+40 11 * * 1-5  cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-morning.sh
+40 17 * * 1-5  cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-exclude-marketabuse.sh
+#15 14 * * 1-5  cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-exclude-marketabuse.sh
+00 17 * * 1-5  cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-delete.sh
+
+35 18 * * 1-5  cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-retail.sh
+30 22 * * 1-5  cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-us.sh
+
+#Dark Pool Loader: auteur : cmichel
+00 7 * * 1-5 cd /home/kch-front/scripts/dark-security-enricher && ./bin/dark-security-launcher.sh
+#45 09 * * 1-5 cd /home/kch-front/scripts/dark-security-enricher && ./bin/dark-security-launcher_test.sh
+10 07 * * 1-5 cd /home/kch-front/scripts/qh-flatfiles-enricher && ./bin/qh-flatfiles-enricher.sh
+
+#GenbrokerAllocThesee: auteur olao
+##00 18 * * 1-5 cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-genbrokeralloc_eur.sh
+#25 14 * * 1-5 cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-genbrokeralloc_eur.sh
+##30 22 * * 1-5 cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-genbrokeralloc_amer.sh
+#15 19 * * 1-5 cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-genbrokeralloc_amer.sh
+##45 11 * * 1-5 cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-genbrokeralloc_asi.sh
+
+#TEMPO
+10 04 * * 2-5  cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-marketabuse.sh
+00 14 * * 6 cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-marketabuse.sh
+
+
+# Hugo: Quod dictionary
+00 20 * * 1-5 cd /home/kch-front/scripts/quod-dictionary && ./quod_launcher.sh
+30 7 * * 1-5 cd /home/kch-front/scripts/quod-dictionary && ./quod_launcher_delta.sh
+
+#Hugo: CACIB REPORT LP
+05 22 * * 1-5  cd /home/kch-front/scripts/market-trade-export && ./bin/market-trade-export-cacib.sh
+#Ansible: Rapprochement carnet retail quotidien - export VOV
+#45 18 * * 1-5 /home/kch-front/scripts/common/ext/launch_script_with_env.sh /home/kch-front/scripts/RetailDailyReconciliation/RetailDailyReconciliationLauncher.py -o
+
+# FixReportSender
+# Elo Mutual Pension Fund
+30 05 * * 1-5 cd /home/kch-front/scripts/fix-report-sender && ./bin/fix-report-sender_elo.sh
+
+# Clément: Datalicense Service
+#40 17 * * 1-5  cd /home/kch-front/scripts/bbg-datalicense-service && ./bin/patch-dataset.sh
+#15 18 * * 1-5  cd /home/kch-front/scripts/bbg-datalicense-service && ./bin/bbg-enrich-kc.sh
+
+#Clement: Short codes automation
+40 17 * * 1-5  cd /home/kch-front/scripts/short-codes-automation && ./bin/short-codes-automation.sh
+
+
+#----- MIGRATION FROM TELPFO01 (Clement) ------
+
+#ForceToCancel
+12 08 * * 1-5 /export/scripts/ForceToCancel/bin/ForceToCancel.pl
+
+#------- Migration from TELBKP02 (Pierre) -------------
+#Reports Xetra
+00 11 * * 1-5 $HOME/scripts/XetraReports/bin/XetraReports.sh > $HOME/scripts/log/XetraReports_$(date +\%Y\%m\%d).log
