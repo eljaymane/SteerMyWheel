@@ -1,13 +1,8 @@
 ﻿using SteerMyWheel.Reader.ReaderStates;
-using SteerMyWheel.Model;
-using SteerMyWheel.Writer;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
+using SteerMyWheel.CronParsing.Model;
 
 namespace SteerMyWheel.Reader
 {

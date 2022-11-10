@@ -1,4 +1,5 @@
-﻿using SteerMyWheel.Model;
+﻿using SteerMyWheel.CronParsing;
+using SteerMyWheel.CronParsing.Model;
 using SteerMyWheel.Writer;
 using System;
 using System.Collections.Generic;

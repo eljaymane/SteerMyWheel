@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SteerMyWheel.Model
+namespace SteerMyWheel.CronParsing.Model
 {
     public class Host : IWritable
     {

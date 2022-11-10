@@ -1,15 +1,12 @@
 ﻿using Neo4jClient;
-using SteerMyWheel.Reader;
-using SteerMyWheel.Model;
-using SteerMyWheel.Writer;
+using SteerMyWheel.CronParsing.Model;
 using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using SteerMyWheel.Reader;
+using SteerMyWheel.Writer;
 
-namespace SteerMyWheel.Writers.Neo4j
+namespace SteerMyWheel.CronParsing.Writers.Neo4j
 {
     public class Neo4jWriter : IWriter<IWritable>,IDisposable
     {

@@ -1,13 +1,14 @@
 ﻿using SteerMyWheel.Reader.ReaderStates;
-using SteerMyWheel.Model;
+using SteerMyWheel.CronParsing;
 using SteerMyWheel.Writer;
-using SteerMyWheel.Writers.Neo4j;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Neo4j.Driver;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using SteerMyWheel.CronParsing.Model;
+using SteerMyWheel.CronParsing.Writers.Neo4j;
 
 namespace SteerMyWheel.Reader
 {

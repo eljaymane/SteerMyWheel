@@ -1,6 +1,6 @@
 ﻿using SteerMyWheel.Reader.Config;
 using SteerMyWheel.Reader.ReaderStates;
-using SteerMyWheel.Model;
+using SteerMyWheel.CronParsing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
+using SteerMyWheel.CronParsing.Model;
 
 namespace SteerMyWheel.Reader
 {
