@@ -1,4 +1,5 @@
-﻿using SteerMyWheel.Model;
+﻿using SteerMyWheel.CronParsing;
+using SteerMyWheel.CronParsing.Model;
 using SteerMyWheel.Writer;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ namespace SteerMyWheel.Reader.ReaderStates
 {
     public class NewScriptState : IState
     {
-        public Script newScript { get; set; }
-        public NewScriptState(Script script)
+        public ScriptExecution newScript { get; set; }
+        public NewScriptState(ScriptExecution script)
         {
             this.newScript = script;
         }

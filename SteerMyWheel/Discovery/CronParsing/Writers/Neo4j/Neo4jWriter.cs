@@ -1,15 +1,12 @@
 ﻿using Neo4jClient;
-using SteerMyWheel.Reader;
-using SteerMyWheel.Model;
-using SteerMyWheel.Writer;
+using SteerMyWheel.CronParsing.Model;
 using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using SteerMyWheel.Reader;
+using SteerMyWheel.Writer;
 
-namespace SteerMyWheel.Writers.Neo4j
+namespace SteerMyWheel.CronParsing.Writers.Neo4j
 {
     public class Neo4jWriter : IWriter<IWritable>,IDisposable
     {
@@ -32,22 +29,22 @@ namespace SteerMyWheel.Writers.Neo4j
         {
             switch (value)
             {
-                case Script script:
+                case ScriptExecution script:
                     _logger.LogInformation("[{time}] Neo4jWriter => Creating script... : {script}", DateTime.UtcNow, script.ToString());
-                    this._graphClient.Cypher.Match("(host:Host)")
-                        .Where((Host host) => host.Name == context.currentHostName)
-                        .Create("(host)-[:HOSTS]->(script:Script $script)")
+                    this._graphClient.Cypher.Match("(host:RemoteHost)")
+                        .Where((RemoteHost host) => host.name == context.currentHostName)
+                        .Create("(host)-[:HOSTS]->(script:ScriptExecution $script)")
                         .WithParam("script", script)
                         .ExecuteWithoutResultsAsync().Wait();
                     _logger.LogInformation("[{time}] Neo4jWriter => Successfully created script {scriptName}", DateTime.UtcNow,script.name);
                         break;
                    
-                case Host host:
+                case RemoteHost host:
                     _logger.LogInformation("[{time}] Neo4jWriter => Creating host... : {host}", DateTime.UtcNow, host.ToString());
-                    await this._graphClient.Cypher.Create("(host:Host $host)")
+                    this._graphClient.Cypher.Create("(host:RemoteHost $host)")
                         .WithParam("host", host)
-                        .ExecuteWithoutResultsAsync();
-                    _logger.LogInformation("[{time}] Neo4jWriter => Successfully created host {hostName}", DateTime.UtcNow, host.Name);
+                        .ExecuteWithoutResultsAsync().Wait();
+                    _logger.LogInformation("[{time}] Neo4jWriter => Successfully created host {hostName}", DateTime.UtcNow, host.name);
                     break;
                      
             }

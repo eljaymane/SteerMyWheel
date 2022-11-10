@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SteerMyWheel.Model
+namespace SteerMyWheel.CronParsing.Model
 {
-    public class Script : IWritable
+    public class ScriptExecution : IWritable
     {
         public string role { get; set; }
         public string cron { get; set; }
@@ -14,7 +14,11 @@ namespace SteerMyWheel.Model
         public string execCommand { get; set; }
         public bool enabled { get; set; }
 
-        public Script(string role, string cron, string name, string path, string execCommand, bool enabled)
+        public ScriptExecution()
+        {
+
+        }
+        public ScriptExecution(string role, string cron, string name, string path, string execCommand, bool enabled)
         {
             this.role = role;
             this.cron = cron;

@@ -1,13 +1,14 @@
 ﻿using SteerMyWheel.Reader.ReaderStates;
-using SteerMyWheel.Model;
+using SteerMyWheel.CronParsing;
 using SteerMyWheel.Writer;
-using SteerMyWheel.Writers.Neo4j;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Neo4j.Driver;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using SteerMyWheel.CronParsing.Model;
+using SteerMyWheel.CronParsing.Writers.Neo4j;
 
 namespace SteerMyWheel.Reader
 {
@@ -21,11 +22,11 @@ namespace SteerMyWheel.Reader
         public string currentRole { get; set; }
         public string currentHostName { get; set; }
 
-        public ReaderStateContext(Host host,ILoggerFactory loggerFactory)
+        public ReaderStateContext(RemoteHost host,ILoggerFactory loggerFactory)
         {
             _loggerFactory = loggerFactory;
             _logger = loggerFactory.CreateLogger<ReaderStateContext>();
-            _logger.LogInformation("[{time}] ( ReaderContext ) ReaderContextInitializing => Host : {hostname}", DateTime.UtcNow,host.Name);
+            _logger.LogInformation("[{time}] ( ReaderContext ) ReaderContextInitializing => Host : {hostname}", DateTime.UtcNow,host.name);
             this.Writer = new Neo4jWriter("http://localhost:7474/","neo4j","Supervision!","neo4j",this);
             this.setState(new InitialState(host));
         }

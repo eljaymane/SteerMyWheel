@@ -10,6 +10,7 @@ namespace SteerMyWheel.Reader.Config
         public static string NameSimpleCase = "(.+\\/)";
         public static string NameJavaCase = @"(\w|\.|-)*(\.jar)";
         public static string Path = "(\\/)((\\w|-|_|[0-9])*\\/(\\w|-|_|[0-9])*)+[^.*\\.\\w]";
+        public static string RepositoryNameJava = "(?<=\\/scripts\\/)(.*)";
         public static bool isJava(string line) { return line.Contains("java"); }
         public static bool isStdoRedirect(string line) { return line.Contains(">"); }
         public static bool IsRole(String line)

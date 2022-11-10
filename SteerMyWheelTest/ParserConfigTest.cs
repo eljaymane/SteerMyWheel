@@ -4,14 +4,21 @@ using SteerMyWheel.Reader.Config;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SteerMyWheelTest
 {
     [TestClass]
-    internal class ParserConfigTest
+    public class ParserConfigTest
     {
-       
-    
+
+        [TestMethod]
+        public void Get_Repository_Name_Should_Return_Name_Java()
+        {
+            var line = "/home/kch-front/scripts/quanthouse-security-enricher";
+            var result = Regex.Match(line, ParserConfig.RepositoryNameJava).ToString();
+            Assert.AreEqual("quanthouse-security-enricher", result);
+        }
         #region IsRole
         [TestMethod]
         public void IsRole_Should_Return_True_If_Its_a_role_line()

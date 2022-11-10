@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteerMyWheel", "SteerMyWheel\SteerMyWheel.csproj", "{D1A979FD-28F1-48CE-B382-EEECC71F4784}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteerMyWheel", "SteerMyWheel\SteerMyWheel.csproj", "{D1A979FD-28F1-48CE-B382-EEECC71F4784}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteerMyWheelTest", "SteerMyWheelTest\SteerMyWheelTest.csproj", "{18C5E482-27BD-4F25-8ED2-57105F951480}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteerMyWheelTest", "SteerMyWheelTest\SteerMyWheelTest.csproj", "{18C5E482-27BD-4F25-8ED2-57105F951480}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,13 +1,8 @@
 ﻿using SteerMyWheel.Reader.ReaderStates;
-using SteerMyWheel.Model;
-using SteerMyWheel.Writer;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
+using SteerMyWheel.CronParsing.Model;
 
 namespace SteerMyWheel.Reader
 {
@@ -15,7 +10,7 @@ namespace SteerMyWheel.Reader
     {
         private ReaderStateContext _stateContext;
         private readonly String[] _cronFile;
-        public CronReader(String cronFilePath, Host host,ILoggerFactory loggerFactory)
+        public CronReader(String cronFilePath, RemoteHost host,ILoggerFactory loggerFactory)
         {
             _cronFile = File.ReadAllLines(cronFilePath);
             _stateContext = new ReaderStateContext(host,loggerFactory);
