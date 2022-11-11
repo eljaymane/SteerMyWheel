@@ -62,8 +62,8 @@ namespace SteerMyWheel.Workers.Git
             }
             
 
-        }
-
+            }
+            
         private async Task createNewRepository()
         {
             Logger.LogInformation("[{time}] Started cloning legacy repository {name} ..", DateTime.UtcNow, _scriptRepository.name);
