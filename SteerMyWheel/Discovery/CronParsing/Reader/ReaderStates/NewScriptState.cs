@@ -17,7 +17,7 @@ namespace SteerMyWheel.Reader.ReaderStates
 
         public async void handle(ReaderStateContext context)
         {
-            await context.Writer.WriteAsync(newScript);
+            await context._writer.WriteAsync(newScript);
         }
     }
 }

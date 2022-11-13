@@ -16,7 +16,7 @@ namespace SteerMyWheel.Reader.ReaderStates
         public async void handle(ReaderStateContext context)
         {
             context.currentHostName = this.remoteHost.name;
-            await context.Writer.WriteAsync(remoteHost);
+            await context._writer.WriteAsync(remoteHost);
         }
     }
 }

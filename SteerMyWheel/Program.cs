@@ -19,6 +19,7 @@ using System.Security.Authentication.ExtendedProtection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics.Metrics;
+using SteerMyWheel.Connectivity;
 
 namespace SteerMyWheel
 {
@@ -44,6 +45,11 @@ namespace SteerMyWheel
             configure.AddConsole()
             )
                     .AddTransient<GlobalConfig>()
+                    .AddTransient<NeoClient>()
+                    .AddTransient<Neo4jWriter>()
+                    .AddTransient<ReaderStateContext>()
+                    .AddTransient<CronReader>()
+                    .AddTransient<CronParser>()
                     .AddTransient<ScriptRepositoryService>());
             var host = builder.Build();
             WorkQueue<GitMigrationWorker> q = new WorkQueue<GitMigrationWorker>(loggerFactory,100);
@@ -53,10 +59,11 @@ namespace SteerMyWheel
             //q.Enqueue(test);
             //q.DeqeueAllAsync(CancellationToken.None);
             //Console.ReadKey();
-            CronReader _reader = new CronReader("C:/scripts.txt", new RemoteHost("PRDFRTAPP901", "PRDFRTAPP901", 22, "KCH-FRONT", "Supervision!"),loggerFactory);
-            _reader.Read();
+            var _reader = host.Services.GetRequiredService<CronReader>();
+            _reader.GetContext().Initialize(new RemoteHost("PRDFRTAPP901", "PRDFRTAPP901", 22, "kcm-front", "Supervision!"));
+            _reader.Read("C:/scripts.txt");
             var syncService = host.Services.GetRequiredService<ScriptRepositoryService>();
-            syncService.syncRepos();
+            syncService.syncRepos(new RemoteHost("PRDFRTAPP901","PRDFRTAPP901",22,"kcm-front","Supervision!"));
 
             host.RunAsync().Wait();
 

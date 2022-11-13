@@ -9,16 +9,21 @@ namespace SteerMyWheel.Reader
     public class CronReader
     {
         private ReaderStateContext _stateContext;
-        private readonly String[] _cronFile;
-        public CronReader(String cronFilePath, RemoteHost host,ILoggerFactory loggerFactory)
+        private CronParser _parser;
+        public CronReader(ReaderStateContext stateContext,CronParser parser)
         {
-            _cronFile = File.ReadAllLines(cronFilePath);
-            _stateContext = new ReaderStateContext(host,loggerFactory);
-            CronParser._context = _stateContext;
+            _stateContext = stateContext;
+            _parser = parser;
+            _parser.setContext(stateContext);
         }
 
-        public void Read()
+        public ReaderStateContext GetContext()
         {
+            return _stateContext;
+        }
+        public void Read(String cronFilePath)
+        {
+            var _cronFile = File.ReadAllLines(cronFilePath);
             foreach (var _line in _cronFile)
             {
                 if(_line != "") this.Parse(_line);
@@ -27,13 +32,13 @@ namespace SteerMyWheel.Reader
 
         public void Parse(String line)
         {
-            _stateContext.setState(CronParser.Parse(line));
+            _stateContext.setState(_parser.Parse(line));
         }
-        public void Write()
+        public async void Write()
         {
             if (_stateContext.currentState.GetType() != typeof(NewScriptState))
                 return;
-            this._stateContext.Writer.WriteAsync(((NewScriptState)_stateContext.currentState).newScript);
+            await this._stateContext._writer.WriteAsync(((NewScriptState)_stateContext.currentState).newScript);
         }
     }
 }

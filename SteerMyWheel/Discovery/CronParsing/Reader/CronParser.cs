@@ -15,11 +15,21 @@ namespace SteerMyWheel.Reader
 {
      public class CronParser
     {
-        private static ILogger<CronParser> _logger;
-        public static ReaderStateContext _context;
-        public static IState Parse(String line)
+        private readonly ILogger<CronParser> _logger;
+        private ReaderStateContext _context;
+
+        public CronParser(ILogger<CronParser> logger)
         {
-            if (_logger == null) _logger = _context._loggerFactory.CreateLogger<CronParser>();
+            _logger = logger;
+        }
+
+        public void setContext(ReaderStateContext context)
+        {
+            _context = context;
+        }
+        public IState Parse(String line)
+        {
+            //if (_logger == null) _logger = _context._loggerFactory.CreateLogger<CronParser>();
             _logger.LogInformation("[{time}] CronParser => Parsing line : {line}", DateTime.UtcNow, line);
             if (ParserConfig.IsScript(line)) return new NewScriptState(new ScriptExecution(_context.currentRole,GetCron(line), GetName(line), GetPath(line),GetExecCommand(line), ParserConfig.IsEnabled(line)));
             if (ParserConfig.IsRole(line)) return new NewRoleState(GetRole(line));

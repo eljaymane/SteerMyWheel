@@ -9,26 +9,34 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using SteerMyWheel.CronParsing.Model;
 using SteerMyWheel.CronParsing.Writers.Neo4j;
+using Microsoft.Extensions.Hosting;
+using System.Collections.ObjectModel;
 
 namespace SteerMyWheel.Reader
 {
     public class ReaderStateContext : IDisposable
     {
-        public ILoggerFactory _loggerFactory;
         private readonly ILogger<ReaderStateContext> _logger;
+        private readonly GlobalConfig _config;
         public EventHandler StateChanged;
         public IState currentState;
-        public IWriter<IWritable> Writer { get; set; }
+        public Neo4jWriter _writer { get; set; }
         public string currentRole { get; set; }
         public string currentHostName { get; set; }
 
-        public ReaderStateContext(RemoteHost host,ILoggerFactory loggerFactory)
+        public ReaderStateContext(ILogger<ReaderStateContext>logger,GlobalConfig config,Neo4jWriter writer)
         {
-            _loggerFactory = loggerFactory;
-            _logger = loggerFactory.CreateLogger<ReaderStateContext>();
-            _logger.LogInformation("[{time}] ( ReaderContext ) ReaderContextInitializing => Host : {hostname}", DateTime.UtcNow,host.name);
-            this.Writer = new Neo4jWriter("http://localhost:7474/","neo4j","Supervision!","neo4j",this);
+            _logger = logger;
+            _config = config;
+            _writer = writer;
+            _writer.setContext(this);
+        }
+
+        public void Initialize(RemoteHost host)
+        {
+            
             this.setState(new InitialState(host));
+            _logger.LogInformation("[{time}] ( ReaderContext ) Initializing => Host : {hostname}", DateTime.UtcNow, host.name);
         }
         protected virtual void onStateChanged(EventArgs e)
         {
@@ -43,7 +51,7 @@ namespace SteerMyWheel.Reader
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            
         }
 
     }

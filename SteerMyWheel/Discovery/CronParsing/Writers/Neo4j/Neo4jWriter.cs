@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using SteerMyWheel.Reader;
 using SteerMyWheel.Writer;
+using SteerMyWheel.Connectivity;
 
 namespace SteerMyWheel.CronParsing.Writers.Neo4j
 {
@@ -12,19 +13,18 @@ namespace SteerMyWheel.CronParsing.Writers.Neo4j
     {
         private readonly ILogger<Neo4jWriter> _logger;
         private GraphClient _graphClient;
-        private readonly ReaderStateContext context;
-        public Neo4jWriter(string rootUri,string username, string password,string database,ReaderStateContext _context)
+        private ReaderStateContext context;
+        public Neo4jWriter(NeoClient _client,ILogger<Neo4jWriter> logger)
         {
-            _logger = _context._loggerFactory.CreateLogger<Neo4jWriter>();
-            _logger.LogInformation("[{time}] Neo4jWriter => Initializing Neo4j connection to {rootUri} with user : {username}",DateTime.UtcNow,rootUri,username);
-            this.context = _context;
-            _graphClient = new GraphClient(new Uri(rootUri), username, password);
-            _graphClient.ConnectAsync().Wait();
-            _logger.LogInformation("[{time}] Neo4jWriter => Successfully connected to Neo4j server !", DateTime.UtcNow);
-            _graphClient.DefaultDatabase = database;
+            _logger = logger;
+            _graphClient = _client.GetConnection();
+
         }
 
-    
+        public void setContext(ReaderStateContext context)
+        {
+            this.context = context;
+        }
         public async Task WriteAsync(IWritable value)
         {
             switch (value)
