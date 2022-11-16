@@ -20,6 +20,15 @@ namespace SteerMyWheel
         public string gitLabScriptsBaseURI { get { return "https://gitlab.keplercheuvreux.com/it-front/scripts/"; } }
         public string gitLabCommandoBaseURI { get { return "https://gitlab.keplercheuvreux.com/it-front/commando/"; } }
 
+        public string bitbucketSecret { get { return _config["Bitbucket:Secret"]; } }
+        public string bitbucketKey { get { return _config["Bitbucket:Key"]; } }
+        public string bitbucketScriptsProject { get { return _config["Bitbucket:ScriptsProject"]; } }
+
+        public string bitbucketAccessTokenURI { get { return "https://bitbucket.org/site/oauth2/access_token"; } }
+
+        public string bitbucketCodeURI { get { return $"https://bitbucket.org/site/oauth2/authorize?client_id={bitbucketKey}&response_type=code"; } }
+        public static string bitbucketAuthCode { get; set; }
+
         public GlobalConfig(IConfiguration config)
         {
             _config = config;

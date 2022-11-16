@@ -13,7 +13,12 @@ namespace SteerMyWheel.Discovery.Model
         public string name { get; set; }
         public string legacyRepository { get; set; }
         public string BitbucketRepository { get; set; }
+        public bool isCloned { get; set; }
 
+        public ScriptRepository()
+        {
+
+        }
         public ScriptRepository(string path, string name)
         {
             this.path = path;

@@ -4,6 +4,7 @@ using SteerMyWheel.Writer;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SteerMyWheel.Reader.ReaderStates
 {
@@ -15,7 +16,7 @@ namespace SteerMyWheel.Reader.ReaderStates
             this.newScript = script;
         }
 
-        public async void handle(ReaderStateContext context)
+        public async Task handle(ReaderStateContext context)
         {
             await context._writer.WriteAsync(newScript);
         }

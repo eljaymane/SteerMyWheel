@@ -16,10 +16,10 @@ namespace SteerMyWheel.Workers
             n = _n;
         }
 
-        public override void setLogger(ILogger<BaseWorker> logger)
-        {
-            Logger = logger;
-        }
+        //public override void setLogger(ILogger<BaseWorker> logger)
+        //{
+        //    Logger = logger;
+        //}
 
         public override Task doWork()
         {

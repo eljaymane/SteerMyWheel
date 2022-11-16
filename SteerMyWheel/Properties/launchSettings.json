@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SteerMyWheel": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

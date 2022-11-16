@@ -41,7 +41,7 @@ namespace SteerMyWheel.Reader
         protected virtual void onStateChanged(EventArgs e)
         {
             _logger.LogInformation("[{time}] ( ReaderContext ) stateChanged => {newState}",DateTime.UtcNow, this.currentState.GetType().Name);
-             this.currentState.handle(this);
+             this.currentState.handle(this).Wait();
         }
         public void setState(IState state)
         {

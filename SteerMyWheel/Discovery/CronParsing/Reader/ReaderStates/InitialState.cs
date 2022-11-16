@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SteerMyWheel.Reader.ReaderStates
 {
@@ -13,7 +14,7 @@ namespace SteerMyWheel.Reader.ReaderStates
             this.remoteHost = _host;
         }
        
-        public async void handle(ReaderStateContext context)
+        public async Task handle(ReaderStateContext context)
         {
             context.currentHostName = this.remoteHost.name;
             await context._writer.WriteAsync(remoteHost);

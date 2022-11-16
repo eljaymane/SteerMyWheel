@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SteerMyWheel.Reader.ReaderStates
 {
     public interface IState
     {
-        void handle(ReaderStateContext context);
+        Task handle(ReaderStateContext context);
     }
 }

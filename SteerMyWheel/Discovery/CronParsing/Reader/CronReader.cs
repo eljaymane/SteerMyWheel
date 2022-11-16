@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using Microsoft.Extensions.Logging;
 using SteerMyWheel.CronParsing.Model;
+using System.Threading.Tasks;
 
 namespace SteerMyWheel.Reader
 {
@@ -21,13 +22,14 @@ namespace SteerMyWheel.Reader
         {
             return _stateContext;
         }
-        public void Read(String cronFilePath)
+        public Task Read(String cronFilePath)
         {
             var _cronFile = File.ReadAllLines(cronFilePath);
             foreach (var _line in _cronFile)
             {
                 if(_line != "") this.Parse(_line);
             }
+            return Task.CompletedTask;
         }
 
         public void Parse(String line)

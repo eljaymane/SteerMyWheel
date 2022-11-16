@@ -1,16 +1,21 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Neo4jClient;
+using Newtonsoft.Json.Linq;
 using SteerMyWheel.Connectivity;
 using SteerMyWheel.CronParsing.Model;
 using SteerMyWheel.Discovery.Model;
+using SteerMyWheel.TaskQueue;
+using SteerMyWheel.Workers.Git;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
@@ -18,17 +23,26 @@ namespace SteerMyWheel.Discovery.ScriptToRepository
 {
     public class ScriptRepositoryService
     {
-        private readonly GlobalConfig _configuration;
+        private ILoggerFactory _loggerFactory;
         private readonly ILogger<ScriptRepositoryService> _logger;
         private GraphClient _client;
+        private NeoClient _neoClient;
+        private WorkQueue<GitMigrationWorker> _gitQueue;
 
-        public ScriptRepositoryService(NeoClient client,ILogger<ScriptRepositoryService> logger)
+        public ScriptRepositoryService(NeoClient client,ILogger<ScriptRepositoryService> logger,WorkQueue<GitMigrationWorker> queue)
         {
             _client = client.GetConnection();
+            _neoClient = client;
             _logger = logger;
+            _gitQueue = queue;
         }
 
-        public Task syncRepos(RemoteHost host)
+        public void setLoggerFactory(ILoggerFactory loggerFactory)
+        {
+            _loggerFactory = loggerFactory;
+        }
+
+        public Task generateGraphRepos(RemoteHost host)
         {
             var syncScripts = new TransformBlock<RemoteHost, IEnumerable<ScriptExecution>>(new Func<RemoteHost, IEnumerable<ScriptExecution>>(getAllScripts));
             var generateRepositories = new TransformBlock<IEnumerable<ScriptExecution>, Dictionary<ScriptRepository, List<ScriptExecution>>>(linkToRepository);
@@ -45,6 +59,88 @@ namespace SteerMyWheel.Discovery.ScriptToRepository
             generateRepositories.Completion.Wait();
             reflectChanges.Completion.Wait();
             return Task.CompletedTask;
+        }
+
+        public Task syncRepos(RemoteHost host)
+        {
+            var getRepos = new TransformBlock<RemoteHost, IEnumerable<ScriptRepository>>(new Func<RemoteHost, IEnumerable<ScriptRepository>>(getAllRepositories));
+            var sync = new TransformBlock<IEnumerable<ScriptRepository>,IEnumerable<ScriptRepository>>(async data => {
+                return generateMigrationWorkers(data);
+            });
+            var genReport = new ActionBlock<IEnumerable<ScriptRepository>>(data =>
+            {
+                generateReport(data, host).Wait();
+            });
+            getRepos.LinkTo(sync);
+            sync.LinkTo(genReport);
+            getRepos.Completion.ContinueWith(delegate { sync.Complete(); });
+            sync.Completion.ContinueWith(delegate { genReport.Complete(); });
+            getRepos.Post(host);
+            getRepos.Complete();
+            sync.Completion.Wait();
+            genReport.Completion.Wait();
+            
+            //sync.Completion.Wait();
+            return Task.CompletedTask;
+        }
+
+        private Task generateReport(IEnumerable<ScriptRepository> repositories,RemoteHost host)
+        {
+            var txt = "RemoteHost;Repository\n";
+            foreach (var repo in repositories)
+            {
+                txt += $"{host.name};{repo.name}\n";
+            }
+            File.WriteAllText($"C:/steer/report_{host.name}.txt", txt);
+            return Task.CompletedTask;
+        }
+
+
+        private IEnumerable<ScriptRepository> getAllRepositories(RemoteHost host)
+        {
+            _logger.LogInformation("[{time}] Requesting all repositories for host {host} ...", DateTime.UtcNow, host.name);
+            var result = _client.Cypher
+                .Match("(h:RemoteHost)-[:HOSTS]-(se:ScriptExecution)-[:IS_ON]->(s:ScriptRepository)")
+                .Where((RemoteHost h) => h.name == host.name)
+                .ReturnDistinct(s => s.As<ScriptRepository>())
+                .ResultsAsync.Result;
+            _logger.LogInformation("[{time}] Retrieved {count} ScriptRepositories ...", DateTime.UtcNow, result.Count());
+            return result;
+
+        }
+
+        private IEnumerable<ScriptRepository> generateMigrationWorkers(IEnumerable<ScriptRepository> repositories)
+        {
+            foreach (var repo in repositories)
+            {
+                var worker = new GitMigrationWorker(repo);
+                worker.setLogger(_loggerFactory.CreateLogger<GitMigrationWorker>());
+                worker.setClient(this._neoClient);
+                _gitQueue.Enqueue(worker).Wait();
+            }
+            var token = new CancellationTokenSource(TimeSpan.FromSeconds(90)).Token;
+             _gitQueue.DeqeueAllAsync(token).Wait();
+            var verify = Task.Run(() =>
+            {
+                var list = Directory.GetDirectories("C:/steer/");
+                using (var client = _client)
+                {
+                    foreach (var dir in list)
+                    {
+                        var name = dir.Replace("C:/steer/", "");
+                        _logger.LogInformation("[{time}] Repository {name} successfully cloned ..", DateTime.UtcNow, name);
+                        client.Cypher.Match("(s:ScriptRepository)")
+                       .Where((ScriptRepository s) => s.name == name)
+                       .Set("s.isCloned = true")
+                       .ExecuteWithoutResultsAsync().Wait();
+                    }
+                }
+
+            });
+            verify.Wait();
+            return repositories;
+
+
         }
 
         private IEnumerable<ScriptExecution> getAllScripts(RemoteHost host)
@@ -136,5 +232,7 @@ namespace SteerMyWheel.Discovery.ScriptToRepository
             
 
         }
+
+
     }
 }

@@ -46,24 +46,29 @@ namespace SteerMyWheel
             )
                     .AddTransient<GlobalConfig>()
                     .AddTransient<NeoClient>()
+                    .AddTransient<BitbucketClient>()
                     .AddTransient<Neo4jWriter>()
                     .AddTransient<ReaderStateContext>()
                     .AddTransient<CronReader>()
                     .AddTransient<CronParser>()
+                    .AddTransient<WorkQueue<GitMigrationWorker>>()
                     .AddTransient<ScriptRepositoryService>());
             var host = builder.Build();
-            WorkQueue<GitMigrationWorker> q = new WorkQueue<GitMigrationWorker>(loggerFactory,100);
             var globalConfig = host.Services.GetRequiredService<GlobalConfig>();
-            Console.Write(globalConfig.neo4jUsername);
-            //var test = new GitMigrationWorker(new ScriptExecution("test", "", "tools", "", "", true));
-            //q.Enqueue(test);
-            //q.DeqeueAllAsync(CancellationToken.None);
-            //Console.ReadKey();
-            var _reader = host.Services.GetRequiredService<CronReader>();
-            _reader.GetContext().Initialize(new RemoteHost("PRDFRTAPP901", "PRDFRTAPP901", 22, "kcm-front", "Supervision!"));
-            _reader.Read("C:/scripts.txt");
-            var syncService = host.Services.GetRequiredService<ScriptRepositoryService>();
-            syncService.syncRepos(new RemoteHost("PRDFRTAPP901","PRDFRTAPP901",22,"kcm-front","Supervision!"));
+            //var _reader = host.Services.GetRequiredService<CronReader>();
+            //_reader.GetContext().Initialize(new RemoteHost("PRDFRTAPP901", "PRDFRTAPP901", 22, "kcm-front", "Supervision!"));
+            //_reader.Read("C:/scripts.txt").Wait();
+            //var syncService = host.Services.GetRequiredService<ScriptRepositoryService>();
+            //syncService.setLoggerFactory(loggerFactory);
+            //var h = new RemoteHost("PRDFRTAPP901", "PRDFRTAPP901", 22, "kcm-front", "Supervision!");
+            //syncService.generateGraphRepos(h).Wait();
+            //syncService.syncRepos(h).Wait();
+
+            //syncService.generateGraphRepos(h);
+            var bitbucket = host.Services.GetRequiredService<BitbucketClient>();
+            bitbucket.getAccessCode();
+            //bitbucket.Connect();
+            //bitbucket.createRepository("test");
 
             host.RunAsync().Wait();
 
