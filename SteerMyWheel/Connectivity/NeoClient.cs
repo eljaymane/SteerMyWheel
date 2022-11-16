@@ -3,6 +3,7 @@ using Neo4jClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SteerMyWheel.Connectivity
 {
@@ -27,12 +28,13 @@ namespace SteerMyWheel.Connectivity
 
         }
 
-        public void Connect()
+        public Task Connect()
         {
            
             _client.DefaultDatabase = _config.neo4jDefaultDB;
             _client.ConnectAsync().Wait();
             _logger.LogInformation("[{time}] Neo4jWriter => Successfully connected to Neo4j server !", DateTime.UtcNow);
+            return Task.CompletedTask;
 
         }
 

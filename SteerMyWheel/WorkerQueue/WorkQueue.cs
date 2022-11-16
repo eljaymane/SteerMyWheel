@@ -83,7 +83,7 @@ namespace SteerMyWheel.TaskQueue
                 try
                 {
                     _logger.LogInformation("[{time}] Processing worker {index}/{count}...", DateTime.UtcNow, index, count);
-                    _queue.Dequeue().doWork();
+                    await _queue.Dequeue().doWork();
                    
                 } finally
                 {

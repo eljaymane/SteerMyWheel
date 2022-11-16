@@ -27,14 +27,16 @@ namespace SteerMyWheel.Discovery.ScriptToRepository
         private readonly ILogger<ScriptRepositoryService> _logger;
         private GraphClient _client;
         private NeoClient _neoClient;
+        private BitbucketClient _bitClient;
         private WorkQueue<GitMigrationWorker> _gitQueue;
 
-        public ScriptRepositoryService(NeoClient client,ILogger<ScriptRepositoryService> logger,WorkQueue<GitMigrationWorker> queue)
+        public ScriptRepositoryService(BitbucketClient bitClient,NeoClient client,ILogger<ScriptRepositoryService> logger,WorkQueue<GitMigrationWorker> queue)
         {
             _client = client.GetConnection();
             _neoClient = client;
             _logger = logger;
             _gitQueue = queue;
+            _bitClient = bitClient;
         }
 
         public void setLoggerFactory(ILoggerFactory loggerFactory)
@@ -116,6 +118,7 @@ namespace SteerMyWheel.Discovery.ScriptToRepository
                 var worker = new GitMigrationWorker(repo);
                 worker.setLogger(_loggerFactory.CreateLogger<GitMigrationWorker>());
                 worker.setClient(this._neoClient);
+                worker.setBitBucketClient(this._bitClient);
                 _gitQueue.Enqueue(worker).Wait();
             }
             var token = new CancellationTokenSource(TimeSpan.FromSeconds(90)).Token;

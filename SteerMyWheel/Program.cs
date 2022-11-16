@@ -58,16 +58,17 @@ namespace SteerMyWheel
             //var _reader = host.Services.GetRequiredService<CronReader>();
             //_reader.GetContext().Initialize(new RemoteHost("PRDFRTAPP901", "PRDFRTAPP901", 22, "kcm-front", "Supervision!"));
             //_reader.Read("C:/scripts.txt").Wait();
-            //var syncService = host.Services.GetRequiredService<ScriptRepositoryService>();
-            //syncService.setLoggerFactory(loggerFactory);
-            //var h = new RemoteHost("PRDFRTAPP901", "PRDFRTAPP901", 22, "kcm-front", "Supervision!");
+            var syncService = host.Services.GetRequiredService<ScriptRepositoryService>();
+            syncService.setLoggerFactory(loggerFactory);
+            var h = new RemoteHost("PRDFRTAPP901", "PRDFRTAPP901", 22, "kcm-front", "Supervision!");
             //syncService.generateGraphRepos(h).Wait();
-            //syncService.syncRepos(h).Wait();
+            syncService.syncRepos(h).Wait();
 
             //syncService.generateGraphRepos(h);
-            var bitbucket = host.Services.GetRequiredService<BitbucketClient>();
-            bitbucket.getAccessCode();
-            //bitbucket.Connect();
+            //var bitbucket = host.Services.GetRequiredService<BitbucketClient>();
+            //bitbucket.getAccessCode();
+            //bitbucket.Connect().Wait();
+            //bitbucket.createRepository("test",true);
             //bitbucket.createRepository("test");
 
             host.RunAsync().Wait();

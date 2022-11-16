@@ -12,6 +12,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SteerMyWheel.Connectivity
 {
@@ -30,16 +31,15 @@ namespace SteerMyWheel.Connectivity
             _logger = logger;
         }
 
-        public async void Connect()
+        public async Task Connect()
         {
-           
             using(var client = new HttpClient())
             {
                 var authCode = "";
                 string formDataBoundary = String.Format("----------{0:N}", Guid.NewGuid());
                 var data = new Dictionary<string, string>
                 {
-                    {"grant_type","authorization_code" },
+                    {"grant_type","client_credentials" },
                     {"code",$"{authCode}" }
                 };
                 var authString = $"{_config.bitbucketKey}:{_config.bitbucketSecret}";
@@ -76,40 +76,38 @@ namespace SteerMyWheel.Connectivity
             }
         }
 
-        public string getAccessCode()
-        {
-            string code = "";
-            ThreadRunner threadRunner = new ThreadRunner();
-            WebView webView = new WebView();
-            threadRunner.Send(() =>
-            {
-                webView.LoadUrlAndWait(_config.bitbucketCodeURI);
-               
-
-                var toke = code;
-            });
-            
-            return code;
-                
-        }
-
         public HttpClient GetConnection()
         {
             throw new NotImplementedException();
         }
 
-        public bool createRepository(string repositoryName)
+        public Task<bool> createRepositoryAsync(string repositoryName,bool isPrivate)
         {
-            var create = $"curl -u {_config.bitbucketUsername}:\"{_config.bitbucketPassword}\" -X POST -H \"Content-Type:application/json\" -d";
-            create += "'{" +
-                $"\"slug\":\"{repositoryName}\"" +
-                "\"forkable\": false" +
-                "\"project\":{" +
-                $"\"key\":\"{_config.bitbucketScriptsProject}\"" +
-                "}'"
-                + $" https://bitbucket.org/rest/api/1.0/projects/{_config.bitbucketScriptsProject}/repos/{repositoryName}";
-            WinAPI.system(create);
-            return true;
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _config.bitbucketScriptsAPI+repositoryName.ToLower());
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var data = new Dictionary<string, object>
+            {
+                {"scm","git" },
+                {"project",new Dictionary<string, string>
+                {
+                    { "key", _config.bitbucketScriptsProject}
+                }
+                },
+                {"is_private",isPrivate}
+
+            };
+            var content = new StringContent(JsonConvert.SerializeObject(data),_encoding,new MediaTypeHeaderValue("application/json"));
+            request.Content = content;
+            request.Method = HttpMethod.Post;
+
+            using(var client = new HttpClient())
+            {
+               var response = client.SendAsync(request).Result;
+                var reader = new StreamReader(response.Content.ReadAsStreamAsync().Result);
+                if (response.IsSuccessStatusCode) return Task.FromResult(true);
+            }
+           
+            return Task.FromResult(false);
 
         }
 

@@ -27,6 +27,7 @@ namespace SteerMyWheel.Workers.Git
         {
             _scriptRepository = scriptRepository;
         }
+
         public override async Task doWork()
         {
             await cloneLegacyRepo();
@@ -86,6 +87,8 @@ namespace SteerMyWheel.Workers.Git
                 cmd.Close();
             });
 
+            
+
           
             createRootDir.LinkTo(cloneFromScripts, new DataflowLinkOptions { PropagateCompletion = true});
             cloneFromScripts.LinkTo(cloneFromCommando, new DataflowLinkOptions { PropagateCompletion = true });
@@ -94,15 +97,21 @@ namespace SteerMyWheel.Workers.Git
             cloneFromScripts.Completion.ContinueWith(delegate { cloneFromCommando.Complete(); });
             cloneFromCommando.Completion.ContinueWith(delegate { closeCmd.Complete(); });
 
+
             
             if (cmd.Start())
             {
-
+                
                     createRootDir.Post(cmd);
-                    createRootDir.Complete();
-                    createRootDir.Completion.Wait();
-                    cloneFromScripts.Completion.Wait();
-                    cloneFromCommando.Completion.Wait();
+                createRootDir.Complete();
+                Task.WaitAll
+                    (
+                    createRootDir.Completion,
+                    cloneFromScripts.Completion,
+                    cloneFromCommando.Completion
+                    );
+                await createNewRepository();
+                
                 //closeCmd.Completion.Wait();
                
 
@@ -160,17 +169,11 @@ namespace SteerMyWheel.Workers.Git
 
         private async Task createNewRepository()
         {
-            Logger.LogInformation("[{time}] Started cloning legacy repository {name} ..", DateTime.UtcNow, _scriptRepository.name);
-            var cmd = new Process();
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.CreateNoWindow = true;
-            var createRepo = $"curl --user {base._globalConfig.bitbucketUsername}:{_globalConfig.bitbucketPassword} https://api.bitbucket.org/2.0/repositories \\ --data name={_scriptRepository.name}";
-            if (cmd.Start())
-            {
-                cmd.StandardInput.WriteLineAsync();
-            }
+            Logger.LogInformation("[{time}] Creating repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.name);
+            await _BitClient.Connect();
+            if (await ((BitbucketClient)_BitClient).createRepositoryAsync(_scriptRepository.name, true))
+                Logger.LogInformation("[{time}] Successfully created repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.name);
+            else Logger.LogInformation("[{time}] Could not create repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.name);
 
         }
 

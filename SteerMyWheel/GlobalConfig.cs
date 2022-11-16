@@ -27,7 +27,7 @@ namespace SteerMyWheel
         public string bitbucketAccessTokenURI { get { return "https://bitbucket.org/site/oauth2/access_token"; } }
 
         public string bitbucketCodeURI { get { return $"https://bitbucket.org/site/oauth2/authorize?client_id={bitbucketKey}&response_type=code"; } }
-        public static string bitbucketAuthCode { get; set; }
+        public string bitbucketScriptsAPI { get { return $"https://api.bitbucket.org/2.0/repositories/kch-it-tet/"; } }
 
         public GlobalConfig(IConfiguration config)
         {
