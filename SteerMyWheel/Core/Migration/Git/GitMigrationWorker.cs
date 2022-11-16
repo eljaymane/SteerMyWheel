@@ -1,16 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
-using SteerMyWheel.Connectivity;
-using SteerMyWheel.CronParsing.Model;
-using SteerMyWheel.Discovery.Model;
+using SteerMyWheel.Connectivity.ClientProviders;
+using SteerMyWheel.Model;
 using SteerMyWheel.TaskQueue;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
@@ -35,7 +29,7 @@ namespace SteerMyWheel.Workers.Git
 
         private async Task cloneLegacyRepo()
         {
-            Logger.LogInformation("[{time}] Started cloning legacy repository {name} ..", DateTime.UtcNow, _scriptRepository.name);
+            Logger.LogInformation("[{time}] Started cloning legacy repository {name} ..", DateTime.UtcNow, _scriptRepository.Name);
             var cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
             cmd.StartInfo.UseShellExecute = false;
@@ -83,7 +77,7 @@ namespace SteerMyWheel.Workers.Git
                 {
                    
                 }
-                else Logger.LogInformation("[{time}] Could not clone repository {name}", DateTime.UtcNow, _scriptRepository.name);
+                else Logger.LogInformation("[{time}] Could not clone repository {name}", DateTime.UtcNow, _scriptRepository.Name);
                 cmd.Close();
             });
 
@@ -137,10 +131,10 @@ namespace SteerMyWheel.Workers.Git
         private Process CloneFromScripts(Process cmd)
         {
             var cd = "cd C:/steer/";
-            var clone = $"git clone {gitRootUri}{_scriptRepository.name}.git && echo success:true";
+            var clone = $"git clone {gitRootUri}{_scriptRepository.Name}.git && echo success:true";
             cmd.StandardInput.WriteLine(cd);
             cmd.StandardInput.Flush();
-            Logger.LogInformation("[{time}] Cloning repository {name} ..", DateTime.UtcNow, _scriptRepository.name);
+            Logger.LogInformation("[{time}] Cloning repository {name} ..", DateTime.UtcNow, _scriptRepository.Name);
             cmd.StandardInput.WriteLine(clone);
             cmd.StandardInput.Flush();
             return cmd;
@@ -151,16 +145,16 @@ namespace SteerMyWheel.Workers.Git
         {
            // cmd.Start();
             //var result = await cmd.StandardOutput.ReadToEndAsync();
-            if (Directory.Exists(_scriptRepository.name)) return cmd;
+            if (Directory.Exists(_scriptRepository.Name)) return cmd;
             else
             {
-                Logger.LogInformation("[{time}] Cloning repository {name} timed out. Maybe it's in commando repo ? Trying again ...", DateTime.UtcNow, _scriptRepository.name);
+                Logger.LogInformation("[{time}] Cloning repository {name} timed out. Maybe it's in commando repo ? Trying again ...", DateTime.UtcNow, _scriptRepository.Name);
                 var cd = "cd C:/steer/";
-                var clone = $"git clone {gitCommandoURI}{_scriptRepository.name}.git";
+                var clone = $"git clone {gitCommandoURI}{_scriptRepository.Name}.git";
                 cmd.StandardInput.WriteLine(cd);
                 cmd.StandardInput.Flush();
                 cmd.StandardInput.WriteLine(clone);
-                Logger.LogInformation("[{time}] Cloning repository {name} ..", DateTime.UtcNow, _scriptRepository.name);
+                Logger.LogInformation("[{time}] Cloning repository {name} ..", DateTime.UtcNow, _scriptRepository.Name);
                 cmd.StandardInput.Flush();
                 return cmd;
             }
@@ -169,11 +163,11 @@ namespace SteerMyWheel.Workers.Git
 
         private async Task createNewRepository()
         {
-            Logger.LogInformation("[{time}] Creating repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.name);
+            Logger.LogInformation("[{time}] Creating repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.Name);
             await _BitClient.Connect();
-            if (await ((BitbucketClient)_BitClient).createRepositoryAsync(_scriptRepository.name, true))
-                Logger.LogInformation("[{time}] Successfully created repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.name);
-            else Logger.LogInformation("[{time}] Could not create repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.name);
+            if (await ((BitbucketClientProvider)_BitClient).createRepositoryAsync(_scriptRepository.Name, true))
+                Logger.LogInformation("[{time}] Successfully created repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.Name);
+            else Logger.LogInformation("[{time}] Could not create repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.Name);
 
         }
 

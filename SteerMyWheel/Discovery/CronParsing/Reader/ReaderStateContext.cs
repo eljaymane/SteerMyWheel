@@ -1,16 +1,8 @@
 ﻿using SteerMyWheel.Reader.ReaderStates;
-using SteerMyWheel.CronParsing;
-using SteerMyWheel.Writer;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Neo4j.Driver;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using SteerMyWheel.CronParsing.Model;
+using SteerMyWheel.Model;
 using SteerMyWheel.CronParsing.Writers.Neo4j;
-using Microsoft.Extensions.Hosting;
-using System.Collections.ObjectModel;
 
 namespace SteerMyWheel.Reader
 {
@@ -36,7 +28,7 @@ namespace SteerMyWheel.Reader
         {
             
             this.setState(new InitialState(host));
-            _logger.LogInformation("[{time}] ( ReaderContext ) Initializing => Host : {hostname}", DateTime.UtcNow, host.name);
+            _logger.LogInformation("[{time}] ( ReaderContext ) Initializing => Host : {hostname}", DateTime.UtcNow, host.Name);
         }
         protected virtual void onStateChanged(EventArgs e)
         {

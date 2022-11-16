@@ -1,8 +1,6 @@
 ﻿using SteerMyWheel.Reader.ReaderStates;
 using System;
 using System.IO;
-using Microsoft.Extensions.Logging;
-using SteerMyWheel.CronParsing.Model;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Reader

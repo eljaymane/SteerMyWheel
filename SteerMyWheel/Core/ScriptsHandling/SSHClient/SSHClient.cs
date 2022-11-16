@@ -1,5 +1,5 @@
 ﻿using Renci.SshNet;
-using SteerMyWheel.CronParsing.Model;
+using SteerMyWheel.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,15 +43,15 @@ namespace SteerMyWheel.ScriptsHandling.Clients
             var script = joinScriptSourceTarget.Receive().Item1;
             var source = joinScriptSourceTarget.Receive().Item2;
             var target = joinScriptSourceTarget.Receive().Item3;
-            var values = script.path.Split('/');
+            var values = script.Path.Split('/');
             var joinScriptPathHost = new JoinBlock<ScriptExecution, string, RemoteHost>();
             var _localPath = new DirectoryInfo(Environment.CurrentDirectory + "/tmp/" + values[values.Length - 1]);
             try
             {
-                using (var _client = new ScpClient(source.remoteHost, source.sshPort, source.SSHUsername, source.SSHPassword))
+                using (var _client = new ScpClient(source.RemoteIP, source.SSHPort, source.SSHUsername, source.SSHPassword))
                 {
                     _client.Connect();
-                    _client.Download(script.path, _localPath);
+                    _client.Download(script.Path, _localPath);
                     joinScriptPathHost.Target1.Post(script);
                     joinScriptPathHost.Target2.Post(_localPath.ToString());
                     joinScriptPathHost.Target3.Post(target);
@@ -71,11 +71,11 @@ namespace SteerMyWheel.ScriptsHandling.Clients
                 var host = joinScriptPathHost.Receive().Item3;
                 var localPath = joinScriptPathHost.Receive().Item2;
                 var script = joinScriptPathHost.Receive().Item1;
-                using (var _client = new ScpClient(host.remoteHost, host.sshPort, host.SSHUsername, host.SSHPassword))
+                using (var _client = new ScpClient(host.RemoteIP, host.SSHPort, host.SSHUsername, host.SSHPassword))
                 {
                     _client.Connect();
-                    _client.Upload(new DirectoryInfo(localPath), script.path);
-                    return script.path;
+                    _client.Upload(new DirectoryInfo(localPath), script.Path);
+                    return script.Path;
                 }
             }catch (Exception e)
             {

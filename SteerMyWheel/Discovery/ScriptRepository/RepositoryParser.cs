@@ -1,9 +1,5 @@
-﻿using SteerMyWheel.CronParsing.Model;
-using SteerMyWheel.Reader;
+﻿using SteerMyWheel.Model;
 using SteerMyWheel.Reader.Config;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace SteerMyWheel.Discovery.ScriptToRepository
@@ -12,7 +8,7 @@ namespace SteerMyWheel.Discovery.ScriptToRepository
     {
         public static string getRepositoryName(ScriptExecution _script)
         {
-            var name = Regex.Match(_script.path, ParserConfig.RepositoryNameJava).ToString();
+            var name = Regex.Match(_script.Path, ParserConfig.RepositoryNameJava).ToString();
             name = name.Contains('/') ? name.Split('/')[0] : name;
             return name ;
           

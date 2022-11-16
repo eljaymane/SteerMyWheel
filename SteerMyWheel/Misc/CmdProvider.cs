@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SteerMyWheel.Workers.Git
+namespace SteerMyWheel.Misc
 {
     public static class WinAPI
     {

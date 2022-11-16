@@ -1,5 +1,5 @@
 ﻿using Neo4jClient;
-using SteerMyWheel.CronParsing.Model;
+using SteerMyWheel.Model;
 using SteerMyWheel.ScriptsHandling.Clients;
 using SteerMyWheel.TaskQueue;
 using System;

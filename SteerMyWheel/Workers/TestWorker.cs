@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using SteerMyWheel.TaskQueue;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Workers

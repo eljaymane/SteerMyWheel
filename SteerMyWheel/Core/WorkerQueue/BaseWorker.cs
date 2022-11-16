@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Neo4jClient;
 using SteerMyWheel.Connectivity;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.TaskQueue

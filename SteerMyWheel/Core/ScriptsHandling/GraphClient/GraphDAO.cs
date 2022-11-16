@@ -1,10 +1,6 @@
 ﻿using Neo4jClient;
-using Neo4jClient.Cypher;
-using SteerMyWheel.CronParsing.Model;
+using SteerMyWheel.Model;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
 namespace SteerMyWheel.ScriptsHandling.Clients
@@ -55,8 +51,8 @@ namespace SteerMyWheel.ScriptsHandling.Clients
             try
             {
                  _client.Cypher.OptionalMatch("(s:Script)<-[HOSTS]-(h:Host)")
-                     .Where((ScriptExecution s) => s.name == joinScriptSourceTarget.Receive().Item1.name)
-                     .AndWhere((RemoteHost h) => h.name == joinScriptSourceTarget.Receive().Item3.name)
+                     .Where((ScriptExecution s) => s.Name == joinScriptSourceTarget.Receive().Item1.Name)
+                     .AndWhere((RemoteHost h) => h.Name == joinScriptSourceTarget.Receive().Item3.Name)
                      .Delete("HOSTS")
                      .ExecuteWithoutResultsAsync().Wait();
                 return joinScriptSourceTarget;
@@ -71,8 +67,8 @@ namespace SteerMyWheel.ScriptsHandling.Clients
             try
             {
                 _client.Cypher.Match("(s:Script)", "(h:Host)")
-                    .Where((ScriptExecution s) => s.name == joinScriptSourceTarget.Receive().Item1.name)
-                    .AndWhere((RemoteHost h) => h.name == joinScriptSourceTarget.Receive().Item3.name)
+                    .Where((ScriptExecution s) => s.Name == joinScriptSourceTarget.Receive().Item1.Name)
+                    .AndWhere((RemoteHost h) => h.Name == joinScriptSourceTarget.Receive().Item3.Name)
                     .CreateUnique("h-[:HOSTS]->s")
                     .ExecuteWithoutResultsAsync().Wait();
                 return joinScriptSourceTarget;

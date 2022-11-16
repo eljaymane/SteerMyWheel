@@ -2,24 +2,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using Neo4jClient.Cypher;
-using SteerMyWheel.CronParsing;
-using SteerMyWheel.CronParsing.Model;
+using SteerMyWheel.Model;
 using SteerMyWheel.CronParsing.Writers.Neo4j;
 using SteerMyWheel.Discovery.ScriptToRepository;
 using SteerMyWheel.Reader;
 using SteerMyWheel.TaskQueue;
 using SteerMyWheel.Workers;
 using SteerMyWheel.Workers.Git;
-using System;
-using System.Configuration;
-using System.IO;
-using System.Security.Authentication.ExtendedProtection;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Diagnostics.Metrics;
-using SteerMyWheel.Connectivity;
+using SteerMyWheel.Connectivity.ClientProviders;
 
 namespace SteerMyWheel
 {
@@ -45,8 +35,8 @@ namespace SteerMyWheel
             configure.AddConsole()
             )
                     .AddTransient<GlobalConfig>()
-                    .AddTransient<NeoClient>()
-                    .AddTransient<BitbucketClient>()
+                    .AddTransient<NeoClientProvider>()
+                    .AddTransient<BitbucketClientProvider>()
                     .AddTransient<Neo4jWriter>()
                     .AddTransient<ReaderStateContext>()
                     .AddTransient<CronReader>()

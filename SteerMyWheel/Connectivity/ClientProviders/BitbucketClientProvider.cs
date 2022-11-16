@@ -1,9 +1,6 @@
-﻿using EO.WebBrowser;
-using Microsoft.Extensions.Logging;
-using Neo4j.Driver;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using SteerMyWheel.Workers.Git;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -14,29 +11,29 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Connectivity
+namespace SteerMyWheel.Connectivity.ClientProviders
 {
-    public class BitbucketClient : IClientProvider<HttpClient>
+    public class BitbucketClientProvider : BaseClientProvider<HttpClient>
     {
-        private readonly ILogger<BitbucketClient> _logger;
+        private readonly ILogger<BitbucketClientProvider> _logger;
         private readonly GlobalConfig _config;
         private readonly Encoding _encoding = Encoding.UTF8;
         private string accessToken = "";
         private string refreshToken = "";
         private readonly string accessTokenRegex = "(?=#access_token=).*(?:&scopes)";
 
-        public BitbucketClient(GlobalConfig config,ILogger<BitbucketClient> logger)
+        public BitbucketClientProvider(GlobalConfig config, ILogger<BitbucketClientProvider> logger)
         {
             _config = config;
             _logger = logger;
         }
 
-        public async Task Connect()
+        public override async Task Connect()
         {
-            using(var client = new HttpClient())
+            using (var client = new HttpClient())
             {
                 var authCode = "";
-                string formDataBoundary = String.Format("----------{0:N}", Guid.NewGuid());
+                string formDataBoundary = string.Format("----------{0:N}", Guid.NewGuid());
                 var data = new Dictionary<string, string>
                 {
                     {"grant_type","client_credentials" },
@@ -47,7 +44,7 @@ namespace SteerMyWheel.Connectivity
 
 
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _config.bitbucketAccessTokenURI);
-                
+
                 request.Headers.Add("User-Agent", "automigration");
                 request.Headers.Authorization = AuthenticationHeaderValue.Parse("Basic " + authString);
                 request.Method = HttpMethod.Post;
@@ -55,7 +52,7 @@ namespace SteerMyWheel.Connectivity
                 var content = new MultipartFormDataContent(formDataBoundary);
                 foreach (var key in data.Keys)
                 {
-                    content.Add(new StringContent(data.GetValueOrDefault(key).ToString()),key.ToString());
+                    content.Add(new StringContent(data.GetValueOrDefault(key).ToString()), key.ToString());
                 }
                 request.Content = content;
 
@@ -64,11 +61,11 @@ namespace SteerMyWheel.Connectivity
                 var req = request.Content.ReadAsStringAsync().Result;
 
                 var reader = new StreamReader(response.Content.ReadAsStreamAsync().Result);
-                dynamic responseBody = JsonConvert.DeserializeObject<ExpandoObject>(reader.ReadToEnd(),new ExpandoObjectConverter());
-                foreach (KeyValuePair<String,object> kv in responseBody)
+                dynamic responseBody = JsonConvert.DeserializeObject<ExpandoObject>(reader.ReadToEnd(), new ExpandoObjectConverter());
+                foreach (KeyValuePair<string, object> kv in responseBody)
                 {
-                   if (kv.Key == "access_token") accessToken = Convert.ToString(kv.Value); 
-                   if (kv.Key == "refresh_token") refreshToken = Convert.ToString(kv.Value);
+                    if (kv.Key == "access_token") accessToken = Convert.ToString(kv.Value);
+                    if (kv.Key == "refresh_token") refreshToken = Convert.ToString(kv.Value);
                 }
 
 
@@ -76,14 +73,9 @@ namespace SteerMyWheel.Connectivity
             }
         }
 
-        public HttpClient GetConnection()
+        public Task<bool> createRepositoryAsync(string repositoryName, bool isPrivate)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> createRepositoryAsync(string repositoryName,bool isPrivate)
-        {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _config.bitbucketScriptsAPI+repositoryName.ToLower());
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _config.bitbucketScriptsAPI + repositoryName.ToLower());
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             var data = new Dictionary<string, object>
             {
@@ -96,17 +88,17 @@ namespace SteerMyWheel.Connectivity
                 {"is_private",isPrivate}
 
             };
-            var content = new StringContent(JsonConvert.SerializeObject(data),_encoding,new MediaTypeHeaderValue("application/json"));
+            var content = new StringContent(JsonConvert.SerializeObject(data), _encoding, new MediaTypeHeaderValue("application/json"));
             request.Content = content;
             request.Method = HttpMethod.Post;
 
-            using(var client = new HttpClient())
+            using (var client = new HttpClient())
             {
-               var response = client.SendAsync(request).Result;
+                var response = client.SendAsync(request).Result;
                 var reader = new StreamReader(response.Content.ReadAsStreamAsync().Result);
                 if (response.IsSuccessStatusCode) return Task.FromResult(true);
             }
-           
+
             return Task.FromResult(false);
 
         }
@@ -115,6 +107,17 @@ namespace SteerMyWheel.Connectivity
         {
             if (accessToken != "") return true;
             return false;
+        }
+
+
+        public override HttpClient GetConnection()
+        {
+            return new HttpClient();
+        }
+
+        public override void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }

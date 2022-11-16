@@ -1,11 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using SteerMyWheel.Workers.Git;
 using System;
 using System.Collections.Generic;
-using System.Net.Mail;
-using System.Text;
 using System.Threading;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.TaskQueue

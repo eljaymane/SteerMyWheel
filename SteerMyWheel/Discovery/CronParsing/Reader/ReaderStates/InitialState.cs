@@ -1,7 +1,4 @@
-﻿using SteerMyWheel.CronParsing.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SteerMyWheel.Model;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Reader.ReaderStates
@@ -16,7 +13,7 @@ namespace SteerMyWheel.Reader.ReaderStates
        
         public async Task handle(ReaderStateContext context)
         {
-            context.currentHostName = this.remoteHost.name;
+            context.currentHostName = this.remoteHost.Name;
             await context._writer.WriteAsync(remoteHost);
         }
     }
