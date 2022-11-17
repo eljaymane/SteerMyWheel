@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SteerMyWheel.Reader;
+using SteerMyWheel.Domain.Discovery.CronParsing;
 using System.Xml.Linq;
 
 namespace SteerMyWheelTest

@@ -1,31 +1,29 @@
 ﻿using Neo4jClient;
-using SteerMyWheel.Model;
-using SteerMyWheel.ScriptsHandling.Clients;
-using SteerMyWheel.TaskQueue;
+using SteerMyWheel.Core.Model.Entities;
+using SteerMyWheel.Core.Synchronization.Migration.SSH;
+using SteerMyWheel.Domain.Model.WorkerQueue;
 using System;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
 namespace SteerMyWheel.Workers
 {
-    public class MigrationWorker : IQueuable
+    public class MigrationWorker : BaseWorker
     {
-        public static SSHClient _sshClient;
-        public static GraphDAO _graphClient;
-
+        public static SSHMigration _sshClient;
+        public static GraphPhysicalMigration _graphClient;
         private ScriptExecution _script;
         private RemoteHost _source;
         private RemoteHost _target;
         public MigrationWorker(ScriptExecution script, RemoteHost source, RemoteHost target)
         {
-            _sshClient = new SSHClient();
-            _graphClient = new GraphDAO(new GraphClient("http://localhost:7474/", "neo4j", "Supervision!"), "neo4j");
+            _sshClient = new SSHMigration();
             _script = script;
             _source = source;
             _target = target;
         }
 
-        public async Task doWork()
+        public override async Task doWork()
         {
             var joinData = new JoinBlock<ScriptExecution, RemoteHost, RemoteHost>();
             joinData.Target1.Post(_script);

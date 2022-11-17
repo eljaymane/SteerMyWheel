@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Migration\" />
+    <Folder Include="Core\Discovery\Crontab\CronReader\" />
   </ItemGroup>
 
 </Project>
