@@ -16,6 +16,10 @@ namespace SteerMyWheel.Domain.Discovery.CronParsing.ReaderState
         public string currentRole { get; set; }
         public string currentHostName { get; set; }
 
+        public ReaderStateContext()
+        {
+
+        }
         public ReaderStateContext(ILogger<ReaderStateContext> logger, CronGraphWriter writer)
         {
             _logger = logger;
@@ -31,6 +35,7 @@ namespace SteerMyWheel.Domain.Discovery.CronParsing.ReaderState
         }
         protected virtual void onStateChanged(EventArgs e)
         {
+            
             _logger.LogInformation("[{time}] ( ReaderContext ) stateChanged => {newState}", DateTime.UtcNow, currentState.GetType().Name);
             currentState.handle(this).Wait();
         }

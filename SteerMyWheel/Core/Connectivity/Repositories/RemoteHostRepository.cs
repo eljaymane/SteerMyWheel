@@ -22,16 +22,16 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             {
                 try
                 {
-                    var result = client.Cypher.Merge("(remoteHost:RemoteHost { RemoteIP : $ip })")
+                    client.Cypher.Merge("(remoteHost:RemoteHost { Name : $name })")
                          .OnCreate()
                          .Set("remoteHost = $entity")
                          .WithParams(new
                          {
-                             ip = entity.RemoteIP,
+                             name = entity.Name,
                              entity
                          })
-                          .Return(h => h.As<RemoteHost>()).ResultsAsync.Result.First();
-                    return result;
+                          .ExecuteWithoutResultsAsync().Wait();
+                    return entity;
                 }
                 catch (Exception e)
                 {

@@ -4,7 +4,8 @@ using SteerMyWheel.Configuration;
 using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Core.Model.WorkersQueue;
-using SteerMyWheel.Core.Synchronization.Migration.Git;
+using SteerMyWheel.Core.Workers.Migration.Git;
+using SteerMyWheel.Domain.Service;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,9 +14,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
-namespace SteerMyWheel.Core.Synchronization
+namespace SteerMyWheel.Core.Services
 {
-    public class ScriptSyncService
+    public class ScriptSyncService : IService
     {
         private ILoggerFactory _loggerFactory;
         private readonly ILogger<ScriptSyncService> _logger;

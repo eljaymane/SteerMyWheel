@@ -15,6 +15,10 @@ namespace SteerMyWheel.Configuration
         public static string RepositoryName = "(?<=\\/scripts\\/)(.*)";
         public static bool isJava(string line) { return line.Contains("java"); }
         public static bool isStdoRedirect(string line) { return line.Contains(">"); }
+        public static bool shouldIgnore(string line)
+        {
+            return line.Replace("#", "").Replace("-", "").Trim() == "";
+        }
         public static bool IsRole(string line)
         {
             if (line.StartsWith('#') && !line.Contains('*')) return true;

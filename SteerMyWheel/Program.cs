@@ -9,10 +9,15 @@ using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Domain.Discovery.CronParsing;
 using SteerMyWheel.Core.Discovery.Crontab.GraphWriter;
 using SteerMyWheel.Domain.Discovery.CronParsing.ReaderState;
-using SteerMyWheel.Core.Discovery.Crontab.CronReader;
-using SteerMyWheel.Core.Synchronization;
-using SteerMyWheel.Core.Synchronization.Migration.Git;
 using SteerMyWheel.Core.Model.WorkersQueue;
+using SteerMyWheel.Core.Workers.Migration.Git;
+using SteerMyWheel.Core.Services;
+using SteerMyWheel.Core.Discovery.Crontab.Reader;
+using System.Collections.Generic;
+using SteerMyWheel.Domain.Model.WorkerQueue;
+using SteerMyWheel.Core.Workers.Discovery;
+using SteerMyWheel.Core.Connectivity.Repositories;
+using System.Threading;
 
 namespace SteerMyWheel
 {
@@ -40,22 +45,44 @@ namespace SteerMyWheel
                     .AddTransient<GlobalConfig>()
                     .AddTransient<NeoClientProvider>()
                     .AddTransient<BitbucketClientProvider>()
-                    .AddTransient<CronGraphWriter>()
-                    .AddTransient<ReaderStateContext>()
-                    .AddTransient<CronReader>()
+                    .AddTransient<SSHClientProvider>()
+                    .AddTransient<ScriptExecutionRepository>()
+                    .AddTransient<ScriptRepositoryRepository>()
+                    .AddTransient<RemoteHostRepository>()
+                    .AddScoped<CronGraphWriter>()
+                    .AddScoped<ReaderStateContext>()
+                    .AddScoped<CronReader>()
                     .AddTransient<CronParser>()
                     .AddTransient<WorkersQueue<GitMigrationWorker>>()
-                    .AddTransient<ScriptSyncService>());
+                    .AddTransient<WorkersQueue<CronDiscoveryWorker>>()
+                    .AddTransient<ScriptSyncService>()
+                    .AddSingleton<CronDiscoveryService>()
+                    
+                    );
             var host = builder.Build();
             var globalConfig = host.Services.GetRequiredService<GlobalConfig>();
+            var remoteHosts = new List<RemoteHost>
+            {
+                new RemoteHost("UATFRTAPP901","UATFRTAPP901",22,"kch-front","Supervision!")
+            };
+            var discoveryService = host.Services.GetRequiredService<CronDiscoveryService>();
+            discoveryService.setLoggerFactory(loggerFactory);
+
+            foreach (var remoteHost in remoteHosts)
+            {
+                discoveryService.Discover(remoteHost).Wait();
+            }
+            discoveryService._queue.DeqeueAllAsync(CancellationToken.None).Wait();
             //var _reader = host.Services.GetRequiredService<CronReader>();
             //_reader.GetContext().Initialize(new RemoteHost("PRDFRTAPP901", "PRDFRTAPP901", 22, "kcm-front", "Supervision!"));
             //_reader.Read("C:/scripts.txt").Wait();
-            var syncService = host.Services.GetRequiredService<ScriptSyncService>();
-            syncService.setLoggerFactory(loggerFactory);
-            var h = new RemoteHost("PRDFRTAPP901", "PRDFRTAPP901", 22, "kcm-front", "Supervision!");
+           
+            
+            //var syncService = host.Services.GetRequiredService<ScriptSyncService>();
+            //syncService.setLoggerFactory(loggerFactory);
+            //var h = new RemoteHost("PRDFRTAPP901", "PRDFRTAPP901", 22, "kcm-front", "Supervision!");
             //syncService.generateGraphRepos(h).Wait();
-            syncService.syncRepos(h).Wait();
+            ////syncService.syncRepos(h).Wait();
 
             //syncService.generateGraphRepos(h);
             //var bitbucket = host.Services.GetRequiredService<BitbucketClient>();

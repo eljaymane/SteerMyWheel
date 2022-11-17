@@ -7,14 +7,19 @@ using SteerMyWheel.Domain.Model.ReaderState;
 using SteerMyWheel.Domain.Discovery.CronParsing.ReaderState;
 using SteerMyWheel.Core.Model.ReaderStates;
 using SteerMyWheel.Core.Model.Entities;
+using System.Drawing;
 
 namespace SteerMyWheel.Domain.Discovery.CronParsing
 {
     public class CronParser
     {
-        private readonly ILogger<CronParser> _logger;
-        private ReaderStateContext _context;
+        private static ILogger<CronParser> _logger;
+        private static ReaderStateContext _context;
 
+        public CronParser()
+        {
+
+        }
         public CronParser(ILogger<CronParser> logger)
         {
             _logger = logger;
@@ -26,10 +31,10 @@ namespace SteerMyWheel.Domain.Discovery.CronParsing
         }
         public IState Parse(string line)
         {
-            //if (_logger == null) _logger = _context._loggerFactory.CreateLogger<CronParser>();
             _logger.LogInformation("[{time}] CronParser => Parsing line : {line}", DateTime.UtcNow, line);
             if (CronParserConfig.IsScript(line)) return new NewScriptState(new ScriptExecution(_context.currentRole, GetCron(line), GetName(line), GetPath(line), GetExecCommand(line), CronParserConfig.IsEnabled(line)));
             if (CronParserConfig.IsRole(line)) return new NewRoleState(GetRole(line));
+            if(CronParserConfig.shouldIgnore(line)) return new IgnoreState();
             return null;
         }
 

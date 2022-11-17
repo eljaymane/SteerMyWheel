@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
-namespace SteerMyWheel.Core.Synchronization.Migration.Git
+namespace SteerMyWheel.Core.Workers.Migration.Git
 {
     public class GitMigrationWorker : BaseWorker
     {
@@ -29,7 +29,7 @@ namespace SteerMyWheel.Core.Synchronization.Migration.Git
 
         private async Task cloneLegacyRepo()
         {
-            Logger.LogInformation("[{time}] Started cloning legacy repository {name} ..", DateTime.UtcNow, _scriptRepository.Name);
+            _logger.LogInformation("[{time}] Started cloning legacy repository {name} ..", DateTime.UtcNow, _scriptRepository.Name);
             var cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
             cmd.StartInfo.UseShellExecute = false;
@@ -77,7 +77,7 @@ namespace SteerMyWheel.Core.Synchronization.Migration.Git
                 {
 
                 }
-                else Logger.LogInformation("[{time}] Could not clone repository {name}", DateTime.UtcNow, _scriptRepository.Name);
+                else _logger.LogInformation("[{time}] Could not clone repository {name}", DateTime.UtcNow, _scriptRepository.Name);
                 cmd.Close();
             });
 
@@ -134,7 +134,7 @@ namespace SteerMyWheel.Core.Synchronization.Migration.Git
             var clone = $"git clone {gitRootUri}{_scriptRepository.Name}.git && echo success:true";
             cmd.StandardInput.WriteLine(cd);
             cmd.StandardInput.Flush();
-            Logger.LogInformation("[{time}] Cloning repository {name} ..", DateTime.UtcNow, _scriptRepository.Name);
+            _logger.LogInformation("[{time}] Cloning repository {name} ..", DateTime.UtcNow, _scriptRepository.Name);
             cmd.StandardInput.WriteLine(clone);
             cmd.StandardInput.Flush();
             return cmd;
@@ -148,13 +148,13 @@ namespace SteerMyWheel.Core.Synchronization.Migration.Git
             if (Directory.Exists(_scriptRepository.Name)) return cmd;
             else
             {
-                Logger.LogInformation("[{time}] Cloning repository {name} timed out. Maybe it's in commando repo ? Trying again ...", DateTime.UtcNow, _scriptRepository.Name);
+                _logger.LogInformation("[{time}] Cloning repository {name} timed out. Maybe it's in commando repo ? Trying again ...", DateTime.UtcNow, _scriptRepository.Name);
                 var cd = "cd C:/steer/";
                 var clone = $"git clone {gitCommandoURI}{_scriptRepository.Name}.git";
                 cmd.StandardInput.WriteLine(cd);
                 cmd.StandardInput.Flush();
                 cmd.StandardInput.WriteLine(clone);
-                Logger.LogInformation("[{time}] Cloning repository {name} ..", DateTime.UtcNow, _scriptRepository.Name);
+                _logger.LogInformation("[{time}] Cloning repository {name} ..", DateTime.UtcNow, _scriptRepository.Name);
                 cmd.StandardInput.Flush();
                 return cmd;
             }
@@ -163,11 +163,11 @@ namespace SteerMyWheel.Core.Synchronization.Migration.Git
 
         private async Task createNewRepository()
         {
-            Logger.LogInformation("[{time}] Creating repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.Name);
+            _logger.LogInformation("[{time}] Creating repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.Name);
             await _BitClient.Connect();
             if (await ((BitbucketClientProvider)_BitClient).createRepositoryAsync(_scriptRepository.Name, true))
-                Logger.LogInformation("[{time}] Successfully created repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.Name);
-            else Logger.LogInformation("[{time}] Could not create repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.Name);
+                _logger.LogInformation("[{time}] Successfully created repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.Name);
+            else _logger.LogInformation("[{time}] Could not create repository {name} on BitBucket ..", DateTime.UtcNow, _scriptRepository.Name);
 
         }
 
