@@ -3,6 +3,7 @@ using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Domain.Connectivity.GraphRepository;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SteerMyWheel.Core.Connectivity.Repositories
@@ -13,6 +14,15 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
         public RemoteHostRepository(NeoClientProvider client, ILogger<RemoteHostRepository> logger) : base(client)
         {
             _logger = logger;
+            try
+            {
+                _client.GetConnection().Cypher.CreateUniqueConstraint("h:RemoteHost", "h.Name").ExecuteWithoutResultsAsync().Wait();
+                _logger.LogInformation("[{time}] Created unique constraint on RemoteHost.Name ...", DateTime.UtcNow);
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation("[{time}] Unique constraint on ScriptExecution.ExecCommand already exists !", DateTime.UtcNow);
+            }
         }
 
         public override RemoteHost Create(RemoteHost entity)
@@ -38,7 +48,6 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
                     return null;
                 }
             }
-            return default;
         }
 
         public override RemoteHost Delete(RemoteHost entity)
@@ -69,6 +78,23 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
                          .Where((RemoteHost s) => s.RemoteIP == X)
                          .Return(s => s.As<RemoteHost>()).ResultsAsync.Result.First();
                     return entity;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public override IEnumerable<RemoteHost> GetAll()
+        {
+            using (var client = _client.GetConnection())
+            {
+                try
+                {
+                    var entities = client.Cypher.Match("(remoteHost:RemoteHost)")
+                         .Return(s => s.As<RemoteHost>()).ResultsAsync.Result;
+                    return entities;
                 }
                 catch (Exception e)
                 {

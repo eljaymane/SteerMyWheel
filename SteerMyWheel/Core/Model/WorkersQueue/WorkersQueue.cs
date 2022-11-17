@@ -2,6 +2,7 @@
 using SteerMyWheel.Domain.Model.WorkerQueue;
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,6 +31,8 @@ namespace SteerMyWheel.Core.Model.WorkersQueue
             EventHandler handler = WorkItemAdded;
             handler?.Invoke(this, e);
             _logger.LogInformation("[{time}] New worker added to queue !", DateTime.UtcNow);
+            var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(120)).Token;
+            this.DeqeueAllAsync(cancellationToken).Wait();
             //semaphore.WaitAsync().Wait();
             //try
             //{

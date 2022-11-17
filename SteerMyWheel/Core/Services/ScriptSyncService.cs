@@ -2,6 +2,7 @@
 using Neo4jClient;
 using SteerMyWheel.Configuration;
 using SteerMyWheel.Core.Connectivity.ClientProviders;
+using SteerMyWheel.Core.Connectivity.Repositories;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Core.Model.WorkersQueue;
 using SteerMyWheel.Core.Workers.Migration.Git;
@@ -20,14 +21,16 @@ namespace SteerMyWheel.Core.Services
     {
         private ILoggerFactory _loggerFactory;
         private readonly ILogger<ScriptSyncService> _logger;
+        private GlobalEntityRepository _repositories;
         private GraphClient _client;
         private NeoClientProvider _neoClient;
         private BitbucketClientProvider _bitClient;
         private WorkersQueue<GitMigrationWorker> _gitQueue;
 
-        public ScriptSyncService(BitbucketClientProvider bitClient, NeoClientProvider client, ILogger<ScriptSyncService> logger, WorkersQueue<GitMigrationWorker> queue)
+        public ScriptSyncService(BitbucketClientProvider bitClient, NeoClientProvider client, ILogger<ScriptSyncService> logger, WorkersQueue<GitMigrationWorker> queue,GlobalEntityRepository repositories)
         {
             _client = client.GetConnection();
+            _repositories = repositories;
             _neoClient = client;
             _logger = logger;
             _gitQueue = queue;
@@ -96,12 +99,8 @@ namespace SteerMyWheel.Core.Services
 
         private IEnumerable<ScriptRepository> getAllRepositories(RemoteHost host)
         {
-            _logger.LogInformation("[{time}] Requesting all repositories for host {host} ...", DateTime.UtcNow, host.Name);
-            var result = _client.Cypher
-                .Match("(h:RemoteHost)-[:HOSTS]-(se:ScriptExecution)-[:IS_ON]->(s:ScriptRepository)")
-                .Where((RemoteHost h) => h.Name == host.Name)
-                .ReturnDistinct(s => s.As<ScriptRepository>())
-                .ResultsAsync.Result;
+           
+            var result = _repositories.ScriptRepositoryRepository.GetAll(host);
             _logger.LogInformation("[{time}] Retrieved {count} ScriptRepositories ...", DateTime.UtcNow, result.Count());
             return result;
 
@@ -128,10 +127,9 @@ namespace SteerMyWheel.Core.Services
                     {
                         var name = dir.Replace("C:/steer/", "");
                         _logger.LogInformation("[{time}] Repository {name} successfully cloned ..", DateTime.UtcNow, name);
-                        client.Cypher.Match("(s:ScriptRepository)")
-                       .Where((ScriptRepository s) => s.Name == name)
-                       .Set("s.isCloned = true")
-                       .ExecuteWithoutResultsAsync().Wait();
+                        var repository = _repositories.ScriptRepositoryRepository.Get(name);
+                        repository.IsCloned = true;
+                        _repositories.ScriptRepositoryRepository.Update(repository);
                     }
                 }
 
@@ -145,8 +143,7 @@ namespace SteerMyWheel.Core.Services
         private IEnumerable<ScriptExecution> getAllScripts(RemoteHost host)
         {
             _logger.LogInformation("[{time}] Requesting all scripts for host {host} ...", DateTime.UtcNow, host.Name);
-            var scripts = _client.Cypher.Match("(script:ScriptExecution)")
-                .Return(script => script.As<ScriptExecution>()).ResultsAsync.Result;
+            var scripts = _repositories.ScriptExecutionRepository.GetAll();
             _logger.LogInformation("[{time}] Retrieved {count} script execution on {host} ...", DateTime.UtcNow, scripts.Count(), host.Name);
             return scripts;
 
@@ -175,16 +172,6 @@ namespace SteerMyWheel.Core.Services
         private Task reflectToGraph(Dictionary<ScriptRepository, List<ScriptExecution>> _repository)
         {
 
-            try
-            {
-                _client.Cypher.CreateUniqueConstraint("r:ScriptRepository", "r.name").ExecuteWithoutResultsAsync().Wait();
-                _logger.LogInformation("[{time}] Created unique constraint on ScriptRepository.name  ...", DateTime.UtcNow);
-            }
-            catch (Exception e)
-            {
-                _logger.LogInformation("[{time}] Unique constraint on ScriptRepository.name already exists !", DateTime.UtcNow);
-            }
-
             foreach (var repository in _repository.Keys)
             {
                 try
@@ -192,22 +179,14 @@ namespace SteerMyWheel.Core.Services
                     if (repository.Name.Trim() == "" || repository.Name.Contains("crontab")) _logger.LogInformation("[{time}] {name} Doesn't look like a repository !", DateTime.UtcNow, repository.Name);
                     else
                     {
-                        _client.Cypher.Merge("(scriptRepository:ScriptRepository { name : $name })")
-                   .OnCreate()
-                   .Set("scriptRepository = $repository")
-                   .WithParams(new
-                   {
-                       name = repository.Name,
-                       repository
-                   })
-                   .ExecuteWithoutResultsAsync().Wait();
-                        _logger.LogInformation("[{time}] Created new ScriptRepository {name}  ...", DateTime.UtcNow, repository.Name);
+                        _repositories.ScriptRepositoryRepository.Create(repository);
+
                     }
 
                 }
                 catch (Exception e)
                 {
-                    _logger.LogInformation("[{time}] ScriptRepository {name} already exists !", DateTime.UtcNow, repository.Name);
+                    
                 }
 
 
@@ -215,16 +194,11 @@ namespace SteerMyWheel.Core.Services
                 {
                     try
                     {
-                        _client.Cypher.Match("(r:ScriptRepository)", "(s:ScriptExecution)")
-                        .Where((ScriptRepository r) => r.Name == repository.Name)
-                        .AndWhere((ScriptExecution s) => s.ExecCommand == script.ExecCommand)
-                        .Create("(s)-[:IS_ON]->(r)")
-                        .ExecuteWithoutResultsAsync().Wait();
-                        _logger.LogInformation("[{time}] Linking ScriptExecution {ScriptName} to ScriptRepository {name}  ...", DateTime.UtcNow, script.Name, repository.Name);
+                        _repositories.ScriptRepositoryRepository.Link(repository, script);
                     }
                     catch (Exception e)
                     {
-                        _logger.LogInformation("[{time}] Could not link ScriptExecution {ScriptName} to ScriptRepository {name} ...", DateTime.UtcNow, script.Name, repository.Name);
+                       
                     }
 
                 }

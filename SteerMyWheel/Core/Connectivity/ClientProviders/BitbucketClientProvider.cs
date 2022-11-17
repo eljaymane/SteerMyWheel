@@ -22,7 +22,6 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
         private readonly Encoding _encoding = Encoding.UTF8;
         private string accessToken = "";
         private string refreshToken = "";
-        private readonly string accessTokenRegex = "(?=#access_token=).*(?:&scopes)";
 
         public BitbucketClientProvider(GlobalConfig config, ILogger<BitbucketClientProvider> logger)
         {

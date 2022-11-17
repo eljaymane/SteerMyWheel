@@ -1,6 +1,6 @@
 ﻿using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Domain.Model.Entity;
-
+using System.Collections.Generic;
 
 namespace SteerMyWheel.Domain.Connectivity.GraphRepository
 {
@@ -14,14 +14,9 @@ namespace SteerMyWheel.Domain.Connectivity.GraphRepository
         }
 
         public abstract T Create(T entity);
-
-
         public abstract T Delete(T entity);
-
-
         public abstract T Get(ID X);
-
-
+        public abstract IEnumerable<T> GetAll();
         public abstract T Update(T entity);
 
     }

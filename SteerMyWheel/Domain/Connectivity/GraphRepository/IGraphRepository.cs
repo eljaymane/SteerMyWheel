@@ -1,4 +1,5 @@
 ﻿using SteerMyWheel.Domain.Model.Entity;
+using System.Collections.Generic;
 
 namespace SteerMyWheel.Domain.Connectivity.GraphRepository
 {
@@ -6,6 +7,7 @@ namespace SteerMyWheel.Domain.Connectivity.GraphRepository
     {
         T Create(T entity);
         T Get(ID X);
+        IEnumerable<T> GetAll();
         T Update(T entity);
         T Delete(T entity);
 
