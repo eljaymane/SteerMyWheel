@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SteerMyWheel.Workers;
 using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Configuration;
 using SteerMyWheel.Core.Model.Entities;
@@ -104,8 +103,7 @@ namespace SteerMyWheel
             services.AddLogging(configure => configure.AddConsole())
                 .AddTransient<ReaderStateContext>()
                 .AddTransient<CronParser>()
-                .AddTransient<CronGraphWriter>()
-                .AddTransient<TestWorker>();
+                .AddTransient<CronGraphWriter>();
                 
 
         }   
