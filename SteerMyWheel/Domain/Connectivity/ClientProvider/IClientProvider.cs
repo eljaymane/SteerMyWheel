@@ -7,7 +7,7 @@ namespace SteerMyWheel.Domain.Connectivity.ClientProvider
     public interface IClientProvider<T, H> where T : class where H : class
     {
         T GetConnection();
-        Task Connect(H host);
+        Task ConnectSSH(H host);
 
         bool isConnected();
     }

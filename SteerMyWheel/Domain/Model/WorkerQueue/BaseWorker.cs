@@ -2,6 +2,7 @@
 using Neo4jClient;
 using Renci.SshNet;
 using SteerMyWheel.Configuration;
+using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Discovery.Crontab.Reader;
 using SteerMyWheel.Domain.Connectivity.ClientProvider;
 using System.Net.Http;
@@ -15,7 +16,7 @@ namespace SteerMyWheel.Domain.Model.WorkerQueue
         public GlobalConfig _globalConfig;
         public IClientProvider<GraphClient> _client;
         public IClientProvider<HttpClient> _BitClient;
-        public IClientProvider<SshClient> _sshClient;
+        public SSHClientProvider _sshClient;
 
         public abstract Task doWork();
 
@@ -34,7 +35,7 @@ namespace SteerMyWheel.Domain.Model.WorkerQueue
             _BitClient = client;
         }
 
-        public virtual void setSSHClient(IClientProvider<SshClient> client)
+        public virtual void setSSHClient(SSHClientProvider client)
         {
             _sshClient = client;
         }

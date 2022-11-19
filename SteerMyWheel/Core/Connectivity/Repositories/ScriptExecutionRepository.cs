@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Domain.Connectivity.GraphRepository;
@@ -106,9 +107,28 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             {
                 try
                 {
-                    _logger.LogInformation("[{time}] Requesting all repositories for host {host} ...", DateTime.UtcNow, host.Name);
+                    _logger.LogInformation("[{time}] Requesting all executions for host {host} ...", DateTime.UtcNow, host.Name);
                     var entities = client.Cypher.Match("(h:RemoteHost)-[:HOSTS]->(scriptExecution:ScriptExecution)")
                         .Where((RemoteHost h) => h.Name == host.Name)
+                        .Return(s => s.As<ScriptExecution>()).ResultsAsync.Result;
+                    return entities;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public IEnumerable<ScriptExecution> GetAll(ScriptRepository repository)
+        {
+            using (var client = _client.GetConnection())
+            {
+                try
+                {
+                    _logger.LogInformation("[{time}] Requesting all executions for repository {name} ...", DateTime.UtcNow, repository.Name);
+                    var entities = client.Cypher.Match("(s:ScriptExecution)-[:IS_ON]->(r:ScriptRepository)")
+                        .Where((ScriptRepository s) => s.Name == s.Name)
                         .Return(s => s.As<ScriptExecution>()).ResultsAsync.Result;
                     return entities;
                 }

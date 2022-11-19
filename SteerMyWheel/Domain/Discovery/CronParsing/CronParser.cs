@@ -32,9 +32,9 @@ namespace SteerMyWheel.Domain.Discovery.CronParsing
         public IState Parse(string line)
         {
             _logger.LogInformation("[{time}] CronParser => Parsing line : {line}", DateTime.UtcNow, line);
-            if (CronParserConfig.IsScript(line)) return new NewScriptState(new ScriptExecution(_context.currentRole, GetCron(line), GetName(line), GetPath(line), GetExecCommand(line), CronParserConfig.IsEnabled(line)));
-            if (CronParserConfig.IsRole(line)) return new NewRoleState(GetRole(line));
-            if(CronParserConfig.shouldIgnore(line)) return new IgnoreState();
+            if (ParserConfig.IsScript(line)) return new NewScriptState(new ScriptExecution(_context.currentRole, GetCron(line), GetName(line), GetPath(line), GetExecCommand(line), ParserConfig.IsEnabled(line)));
+            if (ParserConfig.IsRole(line)) return new NewRoleState(GetRole(line));
+            if(ParserConfig.shouldIgnore(line)) return new IgnoreState();
             return null;
         }
 
@@ -64,11 +64,11 @@ namespace SteerMyWheel.Domain.Discovery.CronParsing
             }
             else if (_line.Contains("java"))
             {
-                name = Regex.Match(_line, CronParserConfig.NameJavaCase).ToString();
+                name = Regex.Match(_line, ParserConfig.NameJavaCase).ToString();
             }
             else
             {
-                name = Regex.Replace(_line, CronParserConfig.NameSimpleCase, "");
+                name = Regex.Replace(_line, ParserConfig.NameSimpleCase, "");
             }
             return name.Trim();
         }
@@ -77,18 +77,18 @@ namespace SteerMyWheel.Domain.Discovery.CronParsing
         {
             line = line.Replace('#', ' ').TrimStart();
             string path = GetExecCommand(line) == line ? line : string.Empty;
-            if (line.Contains("&&") && !CronParserConfig.isJava(line))
+            if (line.Contains("&&") && !ParserConfig.isJava(line))
             {
-                path = Regex.Matches(GetExecCommand(line), CronParserConfig.Path).ElementAt(0).ToString();
+                path = Regex.Matches(GetExecCommand(line), ParserConfig.Path).ElementAt(0).ToString();
             }
-            else if (CronParserConfig.isStdoRedirect(line))
+            else if (ParserConfig.isStdoRedirect(line))
             {
                 path = line.Split('>')[0];
                 return GetPath(path);
             }
             else
             {
-                var matches = Regex.Matches(GetExecCommand(line), CronParserConfig.Path);
+                var matches = Regex.Matches(GetExecCommand(line), ParserConfig.Path);
                 if (matches.Count > 1) path = matches.ElementAt(1).Value;
                 else if (matches.Count == 0) path = "";
                 else path = matches.ElementAt(0).Value;

@@ -101,7 +101,6 @@ namespace SteerMyWheel.Core.Services
         {
            
             var result = _repositories.ScriptRepositoryRepository.GetAll(host);
-            _logger.LogInformation("[{time}] Retrieved {count} ScriptRepositories ...", DateTime.UtcNow, result.Count());
             return result;
 
         }
@@ -155,7 +154,7 @@ namespace SteerMyWheel.Core.Services
             Dictionary<ScriptRepository, List<ScriptExecution>> scriptRepository = new Dictionary<ScriptRepository, List<ScriptExecution>>();
             foreach (var script in scripts)
             {
-                var repositoryName = CronParserConfig.getRepositoryName(script);
+                var repositoryName = ParserConfig.getRepositoryName(script);
                 var repository = new ScriptRepository(script.Path, repositoryName);
 
                 if (scriptRepository.ContainsKey(repository)) scriptRepository.GetValueOrDefault(repository).Add(script);

@@ -48,9 +48,9 @@ namespace SteerMyWheel.Core.Workers.Discovery
 
         public async Task<string> GetCronAsync(RemoteHost host)
         {
-            await _sshClient.Connect(host);
+            await _sshClient.ConnectSSH(host);
             _cronReader.GetContext().Initialize(host);
-            return await _sshClient.getCronFile();
+            return await _sshClient.GetCronFile();
 
         }
 

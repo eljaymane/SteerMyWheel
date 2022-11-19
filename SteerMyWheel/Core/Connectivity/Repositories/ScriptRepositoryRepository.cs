@@ -138,6 +138,7 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
                                        .Where((RemoteHost h) => h.Name == host.Name)
                                        .ReturnDistinct(s => s.As<ScriptRepository>())
                                        .ResultsAsync.Result;
+                    _logger.LogInformation("[{time}] Retrieved {count} ScriptRepositories for RemoteHost {host}...", DateTime.UtcNow, entities.Count(),host.Name);
                     return entities;
                 }catch(Exception e)
                 {

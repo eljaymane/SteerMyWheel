@@ -86,6 +86,24 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             }
         }
 
+        public RemoteHost Get(ScriptRepository repository)
+        {
+            using (var client = _client.GetConnection())
+            {
+                try
+                {
+                    var entity = client.Cypher.Match("(remoteHost:RemoteHost)-[:HOSTS]->(s:ScriptRepository)")
+                         .Where((ScriptRepository s) => s.Name == repository.Name)
+                         .Return(s => s.As<RemoteHost>()).ResultsAsync.Result.First();
+                    return entity;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+
         public override IEnumerable<RemoteHost> GetAll()
         {
             using (var client = _client.GetConnection())

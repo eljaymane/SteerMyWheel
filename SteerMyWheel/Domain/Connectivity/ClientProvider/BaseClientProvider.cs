@@ -17,7 +17,7 @@ namespace SteerMyWheel.Domain.Connectivity.ClientProvider
 
     public abstract class BaseClientProvider<T, H> : IDisposable, IClientProvider<T, H> where T : class where H : class
     {
-        public abstract Task Connect(H host);
+        public abstract Task ConnectSSH(H host);
         public abstract void Dispose();
         public abstract T GetConnection();
         public abstract bool isConnected();
