@@ -1,5 +1,5 @@
-﻿using SteerMyWheel.Core.Connectivity.ClientProviders;
-using SteerMyWheel.Domain.Model.Entity;
+﻿using SteerMyWheel.Domain.Model.Entity;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System.Collections.Generic;
 
 namespace SteerMyWheel.Domain.Connectivity.GraphRepository

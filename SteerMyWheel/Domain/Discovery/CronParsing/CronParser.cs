@@ -4,10 +4,10 @@ using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using SteerMyWheel.Configuration;
 using SteerMyWheel.Domain.Model.ReaderState;
-using SteerMyWheel.Domain.Discovery.CronParsing.ReaderState;
 using SteerMyWheel.Core.Model.ReaderStates;
 using SteerMyWheel.Core.Model.Entities;
 using System.Drawing;
+using SteerMyWheel.Core.Model.CronReading;
 
 namespace SteerMyWheel.Domain.Discovery.CronParsing
 {
@@ -29,12 +29,12 @@ namespace SteerMyWheel.Domain.Discovery.CronParsing
         {
             _context = context;
         }
-        public IState Parse(string line)
+        public IReaderState Parse(string line)
         {
             _logger.LogInformation("[{time}] CronParser => Parsing line : {line}", DateTime.UtcNow, line);
-            if (ParserConfig.IsScript(line)) return new NewScriptState(new ScriptExecution(_context.currentRole, GetCron(line), GetName(line), GetPath(line), GetExecCommand(line), ParserConfig.IsEnabled(line)));
-            if (ParserConfig.IsRole(line)) return new NewRoleState(GetRole(line));
-            if(ParserConfig.shouldIgnore(line)) return new IgnoreState();
+            if (ParserConfig.IsScript(line)) return new NewScriptReaderState(new ScriptExecution(_context.currentRole, GetCron(line), GetName(line), GetPath(line), GetExecCommand(line), ParserConfig.IsEnabled(line)));
+            if (ParserConfig.IsRole(line)) return new NewRoleReaderState(GetRole(line));
+            if(ParserConfig.shouldIgnore(line)) return new IgnoreReaderState();
             return null;
         }
 

@@ -3,7 +3,7 @@ using SteerMyWheel.Core.Model.Entities;
 using System;
 using System.Threading.Tasks.Dataflow;
 
-namespace SteerMyWheel.Core.Synchronization.Migration.SSH
+namespace SteerMyWheel.Core.Workers.Migration.SSH
 {
     public class GraphPhysicalMigration
     {

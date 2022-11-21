@@ -1,14 +1,13 @@
-﻿using SteerMyWheel.Domain.Discovery.CronParsing.ReaderState;
-using SteerMyWheel.Domain.Model.ReaderState;
+﻿using SteerMyWheel.Domain.Model.ReaderState;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Core.Model.ReaderStates
+namespace SteerMyWheel.Core.Model.CronReading
 {
-    public class IgnoreState : IState
+    public class IgnoreReaderState : IReaderState
     {
         public Task handle(ReaderStateContext context)
         {

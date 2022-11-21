@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Core.Connectivity.Repositories
+namespace SteerMyWheel.Infrastracture.Connectivity.Repositories
 {
     public class GlobalEntityRepository
     {
@@ -12,12 +12,12 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
         public ScriptExecutionRepository ScriptExecutionRepository { get; }
         public ScriptRepositoryRepository ScriptRepositoryRepository { get; }
 
-        public GlobalEntityRepository(RemoteHostRepository remoteHostRepository,ScriptExecutionRepository scriptExecutionRepository,ScriptRepositoryRepository scriptRepositoryRepository)
+        public GlobalEntityRepository(RemoteHostRepository remoteHostRepository, ScriptExecutionRepository scriptExecutionRepository, ScriptRepositoryRepository scriptRepositoryRepository)
         {
             RemoteHostRepository = remoteHostRepository;
             ScriptExecutionRepository = scriptExecutionRepository;
             ScriptRepositoryRepository = scriptRepositoryRepository;
         }
-       
+
     }
 }

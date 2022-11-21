@@ -1,14 +1,13 @@
 ﻿using SteerMyWheel.Core.Model.Entities;
-using SteerMyWheel.Domain.Discovery.CronParsing.ReaderState;
 using SteerMyWheel.Domain.Model.ReaderState;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Core.Model.ReaderStates
+namespace SteerMyWheel.Core.Model.CronReading
 {
-    public class InitialState : IState
+    public class InitialReaderState : IReaderState
     {
         public RemoteHost remoteHost { get; }
-        public InitialState(RemoteHost _host)
+        public InitialReaderState(RemoteHost _host)
         {
             remoteHost = _host;
         }

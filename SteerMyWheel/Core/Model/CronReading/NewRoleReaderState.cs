@@ -1,14 +1,13 @@
-﻿using SteerMyWheel.Domain.Discovery.CronParsing.ReaderState;
-using SteerMyWheel.Domain.Model.ReaderState;
+﻿using SteerMyWheel.Domain.Model.ReaderState;
 using System;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Core.Model.ReaderStates
+namespace SteerMyWheel.Core.Model.CronReading
 {
-    public class NewRoleState : IState
+    public class NewRoleReaderState : IReaderState
     {
         private string scriptRole { get; }
-        public NewRoleState(string role)
+        public NewRoleReaderState(string role)
         {
             scriptRole = role;
         }

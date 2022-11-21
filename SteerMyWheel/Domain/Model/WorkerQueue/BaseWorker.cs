@@ -5,6 +5,7 @@ using SteerMyWheel.Configuration;
 using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Discovery.Crontab.Reader;
 using SteerMyWheel.Domain.Connectivity.ClientProvider;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System.Net.Http;
 using System.Threading.Tasks;
 

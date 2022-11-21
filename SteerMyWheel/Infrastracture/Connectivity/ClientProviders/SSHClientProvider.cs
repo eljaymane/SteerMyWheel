@@ -8,6 +8,7 @@ using SteerMyWheel.Core.Model.Enums;
 using SteerMyWheel.Domain.Connectivity.ClientProvider;
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Connectivity.ClientProviders
@@ -25,7 +26,7 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
             _logger = logger;
         }
 
-        public async Task<string> GetCronFile()
+        public Task<string> GetCronFile()
         {
             if (!isConnected()) return null;
             else
@@ -35,7 +36,7 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
                 {
                     var cmd = _client.CreateCommand("crontab -l");
                     var result = cmd.Execute();
-                    return result;
+                    return Task.FromResult(result);
                 }catch(Exception e)
                 {
 
@@ -45,9 +46,33 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
                     _logger.LogInformation("[{time}] [SSH] Successfully read cronfile for user {user} on RemoteHost : {ip} ...", DateTime.UtcNow,_client.ConnectionInfo.Username, _client.ConnectionInfo.Host);
                 }
 
-                return String.Empty;
+                return Task.FromResult(String.Empty);
             }
 
+        }
+
+        public Task<bool> ExecuteCmd(string cmd)
+        {
+            if (_client.IsConnected) _logger.LogInformation($"[{DateTime.UtcNow}] Trying to execute command {cmd} on remote host : {_client.ConnectionInfo.Host}");
+            else
+            {
+                _logger.LogInformation($"[{DateTime.UtcNow}] Client not connected...");
+                return Task.FromResult(false);
+            }
+            var result = _client.CreateCommand(cmd + " && echo success:true").Execute();
+            if (result.Contains("success:true"))
+            {
+                _logger.LogInformation($"[{DateTime.UtcNow}] Command {cmd} has been executed successfully on remote host : {_client.ConnectionInfo.Host}");
+                return Task.FromResult(true);
+            } else
+            {
+                _logger.LogError($"[{DateTime.UtcNow}] Command {cmd} has not completed successfully on remote host : {_client.ConnectionInfo.Host}");
+                return Task.FromResult(false);
+            }
+            
+
+
+            
         }
 
         public async Task DownloadRepository(ScriptRepository repository,string localPath)

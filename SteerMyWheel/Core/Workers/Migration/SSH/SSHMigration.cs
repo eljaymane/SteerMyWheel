@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks.Dataflow;
 
-namespace SteerMyWheel.Core.Synchronization.Migration.SSH
+namespace SteerMyWheel.Core.Workers.Migration.SSH
 {
     public class SSHMigration
     {

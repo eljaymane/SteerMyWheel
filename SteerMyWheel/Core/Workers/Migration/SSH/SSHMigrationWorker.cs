@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Core.Synchronization.Migration.SSH
+namespace SteerMyWheel.Core.Workers.Migration.SSH
 {
     public class SSHMigrationWorker : BaseWorker
     {

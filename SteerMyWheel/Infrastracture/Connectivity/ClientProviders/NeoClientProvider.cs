@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Core.Connectivity.ClientProviders
+namespace SteerMyWheel.Infrastracture.Connectivity.ClientProviders
 {
     public class NeoClientProvider : BaseClientProvider<GraphClient>
     {

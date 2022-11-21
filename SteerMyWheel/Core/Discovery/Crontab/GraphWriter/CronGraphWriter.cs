@@ -2,10 +2,10 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using SteerMyWheel.Core.Connectivity.Repositories;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Domain.Model.Writer;
-using SteerMyWheel.Domain.Discovery.CronParsing.ReaderState;
+using SteerMyWheel.Infrastracture.Connectivity.Repositories;
+using SteerMyWheel.Core.Model.CronReading;
 
 namespace SteerMyWheel.Core.Discovery.Crontab.GraphWriter
 {

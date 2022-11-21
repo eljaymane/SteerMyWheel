@@ -2,12 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Configuration;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Domain.Discovery.CronParsing;
 using SteerMyWheel.Core.Discovery.Crontab.GraphWriter;
-using SteerMyWheel.Domain.Discovery.CronParsing.ReaderState;
 using SteerMyWheel.Core.Model.WorkersQueue;
 using SteerMyWheel.Core.Workers.Migration.Git;
 using SteerMyWheel.Core.Services;
@@ -15,8 +13,10 @@ using SteerMyWheel.Core.Discovery.Crontab.Reader;
 using System.Collections.Generic;
 using SteerMyWheel.Domain.Model.WorkerQueue;
 using SteerMyWheel.Core.Workers.Discovery;
-using SteerMyWheel.Core.Connectivity.Repositories;
 using System.Threading;
+using SteerMyWheel.Infrastracture.Connectivity.Repositories;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
+using SteerMyWheel.Core.Model.CronReading;
 
 namespace SteerMyWheel
 {

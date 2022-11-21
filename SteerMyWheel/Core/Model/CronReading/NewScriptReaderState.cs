@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.ReaderStates
 {
-    public class NewScriptState : IState
+    public class NewScriptState : IReaderState
     {
         public ScriptExecution newScript { get; set; }
         public NewScriptState(ScriptExecution script)

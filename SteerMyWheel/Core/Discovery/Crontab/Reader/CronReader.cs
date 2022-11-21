@@ -1,6 +1,5 @@
-﻿using SteerMyWheel.Core.Model.ReaderStates;
+﻿using SteerMyWheel.Core.Model.CronReading;
 using SteerMyWheel.Domain.Discovery.CronParsing;
-using SteerMyWheel.Domain.Discovery.CronParsing.ReaderState;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -48,9 +47,9 @@ namespace SteerMyWheel.Core.Discovery.Crontab.Reader
         }
         public async void Write()
         {
-            if (_stateContext.currentState.GetType() != typeof(NewScriptState))
+            if (_stateContext.currentState.GetType() != typeof(NewScriptReaderState))
                 return;
-            await _stateContext._writer.WriteScriptExecution(((NewScriptState)_stateContext.currentState).newScript,_stateContext.currentHostName);
+            await _stateContext._writer.WriteScriptExecution(((NewScriptReaderState)_stateContext.currentState).newScript,_stateContext.currentHostName);
         }
     }
 }

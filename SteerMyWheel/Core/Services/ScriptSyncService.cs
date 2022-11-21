@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
 using Neo4jClient;
 using SteerMyWheel.Configuration;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
-using SteerMyWheel.Core.Connectivity.Repositories;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Core.Model.WorkersQueue;
 using SteerMyWheel.Core.Workers.Migration.Git;
 using SteerMyWheel.Domain.Service;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
+using SteerMyWheel.Infrastracture.Connectivity.Repositories;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -13,7 +13,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Core.Connectivity.ClientProviders
+namespace SteerMyWheel.Infrastracture.Connectivity.ClientProviders
 {
     public class BitbucketClientProvider : BaseClientProvider<HttpClient>
     {
