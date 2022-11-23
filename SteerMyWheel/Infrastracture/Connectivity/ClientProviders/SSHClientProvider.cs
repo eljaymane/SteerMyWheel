@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Renci.SshNet;
 using Renci.SshNet.Common;
+using Renci.SshNet.Sftp;
 using SteerMyWheel.Configuration;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Core.Model.Enums;
@@ -121,6 +122,59 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
                 }
             }
             }
+
+        public async Task Upload(string remotePath,string localPath)
+        {
+            if (!_sftpClient.IsConnected) return;
+            try
+            {
+                bool isDir = Directory.Exists(localPath);
+                bool isFile = File.Exists(localPath);
+                if(isDir)
+                {
+                    _logger.LogInformation($"[{DateTime.UtcNow}] Upload : Localpath {localPath} is directory");
+                    foreach (var file in Directory.GetFiles(localPath))
+                    {
+                        using (Stream fileStream = File.OpenRead(file))
+                        {
+                            try
+                            {
+                                _logger.LogInformation($"[{DateTime.UtcNow}] Uploading : {file}");
+                                _sftpClient.UploadFile(fileStream, remotePath);
+                                _logger.LogInformation($"[{DateTime.UtcNow}] File {file} uploaded successfully to {remotePath + file.Split('/')[0]}");
+                            } catch(Exception e)
+                            {
+                                _logger.LogError($"[{DateTime.UtcNow}] Could not upload {file} to {remotePath}");
+                            }
+                            
+                        }
+                    }
+                } else if(isFile) {
+                    using (Stream fileStream = File.OpenRead(localPath))
+                    {
+                        try
+                        {
+                            _logger.LogInformation($"[{DateTime.UtcNow}] Uploading : {localPath}");
+                            _sftpClient.UploadFile(fileStream, remotePath);
+                            _logger.LogInformation($"[{DateTime.UtcNow}] File {localPath} uploaded successfully to {remotePath}");
+                        }
+                        catch(Exception e)
+                        {
+                            _logger.LogError($"[{DateTime.UtcNow}] Could not upload {localPath} to {remotePath}");
+                        }
+                       
+                    }
+                }
+                
+                
+            }catch(Exception e)
+            {
+                _logger.LogError($"[{DateTime.UtcNow}] Could not upload {localPath} to {remotePath}. Reason : {e.Message}");
+            }
+            
+           
+            
+        }
 
         public override Task ConnectSSH(RemoteHost host)
         {

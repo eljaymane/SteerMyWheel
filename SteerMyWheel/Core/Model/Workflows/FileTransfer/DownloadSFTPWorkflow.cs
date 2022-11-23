@@ -5,12 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Core.Model.Workflows.CommandExecution
+namespace SteerMyWheel.Core.Model.Workflows.FileTransfer
 {
-    public class DownloadSFTPWorkflow : BaseWorkflow
+    public class DownloadSFTPWorkflow : SSHWorkflow
     {
+        public string LocalPath { get; set; }
+        public string RemotePath { get; set; }
+
         public DownloadSFTPWorkflow(string name, string description, DateTime executionDate, BaseWorkflow next, BaseWorkflow previous) : base(name, description, executionDate, next, previous)
         {
+
         }
 
         public override bool CanExecute()
@@ -20,12 +24,14 @@ namespace SteerMyWheel.Core.Model.Workflows.CommandExecution
 
         public override Task Execute()
         {
-            throw new NotImplementedException();
+            _sshClient.DownloadDirectory(RemotePath, LocalPath).Wait();
+            return Task.CompletedTask;
+
         }
 
-        public override Task ExecuteAsync()
+        public async override Task ExecuteAsync()
         {
-            throw new NotImplementedException();
+            await _sshClient.DownloadDirectory(RemotePath, LocalPath);
         }
     }
 }
