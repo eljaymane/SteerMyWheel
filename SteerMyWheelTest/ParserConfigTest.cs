@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SteerMyWheel.Reader;
-using SteerMyWheel.Reader.Config;
+using SteerMyWheel.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +15,7 @@ namespace SteerMyWheelTest
         public void Get_Repository_Name_Should_Return_Name_Java()
         {
             var line = "/home/kch-front/scripts/quanthouse-security-enricher";
-            var result = Regex.Match(line, ParserConfig.RepositoryNameJava).ToString();
+            var result = Regex.Match(line, ParserConfig.RepositoryName).ToString();
             Assert.AreEqual("quanthouse-security-enricher", result);
         }
         #region IsRole
