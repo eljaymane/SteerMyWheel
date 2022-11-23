@@ -1,4 +1,5 @@
-﻿using SteerMyWheel.Core.Model.Workflows.CommandExecution;
+﻿using Microsoft.Extensions.Logging;
+using SteerMyWheel.Core.Model.Workflows.CommandExecution;
 using SteerMyWheel.Domain.Model.Workflow;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,11 @@ namespace SteerMyWheel.Core.Model.Workflows
 {
     public class WorkflowStateContext : BaseWorkflowContext
     {
+        private ILogger<WorkflowStateContext> _logger;
         
-        public WorkflowStateContext(ExecutionWorkflow workflow) : base(workflow)
+        public WorkflowStateContext(ILoggerFactory loggerFactory) :base(loggerFactory)
         {
-            Workflow = workflow;
+            _logger = loggerFactory.CreateLogger<WorkflowStateContext>();
             setState(new WorkflowInitialState());
         }
     }

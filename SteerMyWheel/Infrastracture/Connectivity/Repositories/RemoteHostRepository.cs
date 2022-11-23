@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Domain.Connectivity.GraphRepository;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SteerMyWheel.Core.Connectivity.Repositories
+namespace SteerMyWheel.Infrastracture.Connectivity.Repositories
 {
     public class RemoteHostRepository : BaseGraphRepository<RemoteHost, string>
     {
@@ -74,9 +74,9 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             {
                 try
                 {
-                    var entity = client.Cypher.Match("(remoteHost:RemoteHost)")
-                         .Where((RemoteHost s) => s.RemoteIP == X)
-                         .Return(s => s.As<RemoteHost>()).ResultsAsync.Result.First();
+                    var entity = client.Cypher.Match("(r:RemoteHost)")
+                         .Where((RemoteHost r) => r.RemoteIP == X)
+                         .Return(r => r.As<RemoteHost>()).ResultsAsync.Result.First();
                     return entity;
                 }
                 catch (Exception e)
@@ -92,9 +92,9 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             {
                 try
                 {
-                    var entity = client.Cypher.Match("(remoteHost:RemoteHost)-[:HOSTS]->(s:ScriptRepository)")
+                    var entity = client.Cypher.Match("(r:RemoteHost)-[:HOSTS]-(se:ScriptExecution)-[:IS_ON]->(s:ScriptRepository)")
                          .Where((ScriptRepository s) => s.Name == repository.Name)
-                         .Return(s => s.As<RemoteHost>()).ResultsAsync.Result.First();
+                         .Return(r => r.As<RemoteHost>()).ResultsAsync.Result.First();
                     return entity;
                 }
                 catch (Exception e)

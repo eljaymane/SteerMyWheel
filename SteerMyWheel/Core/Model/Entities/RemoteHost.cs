@@ -13,6 +13,11 @@ namespace SteerMyWheel.Core.Model.Entities
 
         public SSHConnectionMethod ConnectionMethod { get; set; } = SSHConnectionMethod.DEFAULT;
 
+        public RemoteHost()
+        {
+
+        }
+
         public RemoteHost(string name, string remoteHost, int sSHPort, string sSHUsername, SSHConnectionMethod connectionMethod)
         {
             Name = name;

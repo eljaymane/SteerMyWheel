@@ -17,6 +17,8 @@ using System.Threading;
 using SteerMyWheel.Infrastracture.Connectivity.Repositories;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.CronReading;
+using SteerMyWheel.Core.Connectivity.ClientProviders;
+using SteerMyWheel.Core.Connectivity.Repositories;
 
 namespace SteerMyWheel
 {
@@ -47,6 +49,7 @@ namespace SteerMyWheel
                     .AddTransient<SSHClientProvider>()
                     .AddTransient<ScriptExecutionRepository>()
                     .AddTransient<ScriptRepositoryRepository>()
+                    .AddTransient<GlobalEntityRepository>()
                     .AddTransient<RemoteHostRepository>()
                     .AddScoped<CronGraphWriter>()
                     .AddScoped<ReaderStateContext>()
@@ -62,7 +65,7 @@ namespace SteerMyWheel
             var globalConfig = host.Services.GetRequiredService<GlobalConfig>();
             var remoteHosts = new List<RemoteHost>
             {
-                new RemoteHost("UATFRTAPP901","UATFRTAPP901",22,"kch-front","Supervision!")
+                new RemoteHost("PRDFRTAPP901","PRDFRTAPP901",22,"kch-front","Supervision!")
             };
             var discoveryService = host.Services.GetRequiredService<CronDiscoveryService>();
             var syncService = host.Services.GetRequiredService<ScriptSyncService>();
@@ -71,9 +74,10 @@ namespace SteerMyWheel
             syncService.setLoggerFactory(loggerFactory);
             foreach (var remoteHost in remoteHosts)
             {
-                discoveryService.Discover(remoteHost).Wait();
-                syncService.generateGraphRepos(remoteHost).Wait();
+                //discoveryService.Discover(remoteHost).Wait();
+                //syncService.generateGraphRepos(remoteHost).Wait();
                 syncService.syncRepos(remoteHost).Wait();
+             
                
                 
                 

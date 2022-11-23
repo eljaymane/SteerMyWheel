@@ -32,7 +32,7 @@ namespace SteerMyWheel.Core.Model.WorkersQueue
             handler?.Invoke(this, e);
             _logger.LogInformation("[{time}] New worker added to queue !", DateTime.UtcNow);
             var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(120)).Token;
-            this.DeqeueAllAsync(cancellationToken).Wait();
+            //this.DeqeueAllAsync(cancellationToken);
             //semaphore.WaitAsync().Wait();
             //try
             //{

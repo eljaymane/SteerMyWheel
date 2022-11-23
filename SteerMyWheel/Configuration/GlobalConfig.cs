@@ -25,7 +25,9 @@ namespace SteerMyWheel.Configuration
         public string bitbucketCodeURI { get { return $"https://bitbucket.org/site/oauth2/authorize?client_id={bitbucketKey}&response_type=code"; } }
         public string bitbucketScriptsAPI { get { return $"https://api.bitbucket.org/2.0/repositories/kch-it-tet/"; } }
         public string SSHKeysPATH { get { return $"{LocalWorkingDirectory}/.ssh/"; } }
-        public string LocalWorkingDirectory { get { return "C:/SteerMyWheel/"; } }
+        public string LocalWorkingDirectory { get { return @"C:\steer\"; } }
+
+        public string LocalReposDirectory { get { return LocalWorkingDirectory + @"repos\"; } }
         public string DefaultCommitMessage { get { return "[Automigration] Updated by SteerMyWheel"; } }
         public GlobalConfig(IConfiguration config)
         {

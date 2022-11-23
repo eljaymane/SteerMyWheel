@@ -1,5 +1,4 @@
-﻿using SteerMyWheel.Core.Model.Entities;
-using SteerMyWheel.Domain.Model.Workflow;
+﻿using SteerMyWheel.Domain.Model.Workflow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +23,7 @@ namespace SteerMyWheel.Core.Model.Workflows
                     context.Workflow.Execute().Wait();
                     context.Workflow = context.Workflow.Next;
                     context.setState(new WorkflowRunningState());
+                    return Task.CompletedTask;
                 }
             }
 

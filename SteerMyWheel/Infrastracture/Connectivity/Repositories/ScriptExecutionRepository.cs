@@ -92,7 +92,7 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
                 try
                 {
                     var entities = client.Cypher.Match("(scriptExecution:ScriptExecution)")
-                         .Return(s => s.As<ScriptExecution>()).ResultsAsync.Result;
+                         .Return(scriptExecution => scriptExecution.As<ScriptExecution>()).ResultsAsync.Result;
                     return entities;
                 }
                 catch (Exception e)
@@ -111,7 +111,7 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
                     _logger.LogInformation("[{time}] Requesting all executions for host {host} ...", DateTime.UtcNow, host.Name);
                     var entities = client.Cypher.Match("(h:RemoteHost)-[:HOSTS]->(scriptExecution:ScriptExecution)")
                         .Where((RemoteHost h) => h.Name == host.Name)
-                        .Return(s => s.As<ScriptExecution>()).ResultsAsync.Result;
+                        .Return(scriptExecution => scriptExecution.As<ScriptExecution>()).ResultsAsync.Result;
                     return entities;
                 }
                 catch (Exception e)

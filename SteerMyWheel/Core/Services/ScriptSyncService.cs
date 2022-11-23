@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Neo4jClient;
 using SteerMyWheel.Configuration;
+using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Core.Model.WorkersQueue;
 using SteerMyWheel.Core.Workers.Migration.Git;
@@ -24,11 +25,14 @@ namespace SteerMyWheel.Core.Services
         private GlobalEntityRepository _repositories;
         private GraphClient _client;
         private NeoClientProvider _neoClient;
+        private SSHClientProvider _sshClient;
         private BitbucketClientProvider _bitClient;
         private WorkersQueue<GitMigrationWorker> _gitQueue;
-
-        public ScriptSyncService(BitbucketClientProvider bitClient, NeoClientProvider client, ILogger<ScriptSyncService> logger, WorkersQueue<GitMigrationWorker> queue,GlobalEntityRepository repositories)
+        private GlobalConfig _config;
+        public ScriptSyncService(SSHClientProvider sshClient,GlobalConfig config,BitbucketClientProvider bitClient, NeoClientProvider client, ILogger<ScriptSyncService> logger, WorkersQueue<GitMigrationWorker> queue,GlobalEntityRepository repositories)
         {
+            _sshClient = sshClient;
+            _config = config;
             _client = client.GetConnection();
             _repositories = repositories;
             _neoClient = client;
@@ -109,22 +113,27 @@ namespace SteerMyWheel.Core.Services
         {
             foreach (var repo in repositories)
             {
-                var worker = new GitMigrationWorker(repo);
-                worker.setLogger(_loggerFactory.CreateLogger<GitMigrationWorker>());
-                worker.setClient(_neoClient);
-                worker.setBitBucketClient(_bitClient);
-                _gitQueue.Enqueue(worker).Wait();
+                
+                    var worker = new GitMigrationWorker(repo);
+                    worker.setLogger(_loggerFactory.CreateLogger<GitMigrationWorker>());
+                    worker.setClient(_neoClient);
+                    worker.setBitBucketClient(_bitClient);
+                    worker.setGlobalConfig(_config);
+                    worker.setGlobalEntityRepository(_repositories);
+                    worker.SetSSHClient(_sshClient);
+                    _gitQueue.Enqueue(worker).Wait();
             }
+            
             var token = new CancellationTokenSource(TimeSpan.FromSeconds(90)).Token;
             _gitQueue.DeqeueAllAsync(token).Wait();
             var verify = Task.Run(() =>
             {
-                var list = Directory.GetDirectories("C:/steer/");
+                var list = Directory.GetDirectories(_config.LocalReposDirectory);
                 using (var client = _client)
                 {
                     foreach (var dir in list)
                     {
-                        var name = dir.Replace("C:/steer/", "");
+                        var name = dir.Replace(_config.LocalReposDirectory, "");
                         _logger.LogInformation("[{time}] Repository {name} successfully cloned ..", DateTime.UtcNow, name);
                         var repository = _repositories.ScriptRepositoryRepository.Get(name);
                         repository.IsCloned = true;
@@ -142,7 +151,7 @@ namespace SteerMyWheel.Core.Services
         private IEnumerable<ScriptExecution> getAllScripts(RemoteHost host)
         {
             _logger.LogInformation("[{time}] Requesting all scripts for host {host} ...", DateTime.UtcNow, host.Name);
-            var scripts = _repositories.ScriptExecutionRepository.GetAll();
+            var scripts = _repositories.ScriptExecutionRepository.GetAll(host);
             _logger.LogInformation("[{time}] Retrieved {count} script execution on {host} ...", DateTime.UtcNow, scripts.Count(), host.Name);
             return scripts;
 
@@ -156,13 +165,14 @@ namespace SteerMyWheel.Core.Services
             {
                 var repositoryName = ParserConfig.getRepositoryName(script);
                 var repository = new ScriptRepository(script.Path, repositoryName);
+                var r = _repositories.ScriptRepositoryRepository.Link(repository,script);
 
                 if (scriptRepository.ContainsKey(repository)) scriptRepository.GetValueOrDefault(repository).Add(script);
                 else
                 {
                     var list = new List<ScriptExecution>();
                     list.Add(script);
-                    scriptRepository.Add(repository, list);
+                   scriptRepository.Add(repository, list);
                 }
             }
             return scriptRepository;
@@ -172,16 +182,17 @@ namespace SteerMyWheel.Core.Services
         {
 
             foreach (var repository in _repository.Keys)
-            {
+            { 
                 try
                 {
                     if (repository.Name.Trim() == "" || repository.Name.Contains("crontab")) _logger.LogInformation("[{time}] {name} Doesn't look like a repository !", DateTime.UtcNow, repository.Name);
                     else
                     {
-                        _repositories.ScriptRepositoryRepository.Create(repository);
-
+                        foreach(var script in _repository.GetValueOrDefault(repository))
+                        {
+                            _repositories.ScriptRepositoryRepository.Link(repository, script);
+                        }
                     }
-
                 }
                 catch (Exception e)
                 {
@@ -199,12 +210,9 @@ namespace SteerMyWheel.Core.Services
                     {
                        
                     }
-
                 }
             }
             return Task.CompletedTask;
-
-
         }
 
 

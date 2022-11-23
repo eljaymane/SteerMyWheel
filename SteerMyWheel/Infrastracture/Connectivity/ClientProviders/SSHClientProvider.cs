@@ -8,6 +8,7 @@ using SteerMyWheel.Core.Model.Enums;
 using SteerMyWheel.Domain.Connectivity.ClientProvider;
 using System;
 using System.IO;
+using System.IO.Enumeration;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -75,33 +76,51 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
             
         }
 
-        public async Task DownloadRepository(ScriptRepository repository,string localPath)
+        public async Task DownloadDirectory(string remotePath,string localPath)
         {
-            if (!_sftpClient.IsConnected) return;
+            
+            if (!_sftpClient.IsConnected || remotePath.Trim() == "") return;
             else
             {
-                var localDirectory = _config.LocalWorkingDirectory + repository.Name;
-                var files = _sftpClient.ListDirectory(repository.Path);
-                _logger.LogInformation($"[{DateTime.UtcNow}] [SFTP] Downloading sources of {repository.Name} from server {_sftpClient.ConnectionInfo.Host} ... ");
+
+                var files = _sftpClient.ListDirectory(remotePath);
+                _logger.LogInformation($"[{DateTime.UtcNow}] [SFTP] Downloading {remotePath} from server {_sftpClient.ConnectionInfo.Host} ... ");
                 foreach (var file in files)
                 {
-                    if(file.Name != "." && file.Name != "..")
+                    if (file.Name != "." && file.Name != "..")
                     {
                         if (file.IsDirectory && !ParserConfig.IgnoreDirectories.Contains(file.Name))
                         {
-                            await DownloadRepository(repository, localPath + "/" + file.Name +"/");
-                        } else
+                            if (localPath == "") return;
+                            await DownloadDirectory(remotePath + file.Name, localPath + "\\" + file.Name);
+                        }
+                        else if(!file.Name.Contains(".csv"))
                         {
-                            if (File.Exists(localPath + file.Name)) File.Move(localPath + file.Name, localPath + file.Name + ".bak");
-                            using (Stream fileStream = File.Create(localPath + file.Name))
+                            if (file.Name.StartsWith(".")) return;
+                            if (File.Exists(localPath + "\\" + file.Name))
                             {
-                                _sftpClient.DownloadFile(repository.Path + file.Name, fileStream);
+                                if (File.Exists(localPath + "\\" + file.Name + ".bak")) File.Delete(localPath + "\\" + file.Name + ".bak");
+                                File.Move(localPath + "\\" + file.Name, localPath + "\\" + file.Name + ".bak");
+                                File.Delete(localPath+ "\\" + file.Name);
+                            }
+                            using (Stream fileStream = File.Create(localPath + "\\" + file.Name))
+                            {
+                                try
+                                {
+                                    _sftpClient.DownloadFile(remotePath + file.Name, fileStream);
+                                    _logger.LogInformation($"[{DateTime.UtcNow}] Successfully downloaded file {file.Name} to {localPath + "\\" + file.Name} !");
+                                }
+                                catch (Exception e)
+                                {
+                                    _logger.LogError($"[{DateTime.UtcNow}] Could not download {file.Name} reason : {e.Message} ...");
+                                }
+
                             }
                         }
                     }
                 }
             }
-        }
+            }
 
         public override Task ConnectSSH(RemoteHost host)
         {
@@ -189,4 +208,5 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
             GC.SuppressFinalize(this);
         }
     }
+
 }

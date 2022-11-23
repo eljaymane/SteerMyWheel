@@ -3,6 +3,7 @@ using Neo4j.Driver;
 using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Domain.Connectivity.GraphRepository;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             }
             catch (Exception e)
             {
-                _logger.LogInformation("[{time}] Unique constraint on ScriptRepository.name already exists !", DateTime.UtcNow);
+                _logger.LogInformation("[{time}] Unique constraint on ScriptRepository.Name already exists !", DateTime.UtcNow);
             }
         }
 
@@ -34,8 +35,8 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             {
                 try
                 {
-                    client.Cypher.Create("(scriptRepository:ScriptRepository) $entity")
-                   .WithParam("entity", entity)
+                    client.Cypher.Create("(s:ScriptRepository) $s")
+                   .WithParam("s", entity)
                    .ExecuteWithoutResultsAsync().Wait();
                     _logger.LogInformation("[{time}] Created new ScriptRepository {name}  ...", DateTime.UtcNow, entity.Name);
                     return entity;
@@ -55,10 +56,10 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             {
                 try
                 {
-                    client.Cypher.Match("(r:ScriptRepository)", "(s:ScriptExecution)")
-                         .Where((ScriptRepository r) => r.Name == scriptRepository.Name)
-                         .AndWhere((ScriptExecution s) => s.ExecCommand == scriptExecution.ExecCommand)
-                         .Create("(s)-[:IS_ON]->(r)")
+                    client.Cypher.Match("(s:ScriptExecution)")
+                         .Where((ScriptExecution s) => s.ExecCommand == scriptExecution.ExecCommand)
+                         .Create("(s)-[:IS_ON]->(r:ScriptRepository $r)")
+                         .WithParam("r",scriptRepository)
                          .ExecuteWithoutResultsAsync().Wait();
                     _logger.LogInformation("[{time}] Successfully linked ScriptExecution {ScriptName} to ScriptRepository {name}  ...", DateTime.UtcNow, scriptExecution.Name, scriptRepository.Name);
                     return new Tuple<ScriptRepository,ScriptExecution>(scriptRepository,scriptExecution);
@@ -97,7 +98,7 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             {
                 try
                 {
-                    var entity = client.Cypher.Match("(scriptRepository:ScriptRepository)")
+                    var entity = client.Cypher.Match("(s:ScriptRepository)")
                          .Where((ScriptRepository s) => s.Name == X)
                          .Return(s => s.As<ScriptRepository>()).ResultsAsync.Result.First();
                     return entity;

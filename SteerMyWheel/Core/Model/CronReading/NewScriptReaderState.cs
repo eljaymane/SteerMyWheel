@@ -1,14 +1,13 @@
 ﻿using SteerMyWheel.Core.Model.Entities;
-using SteerMyWheel.Domain.Discovery.CronParsing.ReaderState;
 using SteerMyWheel.Domain.Model.ReaderState;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Core.Model.ReaderStates
+namespace SteerMyWheel.Core.Model.CronReading
 {
-    public class NewScriptState : IReaderState
+    public class NewScriptReaderState : IReaderState
     {
         public ScriptExecution newScript { get; set; }
-        public NewScriptState(ScriptExecution script)
+        public NewScriptReaderState(ScriptExecution script)
         {
             newScript = script;
         }

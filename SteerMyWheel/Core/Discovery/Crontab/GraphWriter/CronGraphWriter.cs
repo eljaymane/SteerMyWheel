@@ -6,6 +6,7 @@ using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Domain.Model.Writer;
 using SteerMyWheel.Infrastracture.Connectivity.Repositories;
 using SteerMyWheel.Core.Model.CronReading;
+using SteerMyWheel.Core.Connectivity.Repositories;
 
 namespace SteerMyWheel.Core.Discovery.Crontab.GraphWriter
 {
@@ -39,6 +40,7 @@ namespace SteerMyWheel.Core.Discovery.Crontab.GraphWriter
             _logger.LogInformation("[{time}] Neo4jWriter => Successfully created ScriptExecution {script} and matched it to RemoteHost {host}", DateTime.UtcNow, entity.Name, remoteHostName);
             return Task.CompletedTask;
         }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

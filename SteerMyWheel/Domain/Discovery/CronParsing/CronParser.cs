@@ -4,9 +4,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using SteerMyWheel.Configuration;
 using SteerMyWheel.Domain.Model.ReaderState;
-using SteerMyWheel.Core.Model.ReaderStates;
 using SteerMyWheel.Core.Model.Entities;
-using System.Drawing;
 using SteerMyWheel.Core.Model.CronReading;
 
 namespace SteerMyWheel.Domain.Discovery.CronParsing

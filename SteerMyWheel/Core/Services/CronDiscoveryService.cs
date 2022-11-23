@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
+using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Discovery.Crontab.Reader;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Core.Model.WorkersQueue;
 using SteerMyWheel.Core.Workers.Discovery;
 using SteerMyWheel.Domain.Discovery.CronParsing;
-using SteerMyWheel.Domain.Discovery.CronParsing.ReaderState;
 using SteerMyWheel.Domain.Model.WorkerQueue;
 using SteerMyWheel.Domain.Service;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;

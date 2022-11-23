@@ -8,14 +8,21 @@ namespace SteerMyWheel.Domain.Model.Workflow
 {
     public abstract class BaseWorkflowContext
     {
+        private readonly ILoggerFactory _loggerFactory;
         public IWorkflowState State { get; set; }
         public BaseWorkflow Workflow { get; set; }
         public CancellationToken CancellationToken { get; set; }
 
         public EventHandler StateChanged;
-        public BaseWorkflowContext(BaseWorkflow workflow)
+        public BaseWorkflowContext(ILoggerFactory loggerFactory)
         {
-            Workflow = workflow;
+            _loggerFactory = loggerFactory;
+        }
+
+        public void Initialize(BaseWorkflow workflow,CancellationToken cancellationToken)
+        {
+            this.Workflow = workflow;
+            this.CancellationToken = cancellationToken;
         }
 
         public void setState(IWorkflowState state)
