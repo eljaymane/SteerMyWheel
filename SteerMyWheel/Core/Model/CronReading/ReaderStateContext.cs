@@ -1,8 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
 using SteerMyWheel.Core.Model.Entities;
-using SteerMyWheel.Domain.Model.ReaderState;
-using SteerMyWheel.Core.Discovery.Crontab.GraphWriter;
+using SteerMyWheel.Infrastracture.Connectivity.Repositories;
 
 namespace SteerMyWheel.Core.Model.CronReading
 {
@@ -11,7 +10,7 @@ namespace SteerMyWheel.Core.Model.CronReading
         private readonly ILogger<ReaderStateContext> _logger;
         public EventHandler StateChanged;
         public IReaderState currentState;
-        public CronGraphWriter _writer { get; set; }
+        public GlobalEntityRepository _DAO { get; set; }
         public string currentRole { get; set; }
         public string currentHostName { get; set; }
 
@@ -19,11 +18,10 @@ namespace SteerMyWheel.Core.Model.CronReading
         {
 
         }
-        public ReaderStateContext(ILogger<ReaderStateContext> logger, CronGraphWriter writer)
+        public ReaderStateContext(ILogger<ReaderStateContext> logger, GlobalEntityRepository DAO)
         {
             _logger = logger;
-            _writer = writer;
-            _writer.setContext(this);
+            _DAO = DAO;
         }
 
         public void Initialize(RemoteHost host)

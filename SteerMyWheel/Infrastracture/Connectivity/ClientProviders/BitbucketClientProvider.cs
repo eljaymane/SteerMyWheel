@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using SteerMyWheel.Configuration;
-using SteerMyWheel.Domain.Connectivity.ClientProvider;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;

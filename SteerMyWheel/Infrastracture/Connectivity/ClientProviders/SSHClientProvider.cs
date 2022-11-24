@@ -4,9 +4,10 @@ using Renci.SshNet;
 using Renci.SshNet.Common;
 using Renci.SshNet.Sftp;
 using SteerMyWheel.Configuration;
+using SteerMyWheel.Core.Exceptions;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Core.Model.Enums;
-using SteerMyWheel.Domain.Connectivity.ClientProvider;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.IO;
 using System.IO.Enumeration;
@@ -21,6 +22,7 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
         private SftpClient _sftpClient;
         private readonly GlobalConfig _config;
         private readonly ILogger<SSHClientProvider> _logger;
+
 
         public SSHClientProvider(GlobalConfig config,ILogger<SSHClientProvider> logger)
         {
@@ -248,6 +250,7 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
 
         public override SshClient GetConnection()
         {
+            if (_client == null || !_client.IsConnected) throw new SSHClientNotConnectedException();
             return _client;
         }
 

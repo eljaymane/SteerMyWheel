@@ -9,6 +9,10 @@ namespace SteerMyWheel.Configuration
 {
     public class GlobalConfig
     {
+        public GlobalConfig()
+        {
+
+        }
         private IConfiguration _config { get; }
         public string bitbucketUsername { get { return _config["Bitbucket:Login"]; } }
         public string bitbucketPassword { get { return _config["Bitbucket:Password"]; } }
@@ -29,6 +33,7 @@ namespace SteerMyWheel.Configuration
 
         public string LocalReposDirectory { get { return LocalWorkingDirectory + @"repos\"; } }
         public string DefaultCommitMessage { get { return "[Automigration] Updated by SteerMyWheel"; } }
+        public string DefaultRemoteName { get { return "origin"; } }
         public GlobalConfig(IConfiguration config)
         {
             _config = config;

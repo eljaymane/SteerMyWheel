@@ -1,12 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using SteerMyWheel.Core.Connectivity.ClientProviders;
-using SteerMyWheel.Core.Discovery.Crontab.Reader;
+using SteerMyWheel.Core.Model.CronReading;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Core.Model.WorkersQueue;
 using SteerMyWheel.Core.Workers.Discovery;
-using SteerMyWheel.Domain.Discovery.CronParsing;
-using SteerMyWheel.Domain.Model.WorkerQueue;
-using SteerMyWheel.Domain.Service;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.Threading.Tasks;
@@ -14,7 +11,7 @@ using System.Threading.Tasks.Dataflow;
 
 namespace SteerMyWheel.Core.Services
 {
-    public class CronDiscoveryService : IService
+    public class CronDiscoveryService 
     {
         private readonly ILogger<CronDiscoveryService> _logger;
         private ILoggerFactory _loggerFactory;

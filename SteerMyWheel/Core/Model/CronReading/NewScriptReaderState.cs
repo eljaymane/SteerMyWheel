@@ -1,5 +1,4 @@
 ﻿using SteerMyWheel.Core.Model.Entities;
-using SteerMyWheel.Domain.Model.ReaderState;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.CronReading
@@ -12,9 +11,11 @@ namespace SteerMyWheel.Core.Model.CronReading
             newScript = script;
         }
 
-        public async Task handle(ReaderStateContext context)
+        public Task handle(ReaderStateContext context)
         {
-            await context._writer.WriteScriptExecution(newScript, context.currentHostName);
+            newScript.Role = context.currentRole;
+            context._DAO.ScriptExecutionRepository.CreateAndMatch(newScript,context.currentHostName);
+            return Task.CompletedTask;
         }
     }
 }

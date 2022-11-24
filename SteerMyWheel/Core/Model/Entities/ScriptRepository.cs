@@ -1,6 +1,4 @@
-﻿using SteerMyWheel.Domain.Model.Entity;
-
-namespace SteerMyWheel.Core.Model.Entities
+﻿namespace SteerMyWheel.Core.Model.Entities
 {
     public class ScriptRepository : BaseEntity<string>
     {

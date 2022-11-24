@@ -1,12 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SteerMyWheel.Core.Model.Workflows.CommandExecution;
-using SteerMyWheel.Domain.Model.Workflow;
+using SteerMyWheel.Core.Model.Workflows.States;
 using System;
-using System.Collections.Generic;
-using System.IO.Pipes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows
 {

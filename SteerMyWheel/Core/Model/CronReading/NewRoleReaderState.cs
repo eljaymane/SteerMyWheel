@@ -1,5 +1,4 @@
-﻿using SteerMyWheel.Domain.Model.ReaderState;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.CronReading
@@ -11,9 +10,10 @@ namespace SteerMyWheel.Core.Model.CronReading
         {
             scriptRole = role;
         }
-        public async Task handle(ReaderStateContext context)
+        public Task handle(ReaderStateContext context)
         {
             context.currentRole = scriptRole;
+            return Task.CompletedTask;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using SteerMyWheel.Core.Model.Entities;
-using SteerMyWheel.Domain.Model.ReaderState;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.CronReading
@@ -12,10 +11,11 @@ namespace SteerMyWheel.Core.Model.CronReading
             remoteHost = _host;
         }
 
-        public async Task handle(ReaderStateContext context)
+        public Task handle(ReaderStateContext context)
         {
             context.currentHostName = remoteHost.Name;
-            await context._writer.WriteHost(remoteHost);
+            context._DAO.RemoteHostRepository.Create(remoteHost);
+            return Task.CompletedTask;  
         }
     }
 }

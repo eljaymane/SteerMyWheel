@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Logging;
 using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.Entities;
-using SteerMyWheel.Domain.Connectivity.GraphRepository;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
+using SteerMyWheel.Infrastracture.Connectivity.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

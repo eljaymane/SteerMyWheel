@@ -1,10 +1,7 @@
-﻿using Renci.SshNet;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
-using SteerMyWheel.Core.Discovery.Crontab.Reader;
+﻿using SteerMyWheel.Core.Connectivity.ClientProviders;
+using SteerMyWheel.Core.Model.CronReading;
 using SteerMyWheel.Core.Model.Entities;
-using SteerMyWheel.Domain.Connectivity.ClientProvider;
 using SteerMyWheel.Domain.Model.WorkerQueue;
-using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;

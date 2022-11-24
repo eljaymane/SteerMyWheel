@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Neo4jClient;
 using SteerMyWheel.Configuration;
-using SteerMyWheel.Domain.Connectivity.ClientProvider;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -4,12 +4,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SteerMyWheel.Configuration;
 using SteerMyWheel.Core.Model.Entities;
-using SteerMyWheel.Domain.Discovery.CronParsing;
-using SteerMyWheel.Core.Discovery.Crontab.GraphWriter;
 using SteerMyWheel.Core.Model.WorkersQueue;
 using SteerMyWheel.Core.Workers.Migration.Git;
 using SteerMyWheel.Core.Services;
-using SteerMyWheel.Core.Discovery.Crontab.Reader;
 using System.Collections.Generic;
 using SteerMyWheel.Domain.Model.WorkerQueue;
 using SteerMyWheel.Core.Workers.Discovery;
@@ -49,9 +46,8 @@ namespace SteerMyWheel
                     .AddTransient<SSHClientProvider>()
                     .AddTransient<ScriptExecutionRepository>()
                     .AddTransient<ScriptRepositoryRepository>()
-                    .AddTransient<GlobalEntityRepository>()
                     .AddTransient<RemoteHostRepository>()
-                    .AddScoped<CronGraphWriter>()
+                    .AddTransient<GlobalEntityRepository>()
                     .AddScoped<ReaderStateContext>()
                     .AddScoped<CronReader>()
                     .AddTransient<CronParser>()
@@ -106,8 +102,7 @@ namespace SteerMyWheel
         {
             services.AddLogging(configure => configure.AddConsole())
                 .AddTransient<ReaderStateContext>()
-                .AddTransient<CronParser>()
-                .AddTransient<CronGraphWriter>();
+                .AddTransient<CronParser>();
                 
 
         }   

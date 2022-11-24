@@ -1,5 +1,4 @@
-﻿using SteerMyWheel.Domain.Model.Workflow;
-using SteerMyWheel.Infrastracture.Mailing;
+﻿using SteerMyWheel.Infrastracture.Mailing;
 using System;
 using System.Collections.Generic;
 using System.Linq;

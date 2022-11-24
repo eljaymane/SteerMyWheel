@@ -1,13 +1,10 @@
-﻿using SteerMyWheel.Domain.Model.Workflow;
+﻿using SteerMyWheel.Core.Model.Workflows.Abstractions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows.FileTransfer
 {
-    public class UploadSFTPWorkflow : SSHWorkflow
+    public class UploadSFTPWorkflow : BaseSSHWorkflow
     {
         public string LocalPath { get; set; }
         public string RemotePath { get; set; }

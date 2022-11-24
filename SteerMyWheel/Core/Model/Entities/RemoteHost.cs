@@ -1,5 +1,4 @@
 ﻿using SteerMyWheel.Core.Model.Enums;
-using SteerMyWheel.Domain.Model.Entity;
 
 namespace SteerMyWheel.Core.Model.Entities
 {

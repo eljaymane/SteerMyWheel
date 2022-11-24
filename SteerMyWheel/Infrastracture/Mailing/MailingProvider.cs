@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using SteerMyWheel.Domain.Connectivity.ClientProvider;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.ComponentModel;
 using System.Net.Mail;
