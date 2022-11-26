@@ -23,7 +23,7 @@ namespace SteerMyWheel.Core.Workers.Discovery
 
         public override async Task doWork()
         {
-             DiscoverAsync(_remoteHost);
+             await DiscoverAsync(_remoteHost);
         }
 
         public async Task DiscoverAsync(RemoteHost host)

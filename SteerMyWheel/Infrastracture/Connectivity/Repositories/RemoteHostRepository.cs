@@ -3,6 +3,7 @@ using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace SteerMyWheel.Infrastracture.Connectivity.Repositories
@@ -10,6 +11,11 @@ namespace SteerMyWheel.Infrastracture.Connectivity.Repositories
     public class RemoteHostRepository : BaseGraphRepository<RemoteHost, string>
     {
         private readonly ILogger<RemoteHostRepository> _logger;
+
+        public RemoteHostRepository() : base()
+        {
+
+        }
         public RemoteHostRepository(NeoClientProvider client, ILogger<RemoteHostRepository> logger) : base(client)
         {
             _logger = logger;
@@ -48,6 +54,10 @@ namespace SteerMyWheel.Infrastracture.Connectivity.Repositories
                 }
             }
         }
+        public override BaseEntity<string> CreateAndMatch(BaseEntity<string> newScript, string id)
+        {
+            throw new NotImplementedException();
+        }
 
         public override RemoteHost Delete(RemoteHost entity)
         {
@@ -85,8 +95,9 @@ namespace SteerMyWheel.Infrastracture.Connectivity.Repositories
             }
         }
 
-        public RemoteHost Get(ScriptRepository repository)
+        public override RemoteHost Get(object o)
         {
+            var repository = o as ScriptRepository;
             using (var client = _client.GetConnection())
             {
                 try
@@ -118,6 +129,15 @@ namespace SteerMyWheel.Infrastracture.Connectivity.Repositories
                     return null;
                 }
             }
+        }
+        public override IEnumerable<RemoteHost> GetAll(object entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Tuple<BaseEntity<string>, object> Link(BaseEntity<string> active, object passive)
+        {
+            throw new NotImplementedException();
         }
 
         public override RemoteHost Update(RemoteHost entity)

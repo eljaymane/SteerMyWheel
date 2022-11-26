@@ -50,8 +50,10 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             }
         }
 
-        public Tuple<ScriptRepository,ScriptExecution> Link(ScriptRepository scriptRepository, ScriptExecution scriptExecution)
+        public override Tuple<BaseEntity<string>,object> Link(BaseEntity<string> active, object passive)
         {
+            var scriptExecution = (ScriptExecution)passive;
+            var scriptRepository = (ScriptRepository)active;
             using (var client = _client.GetConnection())
             {
                 try
@@ -62,7 +64,7 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
                          .WithParam("r",scriptRepository)
                          .ExecuteWithoutResultsAsync().Wait();
                     _logger.LogInformation("[{time}] Successfully linked ScriptExecution {ScriptName} to ScriptRepository {name}  ...", DateTime.UtcNow, scriptExecution.Name, scriptRepository.Name);
-                    return new Tuple<ScriptRepository,ScriptExecution>(scriptRepository,scriptExecution);
+                    return new Tuple<BaseEntity<string>,object>(scriptRepository,passive);
                 }
                 catch (Exception e)
                 {
@@ -170,6 +172,19 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             return entity;
         }
 
+        public override IEnumerable<ScriptRepository> GetAll(object entity)
+        {
+            throw new NotImplementedException();
+        }
 
+        public override BaseEntity<string> CreateAndMatch(BaseEntity<string> newScript, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ScriptRepository Get(object entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

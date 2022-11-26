@@ -26,7 +26,6 @@ namespace SteerMyWheel.Core.Model.CronReading
 
         public void Initialize(RemoteHost host)
         {
-
             setState(new InitialReaderState(host));
             _logger.LogInformation("[{time}] ( ReaderContext ) Initializing => Host : {hostname}", DateTime.UtcNow, host.Name);
         }

@@ -102,8 +102,9 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             }
         }
 
-        public IEnumerable<ScriptExecution> GetAll(RemoteHost host)
+        public override IEnumerable<ScriptExecution> GetAll(object remoteHost)
         {
+            var host = (RemoteHost) remoteHost;
             using (var client = _client.GetConnection())
             {
                 try
@@ -158,10 +159,9 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
                     return null;
                 }
             }
-            return default;
         }
 
-        public ScriptExecution CreateAndMatch(ScriptExecution entity, string remoteHostName)
+        public override BaseEntity<string> CreateAndMatch(BaseEntity<string> entity, string remoteHostName)
         {
             using (var client = _client.GetConnection())
             {
@@ -179,6 +179,16 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
                 }
             }
             return entity;
+        }
+
+        public override Tuple<BaseEntity<string>, object> Link(BaseEntity<string> active, object passive)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ScriptExecution Get(object entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

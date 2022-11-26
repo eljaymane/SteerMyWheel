@@ -66,7 +66,7 @@ namespace SteerMyWheel.Core.Workers.Migration.Git
         {
             //await cloneLegacyRepoAsync();
             var host = _DAO.RemoteHostRepository.Get(_scriptRepository);
-            if(Directory.Exists(_globalConfig.LocalReposDirectory + _scriptRepository.Name))await syncMachineAndGit(host);
+            if(Directory.Exists(_globalConfig.LocalReposDirectory + _scriptRepository.Name))await syncMachineAndGit((RemoteHost)host);
             else { _logger.LogError($"[{DateTime.UtcNow}] Repository {_scriptRepository.Name} does not exist locally !"); }
         }
 
