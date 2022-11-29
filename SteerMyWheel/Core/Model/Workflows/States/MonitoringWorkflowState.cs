@@ -10,7 +10,7 @@ namespace SteerMyWheel.Core.Model.Workflows.States
         {
             context._ManualResetEvent.WaitOne();
             var workflow = (BaseMonitoringWorkflow)context.Workflow;
-            workflow.ExecuteAsync();
+            workflow.ExecuteAsync(context);
             var waitingThread = new Thread(() =>
             {
                

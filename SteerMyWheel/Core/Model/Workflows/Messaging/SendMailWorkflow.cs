@@ -28,7 +28,7 @@ namespace SteerMyWheel.Core.Model.Workflows.Messaging
             return Task.CompletedTask;
         }
 
-        public async override Task ExecuteAsync()
+        public async override Task ExecuteAsync(BaseWorkflowContext context)
         {
             await _client.SendAsync(message);
         }

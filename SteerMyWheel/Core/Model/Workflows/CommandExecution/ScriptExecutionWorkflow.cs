@@ -45,7 +45,7 @@ namespace SteerMyWheel.Core.Model.Workflows.CommandExecution
 
         }
 
-        public override Task ExecuteAsync()
+        public override Task ExecuteAsync(BaseWorkflowContext context)
         {
             throw new NotImplementedException();
         }

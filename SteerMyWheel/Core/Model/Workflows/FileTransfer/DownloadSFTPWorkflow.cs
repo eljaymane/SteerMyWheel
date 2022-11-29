@@ -26,7 +26,7 @@ namespace SteerMyWheel.Core.Model.Workflows.FileTransfer
 
         }
 
-        public async override Task ExecuteAsync()
+        public async override Task ExecuteAsync(BaseWorkflowContext context)
         {
             await _sshClient.DownloadDirectory(RemotePath, LocalPath);
         }

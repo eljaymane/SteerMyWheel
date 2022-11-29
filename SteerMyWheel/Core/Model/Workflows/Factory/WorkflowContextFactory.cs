@@ -23,7 +23,7 @@ namespace SteerMyWheel.Core.Model.Workflows.Factory
 
         public WorkflowStateContext CreateContext(Queue<BaseWorkflow> workflows, string Name)
         {
-            WorkflowStateContext context = new WorkflowStateContext(_loggerFactory);
+            WorkflowStateContext context = new WorkflowStateContext(_loggerFactory, Name);
             var WorkflowsTree = CreateWorkflowTree(workflows);
             context.Initialize(WorkflowsTree, CancellationToken.None);
             return context;

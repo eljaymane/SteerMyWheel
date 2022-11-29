@@ -32,6 +32,6 @@ namespace SteerMyWheel.Core.Model.Workflows
         }
 
         public abstract Task Execute(BaseWorkflowContext context);
-        public abstract Task ExecuteAsync();
+        public abstract Task ExecuteAsync(BaseWorkflowContext context);
     }
 }

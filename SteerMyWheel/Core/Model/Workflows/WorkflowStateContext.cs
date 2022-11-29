@@ -15,7 +15,7 @@ namespace SteerMyWheel.Core.Model.Workflows
         private EventHandler SuccessUpdated;
 
         
-        public WorkflowStateContext(ILoggerFactory loggerFactory) :base(loggerFactory)
+        public WorkflowStateContext(ILoggerFactory loggerFactory,string name) :base(loggerFactory,name)
         {
             _logger = loggerFactory.CreateLogger<WorkflowStateContext>();
            

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow;
 
 namespace SteerMyWheel.Core.Model.Workflows.Abstractions
 {
@@ -22,8 +23,8 @@ namespace SteerMyWheel.Core.Model.Workflows.Abstractions
 
         public abstract override Task Execute(BaseWorkflowContext context);
 
-        public abstract override Task ExecuteAsync();
+        public abstract override Task ExecuteAsync(BaseWorkflowContext context);
 
-        public abstract Task MonitorAsync();
+        public abstract Task MonitorAsync(FileExistsDelegate _FileExists, DirectoryExistsDelegate directoryExists, BaseWorkflowContext context);
     }
 }

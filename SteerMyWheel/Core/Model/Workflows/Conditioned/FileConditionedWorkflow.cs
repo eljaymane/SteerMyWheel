@@ -28,7 +28,7 @@ namespace SteerMyWheel.Core.Model.Workflows.Conditioned
             return Task.FromCanceled(CancellationToken.None);
         }
 
-        public override Task ExecuteAsync()
+        public override Task ExecuteAsync(BaseWorkflowContext context)
         {
             throw new NotImplementedException();
         }

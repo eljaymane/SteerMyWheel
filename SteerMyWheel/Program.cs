@@ -18,6 +18,7 @@ using SteerMyWheel.Core.Model.Workflows.CommandExecution;
 using System;
 using SteerMyWheel.Core.Model.Workflows.Monitoring;
 using SteerMyWheel.Core.Model.Workflows.Factory;
+using SteerMyWheel.Core.Model.Workflows.Abstractions;
 
 namespace SteerMyWheel
 {
@@ -84,12 +85,12 @@ namespace SteerMyWheel
             //discoveryService._queue.DeqeueAllAsync(CancellationToken.None).Wait();
 
             var workflowService = host.Services.GetRequiredService<WorkflowsThreadsQueue>();
-            var context = new WorkflowStateContext(loggerFactory);
+            var context = new WorkflowStateContext(loggerFactory, "Wait and execute");
             var executionDate = DateTime.Now;
             executionDate = executionDate.AddMinutes(1);
-            var workflow = new MonitorFilesWorkflow(new string[] { "c:/test/test.txt" }, "test", "test", executionDate, null, null);
+            var workflow = new MonitorLocalFilesWorkflow(new string[] { "c:/test/test.txt" }, "test", "test", executionDate, null, null);
             var workflow2 = new LocalCommandExecutionWorkflow("echo File has been found, 2nd execution done.", "test","test",executionDate.AddMinutes(1), null, null);
-            workflow._logger = loggerFactory.CreateLogger<MonitorFilesWorkflow>();
+            workflow._logger = loggerFactory.CreateLogger<AbstractMonitorFilesWorkflow>();
             workflow2._logger = loggerFactory.CreateLogger<LocalCommandExecutionWorkflow>();
             var workflowFactory = host.Services.GetRequiredService<WorkflowContextFactory>();
             Queue<BaseWorkflow> q = new Queue<BaseWorkflow>();

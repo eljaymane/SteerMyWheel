@@ -1,4 +1,5 @@
-﻿using SteerMyWheel.Misc;
+﻿using Microsoft.Extensions.Logging;
+using SteerMyWheel.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,9 @@ namespace SteerMyWheel.Core.Model.Workflows.CommandExecution
             return Task.CompletedTask;
         }
 
-        public override Task ExecuteAsync()
+        public override Task ExecuteAsync(BaseWorkflowContext context)
         {
+            _logger.LogInformation($"[{DateTime.UtcNow}] [Workflow : {context.Name}] Executing...");
             WinAPI.system(_ExecCommand);
             return Task.CompletedTask;
 

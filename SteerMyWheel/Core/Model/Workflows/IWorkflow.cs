@@ -9,6 +9,6 @@ namespace SteerMyWheel.Core.Model.Workflows
     public interface IWorkflow
     {
         Task Execute(BaseWorkflowContext context);
-        Task ExecuteAsync();
+        Task ExecuteAsync(BaseWorkflowContext context);
     }
 }
