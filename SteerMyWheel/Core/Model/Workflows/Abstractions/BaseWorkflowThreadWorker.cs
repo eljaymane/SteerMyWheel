@@ -8,17 +8,12 @@ using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows.Abstractions
 {
-    public class BaseWorkflowThreadWorker 
+    public abstract class BaseThread
     {
         public Thread worker;
+        public ManualResetEvent ManualResetEvent;
+        
 
-        public override Task doWork(ref WorkflowStateContext context)
-        {
-            context._ManualResetEvent.WaitOne();
-            worker = new Thread(() =>
-            {
-                if(context.HasNext()) context.GoNext();
-            });
-        }
+        
     }
 }

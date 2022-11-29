@@ -22,7 +22,7 @@ namespace SteerMyWheel.Core.Model.Workflows.Conditioned
             return File.Exists(FilePath);
         }
 
-        public override Task Execute()
+        public override Task Execute(BaseWorkflowContext context)
         {
             if(CanExecute()) return Task.CompletedTask;
             return Task.FromCanceled(CancellationToken.None);

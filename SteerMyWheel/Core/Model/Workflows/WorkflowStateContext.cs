@@ -18,12 +18,17 @@ namespace SteerMyWheel.Core.Model.Workflows
         public WorkflowStateContext(ILoggerFactory loggerFactory) :base(loggerFactory)
         {
             _logger = loggerFactory.CreateLogger<WorkflowStateContext>();
-            setState(new WorkflowInitialState());
+           
         }
 
         public bool HasNext()
         {
             return Workflow.Next == null ? false : true;
+        }
+
+        public void Initialize()
+        {
+            setState(new WorkflowInitialState());
         }
 
         public void UpdateSuccess(bool success)

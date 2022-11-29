@@ -13,6 +13,10 @@ using System.Threading;
 using SteerMyWheel.Infrastracture.Connectivity.Repositories;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.CronReading;
+using SteerMyWheel.Core.Model.Workflows;
+using SteerMyWheel.Core.Model.Workflows.CommandExecution;
+using System;
+using SteerMyWheel.Core.Model.Workflows.Monitoring;
 
 namespace SteerMyWheel
 {
@@ -52,6 +56,7 @@ namespace SteerMyWheel
                     .AddTransient<WorkersQueue<CronDiscoveryWorker>>()
                     .AddTransient<ScriptSyncService>()
                     .AddSingleton<CronDiscoveryService>()
+                    .AddSingleton<WorkflowsThreadsQueue>()
                     
                     );
             var host = builder.Build();
@@ -60,25 +65,36 @@ namespace SteerMyWheel
             {
                 new RemoteHost("PRDFRTAPP901","PRDFRTAPP901",22,"kch-front","Supervision!")
             };
-            var discoveryService = host.Services.GetRequiredService<CronDiscoveryService>();
-            var syncService = host.Services.GetRequiredService<ScriptSyncService>();
-            var bitbucket = host.Services.GetRequiredService<BitbucketClientProvider>();
-            discoveryService.setLoggerFactory(loggerFactory);
-            syncService.setLoggerFactory(loggerFactory);
-            foreach (var remoteHost in remoteHosts)
-            {
-                //discoveryService.Discover(remoteHost).Wait();
-                //syncService.generateGraphRepos(remoteHost).Wait();
-                syncService.syncRepos(remoteHost).Wait();
-             
-               
-                
-                
-            }
+            //var discoveryService = host.Services.GetRequiredService<CronDiscoveryService>();
+            //var syncService = host.Services.GetRequiredService<ScriptSyncService>();
+            //var bitbucket = host.Services.GetRequiredService<BitbucketClientProvider>();
+            //discoveryService.setLoggerFactory(loggerFactory);
+            //syncService.setLoggerFactory(loggerFactory);
+            //foreach (var remoteHost in remoteHosts)
+            //{
+            //discoveryService.Discover(remoteHost).Wait();
+            //syncService.generateGraphRepos(remoteHost).Wait();
+            //syncService.syncRepos(remoteHost).Wait();
+
+
+
+
+            //}
             //discoveryService._queue.DeqeueAllAsync(CancellationToken.None).Wait();
-            
 
-
+            var workflowService = host.Services.GetRequiredService<WorkflowsThreadsQueue>();
+            var context = new WorkflowStateContext(loggerFactory);
+            var executionDate = DateTime.Now;
+            executionDate = executionDate.AddMinutes(1);
+            var workflow = new MonitorFilesWorkflow(new string[] { "c:/test/test.txt" }, "test", "test", executionDate, null, null);
+            var workflow2 = new LocalCommandExecution("echo`\"File has been found, 2nd execution done.\"", "test","test",executionDate.AddMinutes(1), null, null);
+            workflow2.Previous = workflow;
+            workflow.Next = workflow2;
+            context.Initialize(workflow, CancellationToken.None);
+            var workflowThread = new WorkflowThread(loggerFactory.CreateLogger<WorkflowThread>(),context);
+            workflowService.Enqueue(workflowThread);
+            workflowService.Process();
+            Console.ReadKey();
             host.RunAsync().Wait();
 
             

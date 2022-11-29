@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SteerMyWheel.Core.Model.Workflows.Monitoring.EventArgs
+namespace SteerMyWheel.Core.Model.Workflows.Monitoring.Events
 {
     internal class OnFileIsPresentEventArgs : EventArgs
     {

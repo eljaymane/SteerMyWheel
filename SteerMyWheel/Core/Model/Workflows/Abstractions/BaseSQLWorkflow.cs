@@ -64,8 +64,6 @@ namespace SteerMyWheel.Core.Model.Workflows.Abstractions
         public abstract override bool CanExecute();
 
 
-        public abstract override Task Execute();
-
 
         public abstract override Task ExecuteAsync();
 

@@ -11,14 +11,15 @@ namespace SteerMyWheel.Core.Model.Workflows.States
     {
         public Task HandleAsync(BaseWorkflowContext context)
         {
-            context._ManualResetEvent.WaitOne();
+            var execTime = context.Workflow.ExecutionDate;
+            context._ManualResetEvent.Set();
             while (!context.CancellationToken.IsCancellationRequested)
             {
                 if (context.CancellationToken.IsCancellationRequested)
                 {
                     context.CancellationToken.ThrowIfCancellationRequested();
                 }
-                if (context.Workflow.ExecutionDate >= DateTime.Now)
+                if (execTime.Month == DateTime.Now.Month && execTime.Day == DateTime.Now.Day && execTime.Hour <= DateTime.Now.Hour && execTime.Minute <= DateTime.Now.Minute)
                 {
                     context.Workflow.Execute(context);
                     context.Workflow = context.Workflow.Next;
@@ -29,7 +30,7 @@ namespace SteerMyWheel.Core.Model.Workflows.States
                     Thread.Sleep(1000);
                 }
             }
-            context._ManualResetEvent.Set();
+            context._ManualResetEvent.Reset();
             return Task.CompletedTask;
 
         }

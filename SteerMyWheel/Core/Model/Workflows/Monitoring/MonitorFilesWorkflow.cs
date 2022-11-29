@@ -1,5 +1,5 @@
 ﻿using SteerMyWheel.Core.Model.Workflows.Abstractions;
-using SteerMyWheel.Core.Model.Workflows.Monitoring.EventArgs;
+using SteerMyWheel.Core.Model.Workflows.Monitoring.Events;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,7 +31,7 @@ namespace SteerMyWheel.Core.Model.Workflows.Monitoring
             return _CanGoNext;
         }
 
-        public override Task Execute(WorkflowStateContext context)
+        public override Task Execute(BaseWorkflowContext context)
         {
             ExecuteAsync().Wait();
             return Task.CompletedTask;
@@ -47,11 +47,14 @@ namespace SteerMyWheel.Core.Model.Workflows.Monitoring
         {
             foreach (var path in _Paths)
             {
-                var directory = path.Split('/')[0..(path.Length - 2)].ToString();
-                if (Directory.Exists(directory)) new Thread(() =>
+                var tmp= path.Split('/');
+                var file = tmp[tmp.Length- 1];
+                var directory = path.Replace(file, "");
+                
+                if (Directory.Exists(directory.ToString())) new Thread(() =>
                 {
                     while (!File.Exists(path)) { Thread.Sleep(10000); }
-                    OnFileIsPresent(this, new FileIsPresentEventArgs(path));
+                    onFileIsPresent(new FileIsPresentEventArgs(path));
 
                 }).Start();
                 else throw new DirectoryNotFoundException();
@@ -65,10 +68,10 @@ namespace SteerMyWheel.Core.Model.Workflows.Monitoring
             _CanGoNext = true;
         }
 
-        private protected void onFileIsPresent(string path)
+        private protected void onFileIsPresent(FileIsPresentEventArgs e)
         {
-            OnFileIsPresent?.Invoke(this,new FileIsPresentEventArgs(path));
-            _Paths = _Paths.Where(x => x != path).ToList();
+            OnFileIsPresent?.Invoke(this,e);
+            _Paths = _Paths.Where(x => x != e.path).ToList();
             if (_Paths.Count() == 0) onAllFilesArePresent();
 
         }

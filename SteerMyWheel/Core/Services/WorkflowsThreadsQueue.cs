@@ -19,15 +19,16 @@ namespace SteerMyWheel.Core.Services
             _Queue= new Queue<WorkflowThread>(_config.MaxWorfklowQueueCapacity);
         }
 
-        public void Enqueue(WorkflowThread context)
+        public void Enqueue(WorkflowThread thread)
         {
-            _Queue.Enqueue(context);
+            _Queue.Enqueue(thread);
         }
 
-        public void Process(WorkflowStateContext context)
+        public void Process()
         {
             Parallel.ForEach(_Queue,new ParallelOptions { MaxDegreeOfParallelism = 10, CancellationToken = CancellationToken.None }, e =>
             {
+                
 
                 if (e._context.Workflow.ExecutionDate >= DateTime.Now)
                 {

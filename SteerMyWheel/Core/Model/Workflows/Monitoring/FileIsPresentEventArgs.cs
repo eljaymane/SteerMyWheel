@@ -4,7 +4,7 @@ namespace SteerMyWheel.Core.Model.Workflows.Monitoring
 {
     internal class FileIsPresentEventArgs : System.EventArgs
     {
-        private string path;
+        public string path;
 
         public FileIsPresentEventArgs(string path)
         {

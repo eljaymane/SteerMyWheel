@@ -19,7 +19,7 @@ namespace SteerMyWheel.Core.Model.Workflows.FileTransfer
             return true;
         }
 
-        public override Task Execute()
+        public override Task Execute(BaseWorkflowContext context)
         {
             _sshClient.DownloadDirectory(RemotePath, LocalPath).Wait();
             return Task.CompletedTask;
