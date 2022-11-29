@@ -1,4 +1,4 @@
-﻿using SteerMyWheel.Core.Connectivity.ClientProviders;
+﻿using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;

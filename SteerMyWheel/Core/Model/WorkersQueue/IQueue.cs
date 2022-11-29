@@ -1,4 +1,4 @@
-﻿namespace SteerMyWheel.Domain.Model.WorkerQueue
+﻿namespace SteerMyWheel.Core.Model.WorkersQueue
 {
     public interface IQueue<T>
     {

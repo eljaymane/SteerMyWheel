@@ -6,18 +6,12 @@ using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows.States
 {
-    public class WorkflowFinishedState : IWorkflowState
+    public class WorkflowPausedState : IWorkflowState
     {
-        private bool success { get; set; }
+        public WorkflowPausedState() { }
 
-        public WorkflowFinishedState(bool success)
-        {
-            this.success = success;
-        }
         public Task HandleAsync(BaseWorkflowContext context)
         {
-            context._ManualResetEvent.WaitOne();
-            ((WorkflowStateContext)context).UpdateSuccess(success);
             context._ManualResetEvent.Reset();
             return Task.CompletedTask;
         }

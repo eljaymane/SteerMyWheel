@@ -1,5 +1,4 @@
-﻿using SteerMyWheel.Core.Connectivity.Repositories;
-using SteerMyWheel.Core.Model.Entities;
+﻿using SteerMyWheel.Core.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

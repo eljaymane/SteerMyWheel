@@ -1,12 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using Neo4jClient;
 using SteerMyWheel.Configuration;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Domain.Model.WorkerQueue
+namespace SteerMyWheel.Core.Model.WorkersQueue
 {
     public abstract class BaseWorker : IQueuable
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace SteerMyWheel.Core.Exceptions
+namespace SteerMyWheel.Infrastracture.Connectivity.ClientProviders.Exceptions
 {
     [Serializable]
     public class SSHClientNotConnectedException : Exception
@@ -9,7 +9,7 @@ namespace SteerMyWheel.Core.Exceptions
         private static string _message = "The SSH client is not yet connected to a remote host. Consider verifying the provided connection informations.";
         public SSHClientNotConnectedException() : base(_message)
         {
-           
+
         }
 
         public SSHClientNotConnectedException(string message) : base(message)

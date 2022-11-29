@@ -1,19 +1,17 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
-using SteerMyWheel.Infrastracture.Connectivity.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SteerMyWheel.Core.Connectivity.Repositories
+namespace SteerMyWheel.Infrastracture.Connectivity.Repositories
 {
     public class ScriptExecutionRepository : BaseGraphRepository<ScriptExecution, string>
     {
         private readonly ILogger<ScriptExecutionRepository> _logger;
-        public ScriptExecutionRepository(NeoClientProvider client,ILogger<ScriptExecutionRepository> logger) : base(client)
+        public ScriptExecutionRepository(NeoClientProvider client, ILogger<ScriptExecutionRepository> logger) : base(client)
         {
             _logger = logger;
             //Creating unique constraint for ScriptExection on parameter ExecCommand to avoid duplicates
@@ -104,7 +102,7 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
 
         public override IEnumerable<ScriptExecution> GetAll(object remoteHost)
         {
-            var host = (RemoteHost) remoteHost;
+            var host = (RemoteHost)remoteHost;
             using (var client = _client.GetConnection())
             {
                 try

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.Entities;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace SteerMyWheel.Core.Model.Workflows.CommandExecution
             _scriptExecution = scriptExecution;
         }
 
-        public override Task Execute()
+        public override Task Execute(BaseWorkflowContext context)
         {
             _SSHClient.ConnectSSH(_RemoteHost).Wait();
             if (_SSHClient.ExecuteCmd(_scriptExecution.ExecCommand).Result)

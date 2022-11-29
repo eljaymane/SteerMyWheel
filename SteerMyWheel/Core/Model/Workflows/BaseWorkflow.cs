@@ -28,7 +28,7 @@ namespace SteerMyWheel.Core.Model.Workflows
             Previous = previous;
         }
 
-        public abstract Task Execute();
+        public abstract Task Execute(BaseWorkflowContext context);
         public abstract Task ExecuteAsync();
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using SteerMyWheel.Core.Model.CronReading.Exceptions;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Infrastracture.Connectivity.Repositories;
 
@@ -27,16 +29,16 @@ namespace SteerMyWheel.Core.Model.CronReading
         public void Initialize(RemoteHost host)
         {
             setState(new InitialReaderState(host));
-            _logger.LogInformation("[{time}] ( ReaderContext ) Initializing => Host : {hostname}", DateTime.UtcNow, host.Name);
+            _logger.LogInformation("[{time}] Initializing => Host : {hostname}", DateTime.UtcNow, host.Name);
         }
         protected virtual void onStateChanged(EventArgs e)
         {
-
-            _logger.LogInformation("[{time}] ( ReaderContext ) stateChanged => {newState}", DateTime.UtcNow, currentState.GetType().Name);
+            _logger.LogInformation("[{time}] stateChanged => {newState}", DateTime.UtcNow, currentState.GetType().Name);
             currentState.handle(this).Wait();
         }
         public void setState(IReaderState state)
         {
+            if (currentHostName.IsNullOrEmpty() && state.GetType() == typeof(InitialReaderState)) throw new ReaderStateContextNotInitializedException();
             currentState = state;
             onStateChanged(EventArgs.Empty);
         }
@@ -45,6 +47,5 @@ namespace SteerMyWheel.Core.Model.CronReading
         {
 
         }
-
     }
 }

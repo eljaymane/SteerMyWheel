@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace SteerMyWheel.Domain.Model.WorkerQueue
+namespace SteerMyWheel.Core.Model.WorkersQueue
 {
     public interface IQueuable
     {

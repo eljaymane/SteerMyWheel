@@ -34,6 +34,8 @@ namespace SteerMyWheel.Configuration
         public string LocalReposDirectory { get { return LocalWorkingDirectory + @"repos\"; } }
         public string DefaultCommitMessage { get { return "[Automigration] Updated by SteerMyWheel"; } }
         public string DefaultRemoteName { get { return "origin"; } }
+
+        public int MaxWorfklowQueueCapacity { get { return 100; } }
         public GlobalConfig(IConfiguration config)
         {
             _config = config;

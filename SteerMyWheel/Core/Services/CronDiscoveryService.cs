@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.CronReading;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Core.Model.WorkersQueue;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Neo4jClient.Cypher;
 using SteerMyWheel.Core.Model.Workflows.CommandExecution;
 using SteerMyWheel.Core.Model.Workflows.States;
 using System;
@@ -9,7 +10,7 @@ namespace SteerMyWheel.Core.Model.Workflows
     {
         private ILogger<WorkflowStateContext> _logger;
 
-        private bool Success = false;
+        private bool Success = true;
 
         private EventHandler SuccessUpdated;
 
@@ -18,6 +19,11 @@ namespace SteerMyWheel.Core.Model.Workflows
         {
             _logger = loggerFactory.CreateLogger<WorkflowStateContext>();
             setState(new WorkflowInitialState());
+        }
+
+        public bool HasNext()
+        {
+            return Workflow.Next == null ? false : true;
         }
 
         public void UpdateSuccess(bool success)

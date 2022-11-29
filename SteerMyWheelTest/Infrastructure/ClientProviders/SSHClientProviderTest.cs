@@ -4,9 +4,9 @@ using Moq;
 using Neo4jClient.Cypher;
 using Renci.SshNet;
 using SteerMyWheel.Configuration;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
-using SteerMyWheel.Core.Exceptions;
 using SteerMyWheel.Core.Model.Entities;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ using Xunit;
 
 namespace SteerMyWheelTest.Infrastructure.ClientProviders
 {
-    
+
     [TestClass]
     public class SSHClientProviderTest
     {

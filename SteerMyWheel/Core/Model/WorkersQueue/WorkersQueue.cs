@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using SteerMyWheel.Domain.Model.WorkerQueue;
 using System;
 using System.Collections.Generic;
 using System.Net.Http.Headers;

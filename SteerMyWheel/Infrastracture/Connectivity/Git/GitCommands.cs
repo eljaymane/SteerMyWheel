@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Infrastracture.Git
+namespace SteerMyWheel.Infrastracture.Connectivity.Git
 {
     public class GitCommands
     {
-        public static void PushAll(string path,bool sslVerify)
+        public static void PushAll(string path, bool sslVerify)
         {
             WinAPI.system($"cd {path} && git -c http.sslVerify={sslVerify} push --all");
         }
 
-        public static void Push(string path,bool sslVerify)
+        public static void Push(string path, bool sslVerify)
         {
             WinAPI.system($"cd {path} && git -c http.sslVerify={sslVerify} push");
         }
@@ -32,17 +32,17 @@ namespace SteerMyWheel.Infrastracture.Git
             WinAPI.system($"cd {path} && git add .");
         }
 
-        public static void CreateCommit(string path,string message)
+        public static void CreateCommit(string path, string message)
         {
             WinAPI.system($"cd {path} && git commit -m \"{message}\"");
         }
 
-        public static void Clone(string path,string remote,bool sslVerify)
+        public static void Clone(string path, string remote, bool sslVerify)
         {
             WinAPI.system($"cd {path} && git -c http.sslVerify={sslVerify} clone {remote}");
         }
 
-        public static void Pull(string path,bool sslVerify)
+        public static void Pull(string path, bool sslVerify)
         {
             WinAPI.system($"cd {path} && git -c http.sslVerify={sslVerify} pull");
         }

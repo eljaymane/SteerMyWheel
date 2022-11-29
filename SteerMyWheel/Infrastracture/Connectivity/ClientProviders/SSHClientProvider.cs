@@ -2,19 +2,17 @@
 using Microsoft.Extensions.Logging;
 using Renci.SshNet;
 using Renci.SshNet.Common;
-using Renci.SshNet.Sftp;
 using SteerMyWheel.Configuration;
-using SteerMyWheel.Core.Exceptions;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Core.Model.Enums;
-using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders.Exceptions;
 using System;
 using System.IO;
 using System.IO.Enumeration;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Core.Connectivity.ClientProviders
+namespace SteerMyWheel.Infrastracture.Connectivity.ClientProviders
 {
     public class SSHClientProvider : BaseClientProvider<SshClient, RemoteHost>
     {
@@ -24,7 +22,7 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
         private readonly ILogger<SSHClientProvider> _logger;
 
 
-        public SSHClientProvider(GlobalConfig config,ILogger<SSHClientProvider> logger)
+        public SSHClientProvider(GlobalConfig config, ILogger<SSHClientProvider> logger)
         {
             _config = config;
             _logger = logger;
@@ -41,16 +39,17 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
                     var cmd = _client.CreateCommand("crontab -l");
                     var result = cmd.Execute();
                     return Task.FromResult(result);
-                }catch(Exception e)
+                }
+                catch (Exception e)
                 {
 
                 }
-                finally 
+                finally
                 {
-                    _logger.LogInformation("[{time}] [SSH] Successfully read cronfile for user {user} on RemoteHost : {ip} ...", DateTime.UtcNow,_client.ConnectionInfo.Username, _client.ConnectionInfo.Host);
+                    _logger.LogInformation("[{time}] [SSH] Successfully read cronfile for user {user} on RemoteHost : {ip} ...", DateTime.UtcNow, _client.ConnectionInfo.Username, _client.ConnectionInfo.Host);
                 }
 
-                return Task.FromResult(String.Empty);
+                return Task.FromResult(string.Empty);
             }
 
         }
@@ -68,20 +67,21 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
             {
                 _logger.LogInformation($"[{DateTime.UtcNow}] Command {cmd} has been executed successfully on remote host : {_client.ConnectionInfo.Host}");
                 return Task.FromResult(true);
-            } else
+            }
+            else
             {
                 _logger.LogError($"[{DateTime.UtcNow}] Command {cmd} has not completed successfully on remote host : {_client.ConnectionInfo.Host}");
                 return Task.FromResult(false);
             }
-            
 
 
-            
+
+
         }
 
-        public async Task DownloadDirectory(string remotePath,string localPath)
+        public async Task DownloadDirectory(string remotePath, string localPath)
         {
-            
+
             if (!_sftpClient.IsConnected || remotePath.Trim() == "") return;
             else
             {
@@ -97,14 +97,14 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
                             if (localPath == "") return;
                             await DownloadDirectory(remotePath + file.Name, localPath + "\\" + file.Name);
                         }
-                        else if(!file.Name.Contains(".csv"))
+                        else if (!file.Name.Contains(".csv"))
                         {
                             if (file.Name.StartsWith(".")) return;
                             if (File.Exists(localPath + "\\" + file.Name))
                             {
                                 if (File.Exists(localPath + "\\" + file.Name + ".bak")) File.Delete(localPath + "\\" + file.Name + ".bak");
                                 File.Move(localPath + "\\" + file.Name, localPath + "\\" + file.Name + ".bak");
-                                File.Delete(localPath+ "\\" + file.Name);
+                                File.Delete(localPath + "\\" + file.Name);
                             }
                             using (Stream fileStream = File.Create(localPath + "\\" + file.Name))
                             {
@@ -123,16 +123,16 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
                     }
                 }
             }
-            }
+        }
 
-        public async Task Upload(string remotePath,string localPath)
+        public async Task Upload(string remotePath, string localPath)
         {
             if (!_sftpClient.IsConnected) return;
             try
             {
                 bool isDir = Directory.Exists(localPath);
                 bool isFile = File.Exists(localPath);
-                if(isDir)
+                if (isDir)
                 {
                     _logger.LogInformation($"[{DateTime.UtcNow}] Upload : Localpath {localPath} is directory");
                     foreach (var file in Directory.GetFiles(localPath))
@@ -144,14 +144,17 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
                                 _logger.LogInformation($"[{DateTime.UtcNow}] Uploading : {file}");
                                 _sftpClient.UploadFile(fileStream, remotePath);
                                 _logger.LogInformation($"[{DateTime.UtcNow}] File {file} uploaded successfully to {remotePath + file.Split('/')[0]}");
-                            } catch(Exception e)
+                            }
+                            catch (Exception e)
                             {
                                 _logger.LogError($"[{DateTime.UtcNow}] Could not upload {file} to {remotePath}");
                             }
-                            
+
                         }
                     }
-                } else if(isFile) {
+                }
+                else if (isFile)
+                {
                     using (Stream fileStream = File.OpenRead(localPath))
                     {
                         try
@@ -160,22 +163,23 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
                             _sftpClient.UploadFile(fileStream, remotePath);
                             _logger.LogInformation($"[{DateTime.UtcNow}] File {localPath} uploaded successfully to {remotePath}");
                         }
-                        catch(Exception e)
+                        catch (Exception e)
                         {
                             _logger.LogError($"[{DateTime.UtcNow}] Could not upload {localPath} to {remotePath}");
                         }
-                       
+
                     }
                 }
-                
-                
-            }catch(Exception e)
+
+
+            }
+            catch (Exception e)
             {
                 _logger.LogError($"[{DateTime.UtcNow}] Could not upload {localPath} to {remotePath}. Reason : {e.Message}");
             }
-            
-           
-            
+
+
+
         }
 
         public override Task ConnectSSH(RemoteHost host)
@@ -185,22 +189,24 @@ namespace SteerMyWheel.Core.Connectivity.ClientProviders
                 var privateKey = host.ConnectionMethod != SSHConnectionMethod.DEFAULT ? new PrivateKeyFile(new MemoryStream(File.ReadAllBytes(_config.SSHKeysPATH + host.Name))) : null;
                 _client = privateKey == null ? new SshClient(host.RemoteIP, host.SSHPort, host.SSHUsername, host.SSHPassword) : new SshClient(host.RemoteIP, host.SSHPort, host.SSHUsername, privateKey);
 
-                _logger.LogInformation("[{time}] [SSH] Connecting to RemoteHost : {ip} ...", DateTime.UtcNow,host.RemoteIP);
+                _logger.LogInformation("[{time}] [SSH] Connecting to RemoteHost : {ip} ...", DateTime.UtcNow, host.RemoteIP);
                 _client.Connect();
             }
-            catch(FileNotFoundException e)
+            catch (FileNotFoundException e)
             {
                 _logger.LogError("[{time}] [SSH] Could not find private key file for RemoteHost : {ip} ...", DateTime.UtcNow, host.RemoteIP);
-                return Task.FromException(e);   
-            }catch(SshAuthenticationException e)
+                return Task.FromException(e);
+            }
+            catch (SshAuthenticationException e)
             {
                 _logger.LogError("[{time}] [SSH] Could not find authenticate to RemoteHost : {ip} ...", DateTime.UtcNow, host.RemoteIP);
                 return Task.FromException(e);
-            }catch(SshConnectionException e)
+            }
+            catch (SshConnectionException e)
             {
                 _logger.LogError("[{time}] [SSH] Could not connect to RemoteHost : {ip} ! Check your network and try again ...", DateTime.UtcNow, host.RemoteIP);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogError($"[{DateTime.UtcNow}] [SSH] An unhandled exception occured, quitting...");
             }

@@ -8,14 +8,11 @@ using SteerMyWheel.Core.Model.WorkersQueue;
 using SteerMyWheel.Core.Workers.Migration.Git;
 using SteerMyWheel.Core.Services;
 using System.Collections.Generic;
-using SteerMyWheel.Domain.Model.WorkerQueue;
 using SteerMyWheel.Core.Workers.Discovery;
 using System.Threading;
 using SteerMyWheel.Infrastracture.Connectivity.Repositories;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.CronReading;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
-using SteerMyWheel.Core.Connectivity.Repositories;
 
 namespace SteerMyWheel
 {

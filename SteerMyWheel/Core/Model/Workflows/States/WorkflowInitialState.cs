@@ -11,6 +11,7 @@ namespace SteerMyWheel.Core.Model.Workflows.States
     {
         public Task HandleAsync(BaseWorkflowContext context)
         {
+            context._ManualResetEvent.WaitOne();
             while (!context.CancellationToken.IsCancellationRequested)
             {
                 if (context.CancellationToken.IsCancellationRequested)
@@ -19,7 +20,7 @@ namespace SteerMyWheel.Core.Model.Workflows.States
                 }
                 if (context.Workflow.ExecutionDate >= DateTime.Now)
                 {
-                    context.Workflow.Execute();
+                    context.Workflow.Execute(context);
                     context.Workflow = context.Workflow.Next;
                     return Task.CompletedTask;
                 }
@@ -28,6 +29,7 @@ namespace SteerMyWheel.Core.Model.Workflows.States
                     Thread.Sleep(1000);
                 }
             }
+            context._ManualResetEvent.Set();
             return Task.CompletedTask;
 
         }

@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using SteerMyWheel.Configuration;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.Entities;
-using SteerMyWheel.Domain.Model.WorkerQueue;
+using SteerMyWheel.Core.Model.WorkersQueue;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
+using SteerMyWheel.Infrastracture.Connectivity.Git;
 using SteerMyWheel.Infrastracture.Connectivity.Repositories;
-using SteerMyWheel.Infrastracture.Git;
 using SteerMyWheel.Misc;
 using System;
 using System.Collections;
