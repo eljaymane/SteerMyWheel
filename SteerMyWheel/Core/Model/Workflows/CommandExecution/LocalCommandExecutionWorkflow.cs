@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows.CommandExecution
 {
-    public class LocalCommandExecution : BaseWorkflow
+    public class LocalCommandExecutionWorkflow : BaseWorkflow
     {
         private string _ExecCommand { get; set; }
-        public LocalCommandExecution(string ExecCommand,string name, string description, DateTime executionDate, BaseWorkflow next, BaseWorkflow previous) : base(name, description, executionDate, next, previous)
+        public LocalCommandExecutionWorkflow(string ExecCommand,string name, string description, DateTime executionDate, BaseWorkflow next, BaseWorkflow previous) : base(name, description, executionDate, next, previous)
         {
             _ExecCommand = ExecCommand;
         }

@@ -39,5 +39,10 @@ namespace SteerMyWheel.Core.Model.Entities
         {
             return RemoteIP == ((RemoteHost)other).RemoteIP;
         }
+
+        public override string GetID()
+        {
+            return RemoteIP;
+        }
     }
 }

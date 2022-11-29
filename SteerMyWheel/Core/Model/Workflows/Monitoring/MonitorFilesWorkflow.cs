@@ -1,4 +1,5 @@
-﻿using SteerMyWheel.Core.Model.Workflows.Abstractions;
+﻿using Microsoft.Extensions.Logging;
+using SteerMyWheel.Core.Model.Workflows.Abstractions;
 using SteerMyWheel.Core.Model.Workflows.Monitoring.Events;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,14 @@ namespace SteerMyWheel.Core.Model.Workflows.Monitoring
 
         public override Task ExecuteAsync()
         {
-            MonitorAsync().Wait();
+            try
+            {
+                MonitorAsync().Wait();
+            } catch (DirectoryNotFoundException e)
+            {
+                _logger.LogError($"[{DateTime.UtcNow}] Directory not found : {e.Message}");
+            }
+            
             return Task.CompletedTask;
         }
 
@@ -53,11 +61,15 @@ namespace SteerMyWheel.Core.Model.Workflows.Monitoring
                 
                 if (Directory.Exists(directory.ToString())) new Thread(() =>
                 {
-                    while (!File.Exists(path)) { Thread.Sleep(10000); }
+                    while (!File.Exists(path)) {
+                        _logger.LogInformation($"[{DateTime.UtcNow}] File {path} not found yet. Awaiting...");
+                        Thread.Sleep(10000); 
+                    }
+                    _logger.LogInformation($"[{DateTime.UtcNow}] File {path} arrived !");
                     onFileIsPresent(new FileIsPresentEventArgs(path));
 
                 }).Start();
-                else throw new DirectoryNotFoundException();
+                else throw new DirectoryNotFoundException($"Directory {directory} does not exist !");
             }
             return Task.CompletedTask;
         }
@@ -65,7 +77,9 @@ namespace SteerMyWheel.Core.Model.Workflows.Monitoring
         private protected void onAllFilesArePresent()
         {
             OnAllFilesArePresent?.Invoke(this, System.EventArgs.Empty);
+            _logger.LogInformation($"[{DateTime.UtcNow}] All files are present, continuing workflow execution...");
             _CanGoNext = true;
+            
         }
 
         private protected void onFileIsPresent(FileIsPresentEventArgs e)

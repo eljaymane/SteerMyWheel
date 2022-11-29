@@ -17,6 +17,7 @@ using SteerMyWheel.Core.Model.Workflows;
 using SteerMyWheel.Core.Model.Workflows.CommandExecution;
 using System;
 using SteerMyWheel.Core.Model.Workflows.Monitoring;
+using SteerMyWheel.Core.Model.Workflows.Factory;
 
 namespace SteerMyWheel
 {
@@ -57,7 +58,7 @@ namespace SteerMyWheel
                     .AddTransient<ScriptSyncService>()
                     .AddSingleton<CronDiscoveryService>()
                     .AddSingleton<WorkflowsThreadsQueue>()
-                    
+                    .AddSingleton<WorkflowContextFactory>()
                     );
             var host = builder.Build();
             var globalConfig = host.Services.GetRequiredService<GlobalConfig>();
@@ -87,11 +88,15 @@ namespace SteerMyWheel
             var executionDate = DateTime.Now;
             executionDate = executionDate.AddMinutes(1);
             var workflow = new MonitorFilesWorkflow(new string[] { "c:/test/test.txt" }, "test", "test", executionDate, null, null);
-            var workflow2 = new LocalCommandExecution("echo`\"File has been found, 2nd execution done.\"", "test","test",executionDate.AddMinutes(1), null, null);
-            workflow2.Previous = workflow;
-            workflow.Next = workflow2;
-            context.Initialize(workflow, CancellationToken.None);
-            var workflowThread = new WorkflowThread(loggerFactory.CreateLogger<WorkflowThread>(),context);
+            var workflow2 = new LocalCommandExecutionWorkflow("echo File has been found, 2nd execution done.", "test","test",executionDate.AddMinutes(1), null, null);
+            workflow._logger = loggerFactory.CreateLogger<MonitorFilesWorkflow>();
+            workflow2._logger = loggerFactory.CreateLogger<LocalCommandExecutionWorkflow>();
+            var workflowFactory = host.Services.GetRequiredService<WorkflowContextFactory>();
+            Queue<BaseWorkflow> q = new Queue<BaseWorkflow>();
+            q.Enqueue(workflow);
+            q.Enqueue(workflow2);
+            //context.Initialize(workflow, CancellationToken.None);
+            var workflowThread = new WorkflowThread(loggerFactory.CreateLogger<WorkflowThread>(),workflowFactory.CreateContext(q,"TEST"));
             workflowService.Enqueue(workflowThread);
             workflowService.Process();
             Console.ReadKey();

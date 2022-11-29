@@ -27,5 +27,10 @@
         {
             return ExecCommand == ((ScriptExecution)other).ExecCommand;
         }
+
+        public override string GetID()
+        {
+            return ExecCommand;
+        }
     }
 }

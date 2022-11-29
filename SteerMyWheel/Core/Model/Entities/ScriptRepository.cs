@@ -24,5 +24,10 @@
         {
             return Name == ((ScriptRepository)other).Name;
         }
+
+        public override string GetID()
+        {
+            return Name;
+        }
     }
 }
