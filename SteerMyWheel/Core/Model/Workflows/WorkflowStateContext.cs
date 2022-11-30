@@ -11,6 +11,7 @@ namespace SteerMyWheel.Core.Model.Workflows
     {
         private bool Success = true;
         private EventHandler SuccessUpdated;
+        private EventHandler CancellationTokenChanged;
 
 
         public WorkflowStateContext(ILogger logger, string name) : base(logger, name) { }
@@ -20,6 +21,7 @@ namespace SteerMyWheel.Core.Model.Workflows
         /// <returns>False : if next workflow is null , True if not</returns>
         public bool HasNext()
         {
+            if (CancellationToken.IsCancellationRequested) return false;
             return Workflow.Next == null ? false : true;
         }
         /// <summary>
@@ -38,6 +40,16 @@ namespace SteerMyWheel.Core.Model.Workflows
         protected virtual void OnSuccessUpdated(object sender, EventArgs e)
         {
             SuccessUpdated?.Invoke(this, e);
+        }
+
+        protected virtual void OnCancellationTokenChanged(object sender, EventArgs e)
+        {
+            if (CancellationToken.IsCancellationRequested) setState(new WorkflowErrorState());
+        }
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            base.OnStateChanged(e);
         }
     }
 }

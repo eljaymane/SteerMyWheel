@@ -27,11 +27,13 @@ namespace SteerMyWheel.Infrastracture.Connectivity.ClientProviders
 
         public bool FileExists(string path)
         {
+            if (!_sftpClient.IsConnected) throw new SSHClientNotConnectedException();
             return _sftpClient.Exists(path);
         }
 
         public bool DirectoryExists(string path)
         {
+            if(!_sftpClient.IsConnected) throw new SSHClientNotConnectedException();
             return _sftpClient.Exists(path);
         }
 

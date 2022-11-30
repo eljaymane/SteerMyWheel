@@ -27,6 +27,7 @@ namespace SteerMyWheel.Core.Model.Workflows.Monitoring
             catch (DirectoryNotFoundException e)
             {
                 _logger.LogError($"[{DateTime.UtcNow}] [Workflow : {context.Name}] Directory not found : {e.Message}");
+                context.CancellationToken = new System.Threading.CancellationTokenSource(TimeSpan.Zero).Token;
             }
 
             return Task.CompletedTask;

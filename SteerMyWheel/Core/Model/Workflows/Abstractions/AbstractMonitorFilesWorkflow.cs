@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SteerMyWheel.Core.Model.Workflows.Monitoring.EventArgs;
+using SteerMyWheel.Infrastracture.Connectivity.ClientProviders.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows.Abstractions
 {
+    /// <summary>
+    /// Abstract base class of a workflow that monitor files either locally, or remotely.
+    /// </summary>
     public abstract class AbstractMonitorFilesWorkflow : BaseMonitoringWorkflow
     {
         private IEnumerable<string> _Paths = null;
@@ -39,28 +43,41 @@ namespace SteerMyWheel.Core.Model.Workflows.Abstractions
         }
 
         public override abstract Task ExecuteAsync(BaseWorkflowContext context);
+        /// <summary>
+        /// The monitoring task that verifies if a file exists either locally or remotely.
+        /// </summary>
+        /// <param name="_FileExists">A function that takes a string (path) as input and outputs a bool</param>
+        /// <param name="directoryExists">A function that takes a string (path) as input and outputs a bool</param>
+        /// <param name="context">The workflow context</param>
+        /// <returns></returns>
 
-        public override Task MonitorAsync(FileExistsDelegate _FileExists, DirectoryExistsDelegate _DirectoryExists, BaseWorkflowContext context)
+        public virtual Task MonitorAsync(FileExistsDelegate _FileExists, DirectoryExistsDelegate _DirectoryExists, BaseWorkflowContext context)
         {
             foreach (var path in _Paths)
             {
                 var tmp = path.Split('/');
                 var file = tmp[tmp.Length - 1];
                 var directory = path.Replace(file, "");
-
-                if (_DirectoryExists.Invoke(directory)) new Thread(() =>
+                try
                 {
-
-                    while (!_FileExists.Invoke(path))
+                    if (_DirectoryExists.Invoke(directory)) new Thread(() =>
                     {
-                        _logger.LogInformation($"[{DateTime.UtcNow}] [Workflow : {context.Name}] File {path} not found yet. Awaiting...");
-                        Thread.Sleep(10000);
-                    }
-                    _logger.LogInformation($"[{DateTime.UtcNow}] [Workflow : {context.Name}] File {path} arrived !");
-                    onFileIsPresent(new FileIsPresentEventArgs(path), context);
 
-                }).Start();
-                else throw new DirectoryNotFoundException($"Directory {directory} does not exist !");
+                        while (!_FileExists.Invoke(path))
+                        {
+                            _logger.LogInformation($"[{DateTime.UtcNow}] [Workflow : {context.Name}] File {path} not found yet. Awaiting...");
+                            Thread.Sleep(10000);
+                        }
+                        _logger.LogInformation($"[{DateTime.UtcNow}] [Workflow : {context.Name}] File {path} arrived !");
+                        onFileIsPresent(new FileIsPresentEventArgs(path), context);
+
+                    }).Start();
+                    else throw new DirectoryNotFoundException($"Directory {directory} does not exist !");
+                }catch(SSHClientNotConnectedException e)
+                {
+                    _logger.LogError($"[{DateTime.UtcNow}] [Workflow {context.Name}] {e.Message} !");
+                }
+                
             }
 
             return Task.CompletedTask;

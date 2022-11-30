@@ -25,9 +25,13 @@ namespace SteerMyWheel.Core.Model.Workflows.States
                     }
                     else
                     {
-                        context._logger.LogInformation($"[{DateTime.UtcNow}] [Workflow : {context.Name}] Next task : {context.Workflow.Name} ");
-                        context.Workflow = context.Workflow.Next;
-                        context.setState(new WorkflowRunningState());
+
+                        if (!context.CancellationToken.IsCancellationRequested)
+                        {
+                            context.Workflow = context.Workflow.Next;
+                            context.setState(new WorkflowRunningState());
+                            context._logger.LogInformation($"[{DateTime.UtcNow}] [Workflow : {context.Name}] Next task : {context.Workflow.Name} ");
+                        }
                     }
                     return Task.CompletedTask;
                 }
