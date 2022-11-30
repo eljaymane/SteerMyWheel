@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;

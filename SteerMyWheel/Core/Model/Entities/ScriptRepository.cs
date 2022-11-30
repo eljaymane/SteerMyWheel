@@ -1,5 +1,8 @@
 ﻿namespace SteerMyWheel.Core.Model.Entities
 {
+    /// <summary>
+    /// Represents a git repository that corresponds to a script execution executable.
+    /// </summary>
     public class ScriptRepository : BaseEntity<string>
     {
         public string Path { get; set; }

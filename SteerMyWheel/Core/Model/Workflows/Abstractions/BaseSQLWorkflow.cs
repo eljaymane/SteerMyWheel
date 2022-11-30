@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows.Abstractions

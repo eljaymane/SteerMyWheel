@@ -20,7 +20,7 @@ namespace SteerMyWheel.Core.Model.Workflows.FileTransfer
         public override Task Execute(BaseWorkflowContext context)
         {
             _sshClient.Upload(RemotePath, LocalPath).Wait();
-             return Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
         public override async Task ExecuteAsync(BaseWorkflowContext context)

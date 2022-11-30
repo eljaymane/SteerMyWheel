@@ -3,7 +3,6 @@ using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace SteerMyWheel.Infrastracture.Connectivity.Repositories

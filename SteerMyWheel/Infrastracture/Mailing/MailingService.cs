@@ -21,7 +21,7 @@ namespace SteerMyWheel.Infrastracture.Mailing
         private async void SendAsync(string from, string name, string to, string subject, string text)
         {
             if (mailingProvider == null) return;
-            await mailingProvider.SendAsync(new System.Net.Mail.MailMessage(from,to,subject,text));
+            await mailingProvider.SendAsync(new System.Net.Mail.MailMessage(from, to, subject, text));
         }
     }
 }

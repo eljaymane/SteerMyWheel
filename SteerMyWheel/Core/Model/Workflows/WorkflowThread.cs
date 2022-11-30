@@ -11,7 +11,7 @@ namespace SteerMyWheel.Core.Model.Workflows
 
         public WorkflowThread(ILogger<WorkflowThread> logger, WorkflowStateContext context)
         {
-            _logger= logger;
+            _logger = logger;
             _context = context;
             ManualResetEvent = new ManualResetEvent(false);
         }

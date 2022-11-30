@@ -2,8 +2,6 @@
 using Neo4jClient;
 using SteerMyWheel.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Infrastracture.Connectivity.ClientProviders

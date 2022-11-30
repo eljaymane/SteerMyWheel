@@ -1,9 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SteerMyWheel.Misc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows.CommandExecution
@@ -11,12 +8,12 @@ namespace SteerMyWheel.Core.Model.Workflows.CommandExecution
     public class LocalCommandExecutionWorkflow : BaseWorkflow
     {
         private string _ExecCommand { get; set; }
-        public LocalCommandExecutionWorkflow(string ExecCommand,string name, string description, DateTime executionDate, BaseWorkflow next, BaseWorkflow previous) : base(name, description, executionDate, next, previous)
+        public LocalCommandExecutionWorkflow(string ExecCommand, string name, string description, DateTime executionDate, BaseWorkflow next, BaseWorkflow previous) : base(name, description, executionDate, next, previous)
         {
             _ExecCommand = ExecCommand;
         }
 
-       
+
         public override bool CanExecute()
         {
             return true;

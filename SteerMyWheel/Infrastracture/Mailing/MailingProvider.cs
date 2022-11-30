@@ -3,7 +3,6 @@ using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.ComponentModel;
 using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Infrastracture.Mailing
@@ -15,14 +14,14 @@ namespace SteerMyWheel.Infrastracture.Mailing
 
         public MailingClientProvider(ILogger<MailingClientProvider> logger)
         {
-            
+
             _logger = logger;
         }
 
         public async Task SendAsync(MailMessage message)
         {
             _client.SendCompleted += new SendCompletedEventHandler(SendCompletedCallback);
-            await _client.SendMailAsync(message);       
+            await _client.SendMailAsync(message);
         }
 
         private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)

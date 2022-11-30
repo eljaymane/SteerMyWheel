@@ -26,7 +26,7 @@ namespace SteerMyWheel.Infrastracture.Connectivity.Repositories
         public abstract IEnumerable<T> GetAll();
         public abstract T Update(T entity);
         public abstract IEnumerable<T> GetAll(object entity);
-       // public abstract IEnumerable<T> GetValues(T entity);
+        // public abstract IEnumerable<T> GetValues(T entity);
         public abstract Tuple<BaseEntity<ID>, object> Link(BaseEntity<ID> active, object passive);
         public abstract BaseEntity<ID> CreateAndMatch(BaseEntity<ID> newScript, string id);
 

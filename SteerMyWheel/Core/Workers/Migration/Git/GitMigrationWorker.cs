@@ -5,18 +5,13 @@ using SteerMyWheel.Core.Model.WorkersQueue;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using SteerMyWheel.Infrastracture.Connectivity.Git;
 using SteerMyWheel.Infrastracture.Connectivity.Repositories;
-using SteerMyWheel.Misc;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SteerMyWheel.Core.Workers.Migration.Git
 {
@@ -33,7 +28,7 @@ namespace SteerMyWheel.Core.Workers.Migration.Git
         {
             _scriptRepository = scriptRepository;
             cmd = new Process();
-            
+
             cmd.StartInfo.FileName = "cmd.exe";
             cmd.StartInfo.UseShellExecute = false;
             cmd.StartInfo.RedirectStandardInput = true;
@@ -48,46 +43,47 @@ namespace SteerMyWheel.Core.Workers.Migration.Git
 
         public void setGlobalConfig(GlobalConfig config)
         {
-            base._globalConfig= config;
+            base._globalConfig = config;
             path = _globalConfig.LocalReposDirectory + _scriptRepository.Name;
         }
 
         public void setGlobalRepository(GlobalEntityRepository DAO)
         {
-            _DAO= DAO;
+            _DAO = DAO;
         }
 
-        public void SetSSHClient(SSHClientProvider sshClient)
+        public void SetSSHClient(SSHClient sshClient)
         {
-            _sshClient= sshClient;
+            _sshClient = sshClient;
         }
         public override async Task doWork()
         {
             //await cloneLegacyRepoAsync();
             var host = _DAO.RemoteHostRepository.Get(_scriptRepository);
-            if(Directory.Exists(_globalConfig.LocalReposDirectory + _scriptRepository.Name))await syncMachineAndGit((RemoteHost)host);
+            if (Directory.Exists(_globalConfig.LocalReposDirectory + _scriptRepository.Name)) await syncMachineAndGit((RemoteHost)host);
             else { _logger.LogError($"[{DateTime.UtcNow}] Repository {_scriptRepository.Name} does not exist locally !"); }
         }
 
         private async Task syncMachineAndGit(RemoteHost host)
         {
             var path = _globalConfig.LocalReposDirectory + _scriptRepository.Name;
-            var downloadFromServer = new TransformBlock<RemoteHost, string>(host => {
+            var downloadFromServer = new TransformBlock<RemoteHost, string>(host =>
+            {
                 downloadRecentVersion(host);
                 return path;
-                });
-            var rmRemote = new TransformBlock<string,string>(_path =>
+            });
+            var rmRemote = new TransformBlock<string, string>(_path =>
             {
                 GitCommands.RemoveRemote(_path, _globalConfig.DefaultRemoteName);
                 return _path;
             });
-            var updateRemote = new TransformBlock<string,string>(_path =>
+            var updateRemote = new TransformBlock<string, string>(_path =>
             {
                 var remote = _scriptRepository.BitbucketRepository;
-                GitCommands.AddRemote(_path,_globalConfig.DefaultRemoteName,remote);
+                GitCommands.AddRemote(_path, _globalConfig.DefaultRemoteName, remote);
                 return _path;
             });
-            var add = new TransformBlock<string,string>(_path =>
+            var add = new TransformBlock<string, string>(_path =>
             {
                 GitCommands.AddAllFiles(_path);
                 return _path;
@@ -99,7 +95,7 @@ namespace SteerMyWheel.Core.Workers.Migration.Git
             });
             var pushAll = new ActionBlock<string>(_path =>
             {
-                GitCommands.PushAll(_path,false);
+                GitCommands.PushAll(_path, false);
             });
 
             downloadFromServer.LinkTo(rmRemote);
@@ -123,14 +119,14 @@ namespace SteerMyWheel.Core.Workers.Migration.Git
                 updateRemote.Completion,
                 commit.Completion
                 );
-            
+
         }
 
         private async Task cloneLegacyRepoAsync()
         {
             _logger.LogInformation("[{time}] Started cloning legacy repository {name} ..", DateTime.UtcNow, _scriptRepository.Name);
             var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
-            
+
             var cloneFromScripts = new TransformBlock<string, string>(_path =>
             {
                 GitCommands.Clone(_path, _scriptRepository.LegacyRepository, false);
@@ -146,7 +142,7 @@ namespace SteerMyWheel.Core.Workers.Migration.Git
             var cloneFromCommando = new TransformBlock<string, string>(_path =>
             {
                 var remote = _globalConfig.gitLabCommandoBaseURI + _scriptRepository.Name;
-                GitCommands.Clone(_path,remote,false);
+                GitCommands.Clone(_path, remote, false);
                 return _path;
 
             }, new ExecutionDataflowBlockOptions
@@ -158,12 +154,12 @@ namespace SteerMyWheel.Core.Workers.Migration.Git
             cloneFromScripts.Completion.ContinueWith(delegate { cloneFromCommando.Complete(); });
 
             cloneFromScripts.Post(path);
-                Task.WaitAll
-                    (
-                    cloneFromScripts.Completion,
-                    cloneFromCommando.Completion
-                    );
-                await createNewRepository();
+            Task.WaitAll
+                (
+                cloneFromScripts.Completion,
+                cloneFromCommando.Completion
+                );
+            await createNewRepository();
 
 
         }
@@ -188,14 +184,16 @@ namespace SteerMyWheel.Core.Workers.Migration.Git
                 _logger.LogInformation($"[{DateTime.UtcNow}] Java repository detected ({_scriptRepository.Name}, Skipping..");
                 await Task.FromCanceled(CancellationToken.None);
 
-            } else if(ParserConfig.isPerl(name) || ParserConfig.isPython(name) || ParserConfig.isBash(name))
+            }
+            else if (ParserConfig.isPerl(name) || ParserConfig.isPython(name) || ParserConfig.isBash(name))
             {
                 var type = ParserConfig.isPython(name) ? "python" : ParserConfig.isPerl(name) ? "perl" : ParserConfig.isBash(name) ? "bash" : "unknown";
                 _logger.LogInformation($"[{DateTime.UtcNow}] {type} repository detected for {_scriptRepository.Name}, starting to download files ...");
                 await _sshClient.ConnectSFTP(_DAO.RemoteHostRepository.Get(_scriptRepository));
                 await _sshClient.DownloadDirectory(_scriptRepository.Path, _globalConfig.LocalWorkingDirectory + "repos/" + _scriptRepository.Name);
 
-            } else 
+            }
+            else
             {
                 _logger.LogInformation($"[{DateTime.UtcNow}] Could not detect type of code for repository ({_scriptRepository.Name}, Skipping..");
                 await Task.FromCanceled(CancellationToken.None);

@@ -11,7 +11,7 @@ namespace SteerMyWheel.Core.Workers.Discovery
     public class CronDiscoveryWorker : BaseWorker
     {
         private readonly RemoteHost _remoteHost;
-        private SSHClientProvider _sshClient;
+        private SSHClient _sshClient;
         private CronReader _cronReader;
 
         public CronDiscoveryWorker(RemoteHost remoteHost, CronReader cronReader)
@@ -23,7 +23,7 @@ namespace SteerMyWheel.Core.Workers.Discovery
 
         public override async Task doWork()
         {
-             await DiscoverAsync(_remoteHost);
+            await DiscoverAsync(_remoteHost);
         }
 
         public async Task DiscoverAsync(RemoteHost host)
@@ -34,13 +34,13 @@ namespace SteerMyWheel.Core.Workers.Discovery
                 await ReadCronAsync(data);
             });
             getCron.LinkTo(readCron);
-            getCron.Completion.ContinueWith( delegate { readCron.Complete(); });
+            getCron.Completion.ContinueWith(delegate { readCron.Complete(); });
             getCron.Post(host);
             getCron.Complete();
             getCron.Completion.Wait();
             readCron.Completion.Wait();
-            
-            
+
+
 
         }
 
@@ -57,7 +57,7 @@ namespace SteerMyWheel.Core.Workers.Discovery
             await _cronReader.ReadFromText(cronText);
         }
 
-        public void SetClientProvider(SSHClientProvider client)
+        public void SetClientProvider(SSHClient client)
         {
             this._sshClient = client;
         }

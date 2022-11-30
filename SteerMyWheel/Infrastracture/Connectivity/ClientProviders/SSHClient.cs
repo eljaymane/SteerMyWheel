@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Renci.SshNet;
 using Renci.SshNet.Common;
 using SteerMyWheel.Configuration;
@@ -8,24 +7,32 @@ using SteerMyWheel.Core.Model.Enums;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders.Exceptions;
 using System;
 using System.IO;
-using System.IO.Enumeration;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Infrastracture.Connectivity.ClientProviders
 {
-    public class SSHClientProvider : BaseClientProvider<SshClient, RemoteHost>
+    public class SSHClient : BaseClientProvider<SshClient, RemoteHost>
     {
         private SshClient _client;
         private SftpClient _sftpClient;
         private readonly GlobalConfig _config;
-        private readonly ILogger<SSHClientProvider> _logger;
+        private readonly ILogger<SSHClient> _logger;
 
 
-        public SSHClientProvider(GlobalConfig config, ILogger<SSHClientProvider> logger)
+        public SSHClient(GlobalConfig config, ILogger<SSHClient> logger)
         {
             _config = config;
             _logger = logger;
+        }
+
+        public bool FileExists(string path)
+        {
+            return _sftpClient.Exists(path);
+        }
+
+        public bool DirectoryExists(string path)
+        {
+            return _sftpClient.Exists(path);
         }
 
         public Task<string> GetCronFile()

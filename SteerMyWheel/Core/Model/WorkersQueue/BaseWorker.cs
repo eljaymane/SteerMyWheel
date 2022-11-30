@@ -13,7 +13,7 @@ namespace SteerMyWheel.Core.Model.WorkersQueue
         public GlobalConfig _globalConfig;
         public IClientProvider<GraphClient> _client;
         public IClientProvider<HttpClient> _BitClient;
-        public SSHClientProvider _sshClient;
+        public SSHClient _sshClient;
 
         public abstract Task doWork();
 
@@ -32,7 +32,7 @@ namespace SteerMyWheel.Core.Model.WorkersQueue
             _BitClient = client;
         }
 
-        public virtual void setSSHClient(SSHClientProvider client)
+        public virtual void setSSHClient(SSHClient client)
         {
             _sshClient = client;
         }

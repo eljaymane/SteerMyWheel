@@ -6,18 +6,17 @@ using SteerMyWheel.Core.Workers.Discovery;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
 
 namespace SteerMyWheel.Core.Services
 {
-    public class CronDiscoveryService 
+    public class CronDiscoveryService
     {
         private readonly ILogger<CronDiscoveryService> _logger;
         private ILoggerFactory _loggerFactory;
-        private SSHClientProvider _client;
+        private SSHClient _client;
         public WorkersQueue<CronDiscoveryWorker> _queue;
         private CronReader _cronReader;
-        public CronDiscoveryService(ILogger<CronDiscoveryService> logger,WorkersQueue<CronDiscoveryWorker> queue, CronReader cronReader,SSHClientProvider client)
+        public CronDiscoveryService(ILogger<CronDiscoveryService> logger, WorkersQueue<CronDiscoveryWorker> queue, CronReader cronReader, SSHClient client)
         {
             _logger = logger;
             _queue = queue;
@@ -31,7 +30,7 @@ namespace SteerMyWheel.Core.Services
             var worker = new CronDiscoveryWorker(host, _cronReader);
             worker.setLogger(_loggerFactory.CreateLogger<CronDiscoveryWorker>());
             worker.SetClientProvider(_client);
-           _queue.Enqueue(worker).Wait();
+            _queue.Enqueue(worker).Wait();
             return Task.CompletedTask;
         }
 

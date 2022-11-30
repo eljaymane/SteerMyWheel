@@ -1,9 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Neo4j.Driver;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace SteerMyWheel.Configuration
 {

@@ -1,43 +1,42 @@
 ﻿using Microsoft.Extensions.Logging;
-using Neo4jClient.Cypher;
-using SteerMyWheel.Core.Model.Workflows.CommandExecution;
 using SteerMyWheel.Core.Model.Workflows.States;
 using System;
 
 namespace SteerMyWheel.Core.Model.Workflows
 {
+    /// <summary>
+    /// A context that represents a workflow execution environment
+    /// </summary>
     public class WorkflowStateContext : BaseWorkflowContext
     {
-        private ILogger<WorkflowStateContext> _logger;
-
         private bool Success = true;
-
         private EventHandler SuccessUpdated;
 
-        
-        public WorkflowStateContext(ILoggerFactory loggerFactory,string name) :base(loggerFactory,name)
-        {
-            _logger = loggerFactory.CreateLogger<WorkflowStateContext>();
-           
-        }
 
+        public WorkflowStateContext(ILogger logger, string name) : base(logger, name) { }
+        /// <summary>
+        /// Determines if there is still something as a part of the workflow or not
+        /// </summary>
+        /// <returns>False : if next workflow is null , True if not</returns>
         public bool HasNext()
         {
             return Workflow.Next == null ? false : true;
         }
-
-        public void Initialize()
-        {
-            setState(new WorkflowInitialState());
-        }
-
+        /// <summary>
+        /// Updates the success property.
+        /// </summary>
+        /// <param name="success"></param>
         public void UpdateSuccess(bool success)
         {
             Success &= success;
         }
-
-        protected virtual void OnSuccessUpdated(object sender,EventArgs e) 
-        { 
+        /// <summary>
+        /// Method that handles SuccessUpdated event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected virtual void OnSuccessUpdated(object sender, EventArgs e)
+        {
             SuccessUpdated?.Invoke(this, e);
         }
     }

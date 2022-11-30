@@ -26,8 +26,8 @@ namespace SteerMyWheelTest.Infrastructure.ClientProviders
         [ExpectedException(typeof(SSHClientNotConnectedException))]
         public void GetConnection_Before_Connecting_Should_Raise_SSHClientNotConnectedException()
         {
-            var logger = new LoggerFactory().CreateLogger<SSHClientProvider>();
-            var _client = new SSHClientProvider(new Mock<GlobalConfig>().Object, logger);
+            var logger = new LoggerFactory().CreateLogger<SSHClient>();
+            var _client = new SSHClient(new Mock<GlobalConfig>().Object, logger);
             var result = _client.GetConnection();
             Assert.IsTrue(result.GetType() == typeof(SshClient));
         }
@@ -36,8 +36,8 @@ namespace SteerMyWheelTest.Infrastructure.ClientProviders
         public void GetConnection_After_Connecting_SSH_Should_Return_a_connected_SshClient()
         {
 
-            var logger = new LoggerFactory().CreateLogger<SSHClientProvider>();
-            var _client = new SSHClientProvider(new Mock<GlobalConfig>().Object, logger);
+            var logger = new LoggerFactory().CreateLogger<SSHClient>();
+            var _client = new SSHClient(new Mock<GlobalConfig>().Object, logger);
             _client.ConnectSSH(_remoteHost);
             var result = _client.GetConnection();
             Assert.IsTrue(result.IsConnected);

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SteerMyWheel.Core.Model.Workflows.Monitoring.EventArgs
+﻿namespace SteerMyWheel.Core.Model.Workflows.Monitoring.EventArgs
 {
     internal class FileIsPresentEventArgs : System.EventArgs
     {

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using static SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow;
@@ -15,7 +12,7 @@ namespace SteerMyWheel.Core.Model.Workflows.Abstractions
         public bool _CanGoNext = false;
         public BaseMonitoringWorkflow(string name, string description, DateTime executionDate, BaseWorkflow next, BaseWorkflow previous) : base(name, description, executionDate, next, previous)
         {
-           
+
         }
 
         public abstract override bool CanExecute();

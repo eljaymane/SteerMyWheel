@@ -8,13 +8,13 @@ namespace SteerMyWheel.Core.Model.Workflows.Monitoring
 {
     public class MonitorLocalFilesWorkflow : AbstractMonitorFilesWorkflow
     {
-        public MonitorLocalFilesWorkflow(string[] Paths, string name, string description, DateTime executionDate, BaseWorkflow next, BaseWorkflow previous) :base(Paths,name,description,executionDate,next,previous)
+        public MonitorLocalFilesWorkflow(string[] Paths, string name, string description, DateTime executionDate, BaseWorkflow next, BaseWorkflow previous) : base(Paths, name, description, executionDate, next, previous)
         {
-            
+
         }
         public Task MonitorAsync(BaseWorkflowContext context)
         {
-            base.MonitorAsync(File.Exists, Directory.Exists,context).Wait();
+            base.MonitorAsync(File.Exists, Directory.Exists, context).Wait();
             return Task.CompletedTask;
         }
 

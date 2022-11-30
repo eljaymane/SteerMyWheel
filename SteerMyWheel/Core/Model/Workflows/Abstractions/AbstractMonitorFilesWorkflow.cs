@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -40,7 +39,7 @@ namespace SteerMyWheel.Core.Model.Workflows.Abstractions
         }
 
         public override abstract Task ExecuteAsync(BaseWorkflowContext context);
-       
+
         public override Task MonitorAsync(FileExistsDelegate _FileExists, DirectoryExistsDelegate _DirectoryExists, BaseWorkflowContext context)
         {
             foreach (var path in _Paths)
@@ -54,10 +53,10 @@ namespace SteerMyWheel.Core.Model.Workflows.Abstractions
 
                     while (!_FileExists.Invoke(path))
                     {
-                        _logger.LogInformation($"[{DateTime.UtcNow}] [Workflow : {context.Name} File {path} not found yet. Awaiting...");
+                        _logger.LogInformation($"[{DateTime.UtcNow}] [Workflow : {context.Name}] File {path} not found yet. Awaiting...");
                         Thread.Sleep(10000);
                     }
-                    _logger.LogInformation($"[{DateTime.UtcNow}] File {path} arrived !");
+                    _logger.LogInformation($"[{DateTime.UtcNow}] [Workflow : {context.Name}] File {path} arrived !");
                     onFileIsPresent(new FileIsPresentEventArgs(path), context);
 
                 }).Start();
