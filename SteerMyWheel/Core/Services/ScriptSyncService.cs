@@ -16,6 +16,11 @@ using System.Threading.Tasks.Dataflow;
 
 namespace SteerMyWheel.Core.Services
 {
+    /// <summary>
+    /// A service who's role is to sync between legacy gitlab repositories and new bitbucket repositories.
+    /// It also downlaods the remote script files from the host to push unsaved changes to the repository.
+    /// This class creates GitMigrationWorkers and enqueues them in a WorkersQueue.
+    /// </summary>
     public class ScriptSyncService
     {
         private ILoggerFactory _loggerFactory;

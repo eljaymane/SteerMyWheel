@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Services
 {
+    /// <summary>
+    /// The service who's role is to discover the cron file of a remote host, parse it and represents it's elements on a graph database.
+    /// This class uses a ReaderStateContext encapsulated in a CronReader instance.
+    /// This class generates CronDiscoveryWorkers and queue them in a WorkersQueue.
+    /// </summary>
     public class CronDiscoveryService
     {
         private readonly ILogger<CronDiscoveryService> _logger;

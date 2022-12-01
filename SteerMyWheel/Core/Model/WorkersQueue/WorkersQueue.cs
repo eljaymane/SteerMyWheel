@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.WorkersQueue
 {
+    /// <summary>
+    /// Implementation of a generic workers queue of type T, whith a semaphore for thread-safe access.
+    /// </summary>
+    /// <typeparam name="T">Type of the queued elements</typeparam>
     public class WorkersQueue<T> : IQueue<T> where T : BaseWorker
     {
         private SemaphoreSlim semaphore;

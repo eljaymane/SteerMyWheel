@@ -8,6 +8,9 @@ using System.Threading.Tasks.Dataflow;
 
 namespace SteerMyWheel.Core.Workers.Discovery
 {
+    /// <summary>
+    /// The worker who's role is to discover the cron file of a remote host through SSH.
+    /// </summary>
     public class CronDiscoveryWorker : BaseWorker
     {
         private readonly RemoteHost _remoteHost;
