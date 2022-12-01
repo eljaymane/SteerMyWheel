@@ -12,18 +12,19 @@ namespace SteerMyWheel.Core.Services
     /// <summary>
     /// Represents the service on which all workflows are queued and processed
     /// </summary>
-    public class WorkflowsThreadsQueue
+    public class WorkflowQueue
     {
         /// <summary>
         /// The workflows context queue (encapsulated in WorkflowThread).
         /// </summary>
         private Queue<WorkflowThread> _Queue;
-        private ILogger<WorkflowsThreadsQueue> _Logger;
-
-        public WorkflowsThreadsQueue(GlobalConfig _config, ILogger<WorkflowsThreadsQueue> logger)
+        private ILogger<WorkflowQueue> _Logger;
+        private TaskScheduler Scheduler;
+        public WorkflowQueue(GlobalConfig _config, ILogger<WorkflowQueue> logger)
         {
             _Queue = new Queue<WorkflowThread>(_config.MaxWorfklowQueueCapacity);
             _Logger = logger;
+            Scheduler = TaskScheduler.FromCurrentSynchronizationContext();
         }
         /// <summary>
         /// Add a WorkflowThread to the queue.

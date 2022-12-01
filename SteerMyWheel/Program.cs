@@ -58,7 +58,7 @@ namespace SteerMyWheel
                     .AddTransient<WorkersQueue<CronDiscoveryWorker>>()
                     .AddTransient<ScriptSyncService>()
                     .AddSingleton<CronDiscoveryService>()
-                    .AddSingleton<WorkflowsThreadsQueue>()
+                    .AddSingleton<WorkflowQueue>()
                     .AddSingleton<WorkflowContextFactory>()
                     .AddSingleton<SSHClientFactory>()
                     );
@@ -85,7 +85,7 @@ namespace SteerMyWheel
             //}
             //discoveryService._queue.DeqeueAllAsync(CancellationToken.None).Wait();
             var sshFactory = host.Services.GetRequiredService<SSHClientFactory>();
-            var workflowService = host.Services.GetRequiredService<WorkflowsThreadsQueue>();
+            var workflowService = host.Services.GetRequiredService<WorkflowQueue>();
             var context = new WorkflowStateContext(loggerFactory.CreateLogger<BaseWorkflowContext>(), "Wait and execute");
             var executionDate = DateTime.Now;
             executionDate = executionDate.AddMinutes(1);
