@@ -1,0 +1,82 @@
+\hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client}{}\doxysection{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Client\+Providers.\+SSHClient Class Reference}
+\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client}\index{SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient@{SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient}}
+Inheritance diagram for Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Client\+Providers.\+SSHClient\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.827080cm]{d0/dbf/class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a92149eabe2171354fbfe3f14b42ab5f5}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a92149eabe2171354fbfe3f14b42ab5f5}} 
+{\bfseries SSHClient} (\mbox{\hyperlink{class_steer_my_wheel_1_1_configuration_1_1_global_config}{Global\+Config}} config, ILogger$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client}{SSHClient}} $>$ logger)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a874db18df0f03800e7fd4c2b8d75ea4b}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a874db18df0f03800e7fd4c2b8d75ea4b}} 
+bool {\bfseries File\+Exists} (string path)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a579af1a8c63ae9c2eaae0b5de5bc4f70}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a579af1a8c63ae9c2eaae0b5de5bc4f70}} 
+bool {\bfseries Directory\+Exists} (string path)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a3311c2f9fdf5854629c821cf84551ff4}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a3311c2f9fdf5854629c821cf84551ff4}} 
+Task$<$ string $>$ {\bfseries Get\+Cron\+File} ()
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a77320c19215640c9e0f3c96304538d6c}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a77320c19215640c9e0f3c96304538d6c}} 
+Task$<$ bool $>$ {\bfseries Execute\+Cmd} (string cmd)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_ad6a3ba2b9e1be2f247469cce285e4faf}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_ad6a3ba2b9e1be2f247469cce285e4faf}} 
+async Task {\bfseries Download\+Directory} (string remote\+Path, string local\+Path)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a8c7723e0ce6ba0ce207fc4d4a0755792}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a8c7723e0ce6ba0ce207fc4d4a0755792}} 
+async Task {\bfseries Upload} (string remote\+Path, string local\+Path)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_af6ccc2343e53f6b05414aeccaff31ddb}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_af6ccc2343e53f6b05414aeccaff31ddb}} 
+override Task {\bfseries Connect\+SSH} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_remote_host}{Remote\+Host}} host)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_afbe799f518138f696aae0769a7b10406}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_afbe799f518138f696aae0769a7b10406}} 
+Task {\bfseries Connect\+SFTP} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_remote_host}{Remote\+Host}} host)
+\item 
+override Ssh\+Client \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_ada06c5859f0f887d21e8b73086c688aa}{Get\+Connection}} ()
+\item 
+override bool \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_ad34bf3b1fef5facac5003e2c684897f0}{is\+Connected}} ()
+\item 
+override void \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a0f18bc19d39c0463a3eebda886c63147}{Dispose}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a0f18bc19d39c0463a3eebda886c63147}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_a0f18bc19d39c0463a3eebda886c63147}} 
+\index{SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient@{SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient@{SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily override void Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Client\+Providers.\+SSHClient.\+Dispose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_base_client_provider}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Client\+Providers.\+Base\+Client\+Provider$<$ Ssh\+Client, Remote\+Host $>$}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_ada06c5859f0f887d21e8b73086c688aa}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_ada06c5859f0f887d21e8b73086c688aa}} 
+\index{SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient@{SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient}!GetConnection@{GetConnection}}
+\index{GetConnection@{GetConnection}!SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient@{SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient}}
+\doxysubsubsection{\texorpdfstring{GetConnection()}{GetConnection()}}
+{\footnotesize\ttfamily override Ssh\+Client Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Client\+Providers.\+SSHClient.\+Get\+Connection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_base_client_provider}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Client\+Providers.\+Base\+Client\+Provider$<$ Ssh\+Client, Remote\+Host $>$}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_ad34bf3b1fef5facac5003e2c684897f0}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client_ad34bf3b1fef5facac5003e2c684897f0}} 
+\index{SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient@{SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient}!isConnected@{isConnected}}
+\index{isConnected@{isConnected}!SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient@{SteerMyWheel.Infrastracture.Connectivity.ClientProviders.SSHClient}}
+\doxysubsubsection{\texorpdfstring{isConnected()}{isConnected()}}
+{\footnotesize\ttfamily override bool Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Client\+Providers.\+SSHClient.\+is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_base_client_provider}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Client\+Providers.\+Base\+Client\+Provider$<$ Ssh\+Client, Remote\+Host $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Infrastracture/\+Connectivity/\+Client\+Providers/SSHClient.\+cs\end{DoxyCompactItemize}

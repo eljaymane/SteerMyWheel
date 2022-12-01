@@ -1,0 +1,84 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Cron\+Reader Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader}\index{SteerMyWheel.Core.Model.CronReading.CronReader@{SteerMyWheel.Core.Model.CronReading.CronReader}}
+
+
+The main role of this class is to read a cron file either from memory as text or from a local file. It then passes every line of the cron file to \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser}{Cron\+Parser}} for the parsing task.   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_a11ac791029d7d19a552ba4dc272cab18}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_a11ac791029d7d19a552ba4dc272cab18}} 
+{\bfseries Cron\+Reader} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context}{Reader\+State\+Context}} state\+Context, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser}{Cron\+Parser}} parser)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_ae9a36b0dd766885fa0d6d06b23945c2e}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_ae9a36b0dd766885fa0d6d06b23945c2e}} 
+\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context}{Reader\+State\+Context}} {\bfseries Get\+Context} ()
+\item 
+Task \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_a80e2572d1dc370ab77b2f182abb200b7}{Read\+From\+File}} (string cron\+File\+Path)
+\begin{DoxyCompactList}\small\item\em Reads all the lines of a given cron file and the parse every line.  \end{DoxyCompactList}\item 
+Task \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_a43db5679f8c472189e8fbdd808b859d6}{Read\+From\+Text}} (string cron\+Text)
+\begin{DoxyCompactList}\small\item\em Reads a cron file stored in memory and splits it into line for the parsing process.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_a60e127d3141e4235651c8fbb0956e78f}{Parse}} (string line)
+\begin{DoxyCompactList}\small\item\em Parses a given line and calls set\+State to update the actual reading context state.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The main role of this class is to read a cron file either from memory as text or from a local file. It then passes every line of the cron file to \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser}{Cron\+Parser}} for the parsing task.  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_a60e127d3141e4235651c8fbb0956e78f}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_a60e127d3141e4235651c8fbb0956e78f}} 
+\index{SteerMyWheel.Core.Model.CronReading.CronReader@{SteerMyWheel.Core.Model.CronReading.CronReader}!Parse@{Parse}}
+\index{Parse@{Parse}!SteerMyWheel.Core.Model.CronReading.CronReader@{SteerMyWheel.Core.Model.CronReading.CronReader}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily void Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Cron\+Reader.\+Parse (\begin{DoxyParamCaption}\item[{string}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parses a given line and calls set\+State to update the actual reading context state.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_a80e2572d1dc370ab77b2f182abb200b7}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_a80e2572d1dc370ab77b2f182abb200b7}} 
+\index{SteerMyWheel.Core.Model.CronReading.CronReader@{SteerMyWheel.Core.Model.CronReading.CronReader}!ReadFromFile@{ReadFromFile}}
+\index{ReadFromFile@{ReadFromFile}!SteerMyWheel.Core.Model.CronReading.CronReader@{SteerMyWheel.Core.Model.CronReading.CronReader}}
+\doxysubsubsection{\texorpdfstring{ReadFromFile()}{ReadFromFile()}}
+{\footnotesize\ttfamily Task Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Cron\+Reader.\+Read\+From\+File (\begin{DoxyParamCaption}\item[{string}]{cron\+File\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reads all the lines of a given cron file and the parse every line.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em cron\+File\+Path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_a43db5679f8c472189e8fbdd808b859d6}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader_a43db5679f8c472189e8fbdd808b859d6}} 
+\index{SteerMyWheel.Core.Model.CronReading.CronReader@{SteerMyWheel.Core.Model.CronReading.CronReader}!ReadFromText@{ReadFromText}}
+\index{ReadFromText@{ReadFromText}!SteerMyWheel.Core.Model.CronReading.CronReader@{SteerMyWheel.Core.Model.CronReading.CronReader}}
+\doxysubsubsection{\texorpdfstring{ReadFromText()}{ReadFromText()}}
+{\footnotesize\ttfamily Task Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Cron\+Reader.\+Read\+From\+Text (\begin{DoxyParamCaption}\item[{string}]{cron\+Text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reads a cron file stored in memory and splits it into line for the parsing process.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em cron\+Text} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Model/\+Cron\+Reading/Cron\+Reader.\+cs\end{DoxyCompactItemize}

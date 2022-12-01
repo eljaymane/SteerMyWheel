@@ -1,0 +1,65 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Workers\+Queue.\+Workers\+Queue\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue}\index{SteerMyWheel.Core.Model.WorkersQueue.WorkersQueue$<$ T $>$@{SteerMyWheel.Core.Model.WorkersQueue.WorkersQueue$<$ T $>$}}
+
+
+Implementation of a generic workers queue of type T, whith a semaphore for thread-\/safe access.   
+
+
+Inheritance diagram for Steer\+My\+Wheel.\+Core.\+Model.\+Workers\+Queue.\+Workers\+Queue\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{dd/df9/class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_a9d73622d54b6acae9b463d7f37185b0b}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_a9d73622d54b6acae9b463d7f37185b0b}} 
+{\bfseries Workers\+Queue} (ILogger$<$ \mbox{\hyperlink{interface_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_i_queuable}{IQueuable}} $>$ logger)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_aa19386f51f86d086cc386fca983b81b4}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_aa19386f51f86d086cc386fca983b81b4}} 
+{\bfseries Workers\+Queue} (int degrees\+Of\+Parallelism)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_a8c46c308223d1f57b35ad9d74414f0cb}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_a8c46c308223d1f57b35ad9d74414f0cb}} 
+async Task {\bfseries Enqueue} (T work\+Item)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_af65dd3a87a7e27396b198fa0fc585512}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_af65dd3a87a7e27396b198fa0fc585512}} 
+async Task {\bfseries Deqeue\+All\+Async} (Cancellation\+Token cancellation\+Token)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_a5795f6014934899c2dc48b1d7fe57716}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_a5795f6014934899c2dc48b1d7fe57716}} 
+virtual void {\bfseries On\+Work\+Item\+Added} (Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_aa397bf0f8e98a6c26610b22e5b99b73b}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_aa397bf0f8e98a6c26610b22e5b99b73b}} 
+virtual void {\bfseries On\+All\+Work\+Item\+Processed} (Event\+Args e)
+\end{DoxyCompactItemize}
+\doxysubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_aeb953b1639c89a64279aebd2a10ba6f5}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_aeb953b1639c89a64279aebd2a10ba6f5}} 
+Event\+Handler {\bfseries Work\+Item\+Added}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_a4ed37e6a2f608d4e5b58c6145e6977f2}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue_a4ed37e6a2f608d4e5b58c6145e6977f2}} 
+Event\+Handler {\bfseries All\+Work\+Item\+Processed}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of a generic workers queue of type T, whith a semaphore for thread-\/safe access.  
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of the queued elements\\
+\hline
+\end{DoxyTemplParams}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_base_worker}{Base\+Worker}}}]\end{description}
+\end{Desc}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Model/\+Workers\+Queue/Workers\+Queue.\+cs\end{DoxyCompactItemize}

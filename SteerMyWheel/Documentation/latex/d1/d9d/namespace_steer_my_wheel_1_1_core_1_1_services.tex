@@ -1,0 +1,13 @@
+\hypertarget{namespace_steer_my_wheel_1_1_core_1_1_services}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Services Namespace Reference}
+\label{namespace_steer_my_wheel_1_1_core_1_1_services}\index{SteerMyWheel.Core.Services@{SteerMyWheel.Core.Services}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service}{Cron\+Discovery\+Service}}
+\begin{DoxyCompactList}\small\item\em The service who\textquotesingle{}s role is to discover the cron file of a remote host, parse it and represents it\textquotesingle{}s elements on a graph database. This class uses a Reader\+State\+Context encapsulated in a Cron\+Reader instance. This class generates Cron\+Discovery\+Workers and queue them in a Workers\+Queue.  \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service}{Script\+Sync\+Service}}
+\begin{DoxyCompactList}\small\item\em A service who\textquotesingle{}s role is to sync between legacy gitlab repositories and new bitbucket repositories. It also downlaods the remote script files from the host to push unsaved changes to the repository. This class creates Git\+Migration\+Workers and enqueues them in a Workers\+Queue.  \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_queue}{Workflow\+Queue}}
+\begin{DoxyCompactList}\small\item\em Represents the service on which all workflows are queued and processed  \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_scheduler_service}{Workflow\+Scheduler\+Service}}
+\end{DoxyCompactItemize}

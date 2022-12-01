@@ -1,0 +1,150 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Cron\+Parser Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser}\index{SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}}
+
+
+The parser used to process a cron file lines to retrieve all the executions and their role. The parser expects the cron file to contain a commented line that explicites the role, followed by the cron lines...   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_ab3ee212559e59879f15f113b21184ebd}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_ab3ee212559e59879f15f113b21184ebd}} 
+{\bfseries Cron\+Parser} (ILogger$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser}{Cron\+Parser}} $>$ logger)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a9300eca495789b3d81fa9aaea67e2137}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a9300eca495789b3d81fa9aaea67e2137}} 
+void {\bfseries set\+Context} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context}{Reader\+State\+Context}} context)
+\item 
+\mbox{\hyperlink{interface_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_i_reader_state}{IReader\+State}} \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a46d1d222fedd3639dc7cc6675d0d5fd9}{Parse}} (string line)
+\begin{DoxyCompactList}\small\item\em Parses a cron line to determine wether it is a script line, a role line or a line to ignore.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static string \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a280b22d9fc6f0b0ef119c742860a67d8}{Get\+Role}} (string line)
+\begin{DoxyCompactList}\small\item\em Extracts the role from a given line.  \end{DoxyCompactList}\item 
+static string \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a4261ed0e1cadc5ed49eabccb61c7a1e0}{Get\+Cron}} (string line)
+\begin{DoxyCompactList}\small\item\em Extracts the cron expression from a line  \end{DoxyCompactList}\item 
+static string \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_ad2b21aef1dd74e55e4de6dc79a80446c}{Get\+Name}} (string line)
+\begin{DoxyCompactList}\small\item\em Gets the name of the referenced script from the given line.  \end{DoxyCompactList}\item 
+static string \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_ab3833275b280657c29785d67edbc5d4b}{Get\+Path}} (string line)
+\begin{DoxyCompactList}\small\item\em Extracts the path of the script execution from the given line.  \end{DoxyCompactList}\item 
+static string \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a72aca70b4f774cda69037ef94e154ecd}{Get\+Exec\+Command}} (string line)
+\begin{DoxyCompactList}\small\item\em Extracts the execution command from the given line.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The parser used to process a cron file lines to retrieve all the executions and their role. The parser expects the cron file to contain a commented line that explicites the role, followed by the cron lines...  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a4261ed0e1cadc5ed49eabccb61c7a1e0}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a4261ed0e1cadc5ed49eabccb61c7a1e0}} 
+\index{SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}!GetCron@{GetCron}}
+\index{GetCron@{GetCron}!SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}}
+\doxysubsubsection{\texorpdfstring{GetCron()}{GetCron()}}
+{\footnotesize\ttfamily static string Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Cron\+Parser.\+Get\+Cron (\begin{DoxyParamCaption}\item[{string}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Extracts the cron expression from a line  
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a72aca70b4f774cda69037ef94e154ecd}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a72aca70b4f774cda69037ef94e154ecd}} 
+\index{SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}!GetExecCommand@{GetExecCommand}}
+\index{GetExecCommand@{GetExecCommand}!SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}}
+\doxysubsubsection{\texorpdfstring{GetExecCommand()}{GetExecCommand()}}
+{\footnotesize\ttfamily static string Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Cron\+Parser.\+Get\+Exec\+Command (\begin{DoxyParamCaption}\item[{string}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Extracts the execution command from the given line.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_ad2b21aef1dd74e55e4de6dc79a80446c}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_ad2b21aef1dd74e55e4de6dc79a80446c}} 
+\index{SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}!GetName@{GetName}}
+\index{GetName@{GetName}!SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily static string Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Cron\+Parser.\+Get\+Name (\begin{DoxyParamCaption}\item[{string}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Gets the name of the referenced script from the given line.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_ab3833275b280657c29785d67edbc5d4b}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_ab3833275b280657c29785d67edbc5d4b}} 
+\index{SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}!GetPath@{GetPath}}
+\index{GetPath@{GetPath}!SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}}
+\doxysubsubsection{\texorpdfstring{GetPath()}{GetPath()}}
+{\footnotesize\ttfamily static string Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Cron\+Parser.\+Get\+Path (\begin{DoxyParamCaption}\item[{string}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Extracts the path of the script execution from the given line.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a280b22d9fc6f0b0ef119c742860a67d8}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a280b22d9fc6f0b0ef119c742860a67d8}} 
+\index{SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}!GetRole@{GetRole}}
+\index{GetRole@{GetRole}!SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}}
+\doxysubsubsection{\texorpdfstring{GetRole()}{GetRole()}}
+{\footnotesize\ttfamily static string Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Cron\+Parser.\+Get\+Role (\begin{DoxyParamCaption}\item[{string}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Extracts the role from a given line.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a46d1d222fedd3639dc7cc6675d0d5fd9}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser_a46d1d222fedd3639dc7cc6675d0d5fd9}} 
+\index{SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}!Parse@{Parse}}
+\index{Parse@{Parse}!SteerMyWheel.Core.Model.CronReading.CronParser@{SteerMyWheel.Core.Model.CronReading.CronParser}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interface_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_i_reader_state}{IReader\+State}} Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Cron\+Parser.\+Parse (\begin{DoxyParamCaption}\item[{string}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parses a cron line to determine wether it is a script line, a role line or a line to ignore.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & The line to be parsed\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The correct state that corresponds to the given line
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Model/\+Cron\+Reading/Cron\+Parser.\+cs\end{DoxyCompactItemize}

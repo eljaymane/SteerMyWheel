@@ -1,0 +1,21 @@
+\hypertarget{namespace_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading Namespace Reference}
+\label{namespace_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading}\index{SteerMyWheel.Core.Model.CronReading@{SteerMyWheel.Core.Model.CronReading}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser}{Cron\+Parser}}
+\begin{DoxyCompactList}\small\item\em The parser used to process a cron file lines to retrieve all the executions and their role. The parser expects the cron file to contain a commented line that explicites the role, followed by the cron lines...  \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader}{Cron\+Reader}}
+\begin{DoxyCompactList}\small\item\em The main role of this class is to read a cron file either from memory as text or from a local file. It then passes every line of the cron file to \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser}{Cron\+Parser}} for the parsing task.  \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_ignore_reader_state}{Ignore\+Reader\+State}}
+\begin{DoxyCompactList}\small\item\em Represents a state in which the context ignores the actual parsed line and goes to the next one.  \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_initial_reader_state}{Initial\+Reader\+State}}
+\begin{DoxyCompactList}\small\item\em Represents the initial state of the cron reading context. Remote\+Host represents the remote host for which the actual context was created (that contains the script executions)  \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interface_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_i_reader_state}{IReader\+State}}
+\begin{DoxyCompactList}\small\item\em Contract of the states of a cron reader context.  \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_new_role_reader_state}{New\+Role\+Reader\+State}}
+\begin{DoxyCompactList}\small\item\em The state in which the reader context updates the current role.  \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_new_script_reader_state}{New\+Script\+Reader\+State}}
+\begin{DoxyCompactList}\small\item\em Represents a state in which the context create a new Script\+Execution and stores it in a graph database.  \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context}{Reader\+State\+Context}}
+\begin{DoxyCompactList}\small\item\em Represents the context of a cron reading process. It\textquotesingle{}s state is updated after parsing every line of the cron file using the \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser}{Cron\+Parser}} class  \end{DoxyCompactList}\end{DoxyCompactItemize}

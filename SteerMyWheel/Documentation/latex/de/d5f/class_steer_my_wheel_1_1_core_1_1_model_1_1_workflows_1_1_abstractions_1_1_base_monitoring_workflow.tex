@@ -1,0 +1,76 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+Monitoring\+Workflow Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow}\index{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow}}
+
+
+Abstract base class of a workflow that is related to monitoring   
+
+
+Inheritance diagram for Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+Monitoring\+Workflow\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.898551cm]{de/d5f/class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_acd5d5b1d742fc183f920d70e02760a4d}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_acd5d5b1d742fc183f920d70e02760a4d}} 
+{\bfseries Base\+Monitoring\+Workflow} (string name, string description, Date\+Time execution\+Date, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Base\+Workflow}} next, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Base\+Workflow}} previous)
+\item 
+abstract override bool \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a7e8db4c8f40ff9a97fd54c51787e0194}{Can\+Execute}} ()
+\item 
+abstract override Task \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a25f88093a1bd4bdf17c64a4b9de3a229}{Execute}} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}} context)
+\item 
+abstract override Task \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a7ab0f0ff78c0751237cd27d35f60194f}{Execute\+Async}} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}} context)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a99d27234e8c7fa8f525ee796ecf82bd4}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a99d27234e8c7fa8f525ee796ecf82bd4}} 
+Thread {\bfseries Monitoring\+Thread}
+\begin{DoxyCompactList}\small\item\em The thread that executes the monitoring function  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a379f649409c9c5ba8516e89b23fb0257}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a379f649409c9c5ba8516e89b23fb0257}} 
+bool {\bfseries \+\_\+\+Can\+Go\+Next} = false
+\begin{DoxyCompactList}\small\item\em Determines whether the monitoring process has finished or not  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class of a workflow that is related to monitoring  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a7e8db4c8f40ff9a97fd54c51787e0194}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a7e8db4c8f40ff9a97fd54c51787e0194}} 
+\index{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow}!CanExecute@{CanExecute}}
+\index{CanExecute@{CanExecute}!SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow}}
+\doxysubsubsection{\texorpdfstring{CanExecute()}{CanExecute()}}
+{\footnotesize\ttfamily abstract override bool Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+Monitoring\+Workflow.\+Can\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Base\+Workflow}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a25f88093a1bd4bdf17c64a4b9de3a229}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a25f88093a1bd4bdf17c64a4b9de3a229}} 
+\index{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow}!Execute@{Execute}}
+\index{Execute@{Execute}!SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily abstract override Task Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+Monitoring\+Workflow.\+Execute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}}}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Base\+Workflow}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a7ab0f0ff78c0751237cd27d35f60194f}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow_a7ab0f0ff78c0751237cd27d35f60194f}} 
+\index{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow}!ExecuteAsync@{ExecuteAsync}}
+\index{ExecuteAsync@{ExecuteAsync}!SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseMonitoringWorkflow}}
+\doxysubsubsection{\texorpdfstring{ExecuteAsync()}{ExecuteAsync()}}
+{\footnotesize\ttfamily abstract override Task Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+Monitoring\+Workflow.\+Execute\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}}}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Base\+Workflow}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Model/\+Workflows/\+Abstractions/Base\+Monitoring\+Workflow.\+cs\end{DoxyCompactItemize}

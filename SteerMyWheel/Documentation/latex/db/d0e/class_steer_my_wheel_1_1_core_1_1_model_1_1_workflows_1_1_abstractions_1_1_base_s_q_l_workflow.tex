@@ -1,0 +1,70 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+SQLWorkflow Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow}\index{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseSQLWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseSQLWorkflow}}
+Inheritance diagram for Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+SQLWorkflow\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.673031cm]{db/d0e/class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_ac97e84eec6c1278971c14381f0e801a2}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_ac97e84eec6c1278971c14381f0e801a2}} 
+{\bfseries Base\+SQLWorkflow} (string name, string description, Date\+Time execution\+Date, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Base\+Workflow}} next, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Base\+Workflow}} previous)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_a78c620096a27c88dae63113ec9ab7c51}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_a78c620096a27c88dae63113ec9ab7c51}} 
+object\mbox{[}$\,$\mbox{]} {\bfseries Get\+Data} ()
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_af2a47c442c7a6155cd768a6f666214f2}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_af2a47c442c7a6155cd768a6f666214f2}} 
+object\mbox{[}$\,$\mbox{]} {\bfseries Execute\+Query\+With\+Result} ()
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_afa559015f2a105fd20f37e9f17291d27}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_afa559015f2a105fd20f37e9f17291d27}} 
+Task$<$ bool $>$ {\bfseries Execute\+Query\+Without\+Result} ()
+\item 
+abstract override bool \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_ac86669ad6820c8443d7d00e8cb6f3513}{Can\+Execute}} ()
+\item 
+abstract override Task \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_a8110f40f0bf8cff1e23418b1e075457d}{Execute\+Async}} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}} context)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_a4614901de3baca6cb700c54685537fd3}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_a4614901de3baca6cb700c54685537fd3}} 
+object\mbox{[}$\,$\mbox{]} {\bfseries data}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_a45cf43f35da55756348748b926c9c556}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_a45cf43f35da55756348748b926c9c556}} 
+Sql\+Connection\+String\+Builder {\bfseries Builder}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_a3beb88f750b6bd7143b6ca101d236dd5}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_a3beb88f750b6bd7143b6ca101d236dd5}} 
+string {\bfseries SQLQuery}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_ac86669ad6820c8443d7d00e8cb6f3513}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_ac86669ad6820c8443d7d00e8cb6f3513}} 
+\index{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseSQLWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseSQLWorkflow}!CanExecute@{CanExecute}}
+\index{CanExecute@{CanExecute}!SteerMyWheel.Core.Model.Workflows.Abstractions.BaseSQLWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseSQLWorkflow}}
+\doxysubsubsection{\texorpdfstring{CanExecute()}{CanExecute()}}
+{\footnotesize\ttfamily abstract override bool Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+SQLWorkflow.\+Can\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Base\+Workflow}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_a8110f40f0bf8cff1e23418b1e075457d}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_s_q_l_workflow_a8110f40f0bf8cff1e23418b1e075457d}} 
+\index{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseSQLWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseSQLWorkflow}!ExecuteAsync@{ExecuteAsync}}
+\index{ExecuteAsync@{ExecuteAsync}!SteerMyWheel.Core.Model.Workflows.Abstractions.BaseSQLWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.BaseSQLWorkflow}}
+\doxysubsubsection{\texorpdfstring{ExecuteAsync()}{ExecuteAsync()}}
+{\footnotesize\ttfamily abstract override Task Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+SQLWorkflow.\+Execute\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}}}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Base\+Workflow}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Model/\+Workflows/\+Abstractions/Base\+SQLWorkflow.\+cs\end{DoxyCompactItemize}

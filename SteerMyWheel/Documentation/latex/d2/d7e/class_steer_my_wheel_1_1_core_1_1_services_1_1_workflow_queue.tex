@@ -1,0 +1,44 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_queue}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Services.\+Workflow\+Queue Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_queue}\index{SteerMyWheel.Core.Services.WorkflowQueue@{SteerMyWheel.Core.Services.WorkflowQueue}}
+
+
+Represents the service on which all workflows are queued and processed   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_queue_afca5282470dc99d7ec5735d5c0dea85c}\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_queue_afca5282470dc99d7ec5735d5c0dea85c}} 
+{\bfseries Workflow\+Queue} (\mbox{\hyperlink{class_steer_my_wheel_1_1_configuration_1_1_global_config}{Global\+Config}} \+\_\+config, ILogger$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_queue}{Workflow\+Queue}} $>$ logger)
+\item 
+void \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_queue_ad4cf9bd0fb1876a9b76cccb63064d430}{Enqueue}} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_thread}{Workflow\+Thread}} thread)
+\begin{DoxyCompactList}\small\item\em Add a Workflow\+Thread to the queue.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_queue_aec1c6bb0ce3c63c590296f0c21cb3a70}\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_queue_aec1c6bb0ce3c63c590296f0c21cb3a70}} 
+void {\bfseries Process} ()
+\begin{DoxyCompactList}\small\item\em Parallel process all the enqueued Workflows\+Threads. The cancellation token is able to interrupt the processing of a workflow context. If the execution date is not today, the thread is blocked.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the service on which all workflows are queued and processed  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_queue_ad4cf9bd0fb1876a9b76cccb63064d430}\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_workflow_queue_ad4cf9bd0fb1876a9b76cccb63064d430}} 
+\index{SteerMyWheel.Core.Services.WorkflowQueue@{SteerMyWheel.Core.Services.WorkflowQueue}!Enqueue@{Enqueue}}
+\index{Enqueue@{Enqueue}!SteerMyWheel.Core.Services.WorkflowQueue@{SteerMyWheel.Core.Services.WorkflowQueue}}
+\doxysubsubsection{\texorpdfstring{Enqueue()}{Enqueue()}}
+{\footnotesize\ttfamily void Steer\+My\+Wheel.\+Core.\+Services.\+Workflow\+Queue.\+Enqueue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_thread}{Workflow\+Thread}}}]{thread }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add a Workflow\+Thread to the queue.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em thread} & The Workflow\+Thread to be enqued\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Services/Workflow\+Queue.\+cs\end{DoxyCompactItemize}
