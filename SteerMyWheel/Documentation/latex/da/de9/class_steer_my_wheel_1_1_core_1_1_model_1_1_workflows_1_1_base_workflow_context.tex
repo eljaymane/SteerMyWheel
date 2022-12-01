@@ -1,0 +1,123 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Base\+Workflow\+Context Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}\index{SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext@{SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext}}
+
+
+Base class of a Workflow\+Context   
+
+
+Inheritance diagram for Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Base\+Workflow\+Context\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{da/de9/class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_af46f8a5070e3f3c88fb3ba3c9a9ac13c}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_af46f8a5070e3f3c88fb3ba3c9a9ac13c}} 
+{\bfseries Base\+Workflow\+Context} (ILogger logger, string name)
+\item 
+void \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_aaeaf0518bf2ad6d8cd2237c055d2e91b}{Initialize}} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Base\+Workflow}} workflow, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a656d087c9043cd39e76edbe32a12715d}{Cancellation\+Token}} cancellation\+Token)
+\begin{DoxyCompactList}\small\item\em Initializes the context with the workflow to execute and the cancellation token that can interrupt it\textquotesingle{}s execution. Then it\textquotesingle{}s sets the state to the initial state.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a811a46b086254fbe826dad46f0a18891}{set\+State}} (\mbox{\hyperlink{interface_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_i_workflow_state}{IWorkflow\+State}} state)
+\begin{DoxyCompactList}\small\item\em Changes the state of the actual context  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_ac87cb7a3f41e14712571843cbee9a3d2}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_ac87cb7a3f41e14712571843cbee9a3d2}} 
+virtual void {\bfseries Go\+Next} ()
+\begin{DoxyCompactList}\small\item\em Go to the next task of the actual workflow to be executed.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a115d035e8c858119ec950372ed717dfe}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a115d035e8c858119ec950372ed717dfe}} 
+virtual void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Free the ressources used by this class.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a32b2e84730ff28a14e98f152fd886037}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a32b2e84730ff28a14e98f152fd886037}} 
+ILogger {\bfseries \+\_\+logger}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a0763fe760c3356bf5ef86292c435d587}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a0763fe760c3356bf5ef86292c435d587}} 
+Event\+Handler {\bfseries State\+Changed}
+\begin{DoxyCompactList}\small\item\em Event handler of \char`\"{}\+State\+Changed\char`\"{} Event  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_acd6d8dfc514bf65cf69d826c8be8830b}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_acd6d8dfc514bf65cf69d826c8be8830b}} 
+Manual\+Reset\+Event {\bfseries \+\_\+\+Manual\+Reset\+Event} = new Manual\+Reset\+Event(true)
+\begin{DoxyCompactList}\small\item\em Manual reset events used to manually synchronize the threads created by the execution of the workflow  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual async void \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a145ae4510c0cca12a586e9fd072fbf1f}{On\+State\+Changed}} (Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Handler of State\+Changed event  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a40d569f15b7d2038625900af9ddab980}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a40d569f15b7d2038625900af9ddab980}} 
+\mbox{\hyperlink{interface_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_i_workflow_state}{IWorkflow\+State}} {\bfseries State}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Represents the actual state of this context  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_aaf2ad982669728d10ca9dde071a777e6}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_aaf2ad982669728d10ca9dde071a777e6}} 
+\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Base\+Workflow}} {\bfseries Workflow}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Represents the workflow to be executed in this context  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a656d087c9043cd39e76edbe32a12715d}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a656d087c9043cd39e76edbe32a12715d}} 
+Cancellation\+Token {\bfseries Cancellation\+Token}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Cancellation token that can interrupt the workflow execution. Default \+: None  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a071f4147c20f0b110021d34f308c97a6}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a071f4147c20f0b110021d34f308c97a6}} 
+string {\bfseries Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Name of the context  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class of a Workflow\+Context  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_aaeaf0518bf2ad6d8cd2237c055d2e91b}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_aaeaf0518bf2ad6d8cd2237c055d2e91b}} 
+\index{SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext@{SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext@{SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily void Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Base\+Workflow\+Context.\+Initialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Base\+Workflow}}}]{workflow,  }\item[{\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a656d087c9043cd39e76edbe32a12715d}{Cancellation\+Token}}}]{cancellation\+Token }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes the context with the workflow to execute and the cancellation token that can interrupt it\textquotesingle{}s execution. Then it\textquotesingle{}s sets the state to the initial state.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em workflow} & The workflow to execute\\
+\hline
+{\em cancellation\+Token} & The cancellation token\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a145ae4510c0cca12a586e9fd072fbf1f}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a145ae4510c0cca12a586e9fd072fbf1f}} 
+\index{SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext@{SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext}!OnStateChanged@{OnStateChanged}}
+\index{OnStateChanged@{OnStateChanged}!SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext@{SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext}}
+\doxysubsubsection{\texorpdfstring{OnStateChanged()}{OnStateChanged()}}
+{\footnotesize\ttfamily virtual async void Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Base\+Workflow\+Context.\+On\+State\+Changed (\begin{DoxyParamCaption}\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Handler of State\+Changed event  
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & Event argument\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a8c6a4fb00a51faf1e3ad831ded164dd3}{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Workflow\+State\+Context}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a811a46b086254fbe826dad46f0a18891}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a811a46b086254fbe826dad46f0a18891}} 
+\index{SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext@{SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext}!setState@{setState}}
+\index{setState@{setState}!SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext@{SteerMyWheel.Core.Model.Workflows.BaseWorkflowContext}}
+\doxysubsubsection{\texorpdfstring{setState()}{setState()}}
+{\footnotesize\ttfamily void Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Base\+Workflow\+Context.\+set\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_i_workflow_state}{IWorkflow\+State}}}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Changes the state of the actual context  
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The new desired state\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Model/\+Workflows/Base\+Workflow\+Context.\+cs\end{DoxyCompactItemize}

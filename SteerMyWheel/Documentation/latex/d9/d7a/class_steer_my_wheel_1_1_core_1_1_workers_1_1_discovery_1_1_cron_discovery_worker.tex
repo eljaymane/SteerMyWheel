@@ -1,0 +1,55 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Workers.\+Discovery.\+Cron\+Discovery\+Worker Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker}\index{SteerMyWheel.Core.Workers.Discovery.CronDiscoveryWorker@{SteerMyWheel.Core.Workers.Discovery.CronDiscoveryWorker}}
+
+
+The worker who\textquotesingle{}s role is to discover the cron file of a remote host through SSH.   
+
+
+Inheritance diagram for Steer\+My\+Wheel.\+Core.\+Workers.\+Discovery.\+Cron\+Discovery\+Worker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d9/d7a/class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_a4a153751f69a864cd3e6080b15febb8b}\label{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_a4a153751f69a864cd3e6080b15febb8b}} 
+{\bfseries Cron\+Discovery\+Worker} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_remote_host}{Remote\+Host}} remote\+Host, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader}{Cron\+Reader}} cron\+Reader)
+\item 
+override async Task \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_a64ee273e9f20f0dda8ff3073b44c22d3}{do\+Work}} ()
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_abafbd4cba279f6184c43f952d61e99bb}\label{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_abafbd4cba279f6184c43f952d61e99bb}} 
+async Task {\bfseries Discover\+Async} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_remote_host}{Remote\+Host}} host)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_aec8c1f40406b3675d7b41c3d26233a85}\label{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_aec8c1f40406b3675d7b41c3d26233a85}} 
+async Task$<$ string $>$ {\bfseries Get\+Cron\+Async} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_remote_host}{Remote\+Host}} host)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_a981af95f8688b8719673d3a8d69e6ff1}\label{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_a981af95f8688b8719673d3a8d69e6ff1}} 
+async Task {\bfseries Read\+Cron\+Async} (string cron\+Text)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_a2fd1df16d0d4ad4ca898f5e2d3f2a190}\label{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_a2fd1df16d0d4ad4ca898f5e2d3f2a190}} 
+void {\bfseries Set\+Client\+Provider} (\mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client}{SSHClient}} client)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+The worker who\textquotesingle{}s role is to discover the cron file of a remote host through SSH.  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_a64ee273e9f20f0dda8ff3073b44c22d3}\label{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker_a64ee273e9f20f0dda8ff3073b44c22d3}} 
+\index{SteerMyWheel.Core.Workers.Discovery.CronDiscoveryWorker@{SteerMyWheel.Core.Workers.Discovery.CronDiscoveryWorker}!doWork@{doWork}}
+\index{doWork@{doWork}!SteerMyWheel.Core.Workers.Discovery.CronDiscoveryWorker@{SteerMyWheel.Core.Workers.Discovery.CronDiscoveryWorker}}
+\doxysubsubsection{\texorpdfstring{doWork()}{doWork()}}
+{\footnotesize\ttfamily override async Task Steer\+My\+Wheel.\+Core.\+Workers.\+Discovery.\+Cron\+Discovery\+Worker.\+do\+Work (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_base_worker}{Steer\+My\+Wheel.\+Core.\+Model.\+Workers\+Queue.\+Base\+Worker}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Workers/\+Discovery/Cron\+Discovery\+Worker.\+cs\end{DoxyCompactItemize}

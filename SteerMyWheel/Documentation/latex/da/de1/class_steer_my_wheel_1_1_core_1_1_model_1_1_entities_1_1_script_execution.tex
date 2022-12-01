@@ -1,0 +1,73 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Entities.\+Script\+Execution Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution}\index{SteerMyWheel.Core.Model.Entities.ScriptExecution@{SteerMyWheel.Core.Model.Entities.ScriptExecution}}
+
+
+Represent an execution instance of a given script either read from a cron file or created for a workflow purpose.   
+
+
+Inheritance diagram for Steer\+My\+Wheel.\+Core.\+Model.\+Entities.\+Script\+Execution\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{da/de1/class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a4b7e1af140bef37b4053e92862b51a7e}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a4b7e1af140bef37b4053e92862b51a7e}} 
+{\bfseries Script\+Execution} (string role, string cron, string name, string path, string exec\+Command, bool enabled)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a26f2eb0cb0580204da9d48c53f9a90d1}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a26f2eb0cb0580204da9d48c53f9a90d1}} 
+override bool {\bfseries Equals} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_base_entity}{Base\+Entity}}$<$ string $>$ other)
+\item 
+override string \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a5238b550f8122aeac192e9397f37f517}{Get\+ID}} ()
+\begin{DoxyCompactList}\small\item\em Returns the id of a given entity.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a155657ab3e47e24ac6de70df8696ec25}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a155657ab3e47e24ac6de70df8696ec25}} 
+string {\bfseries Role}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Role of the script execution.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_aac748e88a2fb491c4e7e444abd28ad0c}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_aac748e88a2fb491c4e7e444abd28ad0c}} 
+string {\bfseries Cron}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Cron expression representing the frequence of execution of the actual script.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a8b7a57993d58631e24fabec5692bceb8}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a8b7a57993d58631e24fabec5692bceb8}} 
+string {\bfseries Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Name of the script.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_ac8281cbf2f2d1d9fa936d5fa89f82d66}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_ac8281cbf2f2d1d9fa936d5fa89f82d66}} 
+string {\bfseries Path}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Path of the script executable.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a32e0cc332234af5514a0deb6ca76ec17}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a32e0cc332234af5514a0deb6ca76ec17}} 
+string {\bfseries Exec\+Command}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The execution command that represents the script execution.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a8883c46fc68ea9af38cf9521a328dac3}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a8883c46fc68ea9af38cf9521a328dac3}} 
+bool {\bfseries Enabled}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em False if the script execution is disabled. True if not.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represent an execution instance of a given script either read from a cron file or created for a workflow purpose.  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a5238b550f8122aeac192e9397f37f517}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_script_execution_a5238b550f8122aeac192e9397f37f517}} 
+\index{SteerMyWheel.Core.Model.Entities.ScriptExecution@{SteerMyWheel.Core.Model.Entities.ScriptExecution}!GetID@{GetID}}
+\index{GetID@{GetID}!SteerMyWheel.Core.Model.Entities.ScriptExecution@{SteerMyWheel.Core.Model.Entities.ScriptExecution}}
+\doxysubsubsection{\texorpdfstring{GetID()}{GetID()}}
+{\footnotesize\ttfamily override string Steer\+My\+Wheel.\+Core.\+Model.\+Entities.\+Script\+Execution.\+Get\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Returns the id of a given entity.  
+
+\begin{DoxyReturn}{Returns}
+The id of the entity.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_base_entity_a03067cca2d95a24709b629d554152ae3}{Steer\+My\+Wheel.\+Core.\+Model.\+Entities.\+Base\+Entity$<$ string $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Model/\+Entities/Script\+Execution.\+cs\end{DoxyCompactItemize}

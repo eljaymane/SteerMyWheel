@@ -16,13 +16,13 @@ namespace SteerMyWheel.Core.Model.Workflows.ETL.SQL
             return true;
         }
 
-        public override Task Execute()
+        public override Task Execute(BaseWorkflowContext context)
         {
             if (base.ExecuteQueryWithoutResult().Result) return Task.CompletedTask;
             return Task.FromCanceled(CancellationToken.None);
         }
 
-        public override Task ExecuteAsync()
+        public override Task ExecuteAsync(BaseWorkflowContext context)
         {
             throw new NotImplementedException();
         }

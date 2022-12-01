@@ -1,11 +1,29 @@
 ﻿namespace SteerMyWheel.Core.Model.Entities
 {
+    /// <summary>
+    /// Represents a git repository that corresponds to a script execution executable.
+    /// </summary>
     public class ScriptRepository : BaseEntity<string>
     {
+        /// <summary>
+        /// The path of the repository in a RemoteHost
+        /// </summary>
         public string Path { get; set; }
+        /// <summary>
+        /// Name of the repository
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Legacy repository link 
+        /// </summary>
         public string LegacyRepository { get; set; }
+        /// <summary>
+        /// Bitbucket repository link
+        /// </summary>
         public string BitbucketRepository { get; set; }
+        /// <summary>
+        /// If the repository has been successfully cloned
+        /// </summary>
         public bool IsCloned { get; set; }
 
         public ScriptRepository()
@@ -23,6 +41,11 @@
         public override bool Equals(BaseEntity<string> other)
         {
             return Name == ((ScriptRepository)other).Name;
+        }
+
+        public override string GetID()
+        {
+            return Name;
         }
     }
 }

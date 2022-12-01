@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.CronReading;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Core.Model.WorkersQueue;
@@ -7,18 +6,22 @@ using SteerMyWheel.Core.Workers.Discovery;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System;
 using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
 
 namespace SteerMyWheel.Core.Services
 {
-    public class CronDiscoveryService 
+    /// <summary>
+    /// The service who's role is to discover the cron file of a remote host, parse it and represents it's elements on a graph database.
+    /// This class uses a ReaderStateContext encapsulated in a CronReader instance.
+    /// This class generates CronDiscoveryWorkers and queue them in a WorkersQueue.
+    /// </summary>
+    public class CronDiscoveryService
     {
         private readonly ILogger<CronDiscoveryService> _logger;
         private ILoggerFactory _loggerFactory;
-        private SSHClientProvider _client;
+        private SSHClient _client;
         public WorkersQueue<CronDiscoveryWorker> _queue;
         private CronReader _cronReader;
-        public CronDiscoveryService(ILogger<CronDiscoveryService> logger,WorkersQueue<CronDiscoveryWorker> queue, CronReader cronReader,SSHClientProvider client)
+        public CronDiscoveryService(ILogger<CronDiscoveryService> logger, WorkersQueue<CronDiscoveryWorker> queue, CronReader cronReader, SSHClient client)
         {
             _logger = logger;
             _queue = queue;
@@ -32,7 +35,7 @@ namespace SteerMyWheel.Core.Services
             var worker = new CronDiscoveryWorker(host, _cronReader);
             worker.setLogger(_loggerFactory.CreateLogger<CronDiscoveryWorker>());
             worker.SetClientProvider(_client);
-           _queue.Enqueue(worker).Wait();
+            _queue.Enqueue(worker).Wait();
             return Task.CompletedTask;
         }
 

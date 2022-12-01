@@ -1,14 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using Neo4j.Driver;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Core.Model.Entities;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
-using SteerMyWheel.Infrastracture.Connectivity.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SteerMyWheel.Core.Connectivity.Repositories
+namespace SteerMyWheel.Infrastracture.Connectivity.Repositories
 {
     public class ScriptRepositoryRepository : BaseGraphRepository<ScriptRepository, string>
     {
@@ -50,8 +47,10 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             }
         }
 
-        public Tuple<ScriptRepository,ScriptExecution> Link(ScriptRepository scriptRepository, ScriptExecution scriptExecution)
+        public override Tuple<BaseEntity<string>, object> Link(BaseEntity<string> active, object passive)
         {
+            var scriptExecution = (ScriptExecution)passive;
+            var scriptRepository = (ScriptRepository)active;
             using (var client = _client.GetConnection())
             {
                 try
@@ -59,10 +58,10 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
                     client.Cypher.Match("(s:ScriptExecution)")
                          .Where((ScriptExecution s) => s.ExecCommand == scriptExecution.ExecCommand)
                          .Create("(s)-[:IS_ON]->(r:ScriptRepository $r)")
-                         .WithParam("r",scriptRepository)
+                         .WithParam("r", scriptRepository)
                          .ExecuteWithoutResultsAsync().Wait();
                     _logger.LogInformation("[{time}] Successfully linked ScriptExecution {ScriptName} to ScriptRepository {name}  ...", DateTime.UtcNow, scriptExecution.Name, scriptRepository.Name);
-                    return new Tuple<ScriptRepository,ScriptExecution>(scriptRepository,scriptExecution);
+                    return new Tuple<BaseEntity<string>, object>(scriptRepository, passive);
                 }
                 catch (Exception e)
                 {
@@ -129,8 +128,8 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
         }
 
         public IEnumerable<ScriptRepository> GetAll(RemoteHost host)
-        { 
-            using(var client = _client.GetConnection())
+        {
+            using (var client = _client.GetConnection())
             {
                 try
                 {
@@ -139,15 +138,16 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
                                        .Where((RemoteHost h) => h.Name == host.Name)
                                        .ReturnDistinct(s => s.As<ScriptRepository>())
                                        .ResultsAsync.Result;
-                    _logger.LogInformation("[{time}] Retrieved {count} ScriptRepositories for RemoteHost {host}...", DateTime.UtcNow, entities.Count(),host.Name);
+                    _logger.LogInformation("[{time}] Retrieved {count} ScriptRepositories for RemoteHost {host}...", DateTime.UtcNow, entities.Count(), host.Name);
                     return entities;
-                }catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     return null;
                 }
-                
+
             }
-           
+
         }
 
         public override ScriptRepository Update(ScriptRepository entity)
@@ -170,6 +170,19 @@ namespace SteerMyWheel.Core.Connectivity.Repositories
             return entity;
         }
 
+        public override IEnumerable<ScriptRepository> GetAll(object entity)
+        {
+            throw new NotImplementedException();
+        }
 
+        public override BaseEntity<string> CreateAndMatch(BaseEntity<string> newScript, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ScriptRepository Get(object entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

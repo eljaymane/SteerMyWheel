@@ -1,0 +1,109 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Workflow\+State\+Context Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context}\index{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext@{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext}}
+
+
+A context that represents a workflow execution environment   
+
+
+Inheritance diagram for Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Workflow\+State\+Context\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{db/d4c/class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a09841cadeead43feeb636e2eec4513ee}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a09841cadeead43feeb636e2eec4513ee}} 
+{\bfseries Workflow\+State\+Context} (ILogger logger, string name)
+\item 
+bool \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a9e7db85d3bffb7a00f713d8bc4ef52ef}{Has\+Next}} ()
+\begin{DoxyCompactList}\small\item\em Determines if there is still something as a part of the workflow or not  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a0d409df2d91edb8dd3315bddeacd3084}{Update\+Success}} (bool success)
+\begin{DoxyCompactList}\small\item\em Updates the success property.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a0d6479f3af21bd1f5df48eabad0d3450}{On\+Success\+Updated}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Method that handles Success\+Updated event.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_af938eb1f90d3c136fe3a2a4ea880189e}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_af938eb1f90d3c136fe3a2a4ea880189e}} 
+virtual void {\bfseries On\+Cancellation\+Token\+Changed} (object sender, Event\+Args e)
+\item 
+override void \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a8c6a4fb00a51faf1e3ad831ded164dd3}{On\+State\+Changed}} (Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Handler of State\+Changed event  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A context that represents a workflow execution environment  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a9e7db85d3bffb7a00f713d8bc4ef52ef}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a9e7db85d3bffb7a00f713d8bc4ef52ef}} 
+\index{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext@{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext}!HasNext@{HasNext}}
+\index{HasNext@{HasNext}!SteerMyWheel.Core.Model.Workflows.WorkflowStateContext@{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext}}
+\doxysubsubsection{\texorpdfstring{HasNext()}{HasNext()}}
+{\footnotesize\ttfamily bool Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Workflow\+State\+Context.\+Has\+Next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Determines if there is still something as a part of the workflow or not  
+
+\begin{DoxyReturn}{Returns}
+False \+: if next workflow is null , True if not
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a8c6a4fb00a51faf1e3ad831ded164dd3}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a8c6a4fb00a51faf1e3ad831ded164dd3}} 
+\index{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext@{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext}!OnStateChanged@{OnStateChanged}}
+\index{OnStateChanged@{OnStateChanged}!SteerMyWheel.Core.Model.Workflows.WorkflowStateContext@{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext}}
+\doxysubsubsection{\texorpdfstring{OnStateChanged()}{OnStateChanged()}}
+{\footnotesize\ttfamily override void Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Workflow\+State\+Context.\+On\+State\+Changed (\begin{DoxyParamCaption}\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Handler of State\+Changed event  
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & Event argument\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context_a145ae4510c0cca12a586e9fd072fbf1f}{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Base\+Workflow\+Context}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a0d6479f3af21bd1f5df48eabad0d3450}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a0d6479f3af21bd1f5df48eabad0d3450}} 
+\index{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext@{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext}!OnSuccessUpdated@{OnSuccessUpdated}}
+\index{OnSuccessUpdated@{OnSuccessUpdated}!SteerMyWheel.Core.Model.Workflows.WorkflowStateContext@{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext}}
+\doxysubsubsection{\texorpdfstring{OnSuccessUpdated()}{OnSuccessUpdated()}}
+{\footnotesize\ttfamily virtual void Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Workflow\+State\+Context.\+On\+Success\+Updated (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Method that handles Success\+Updated event.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a0d409df2d91edb8dd3315bddeacd3084}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context_a0d409df2d91edb8dd3315bddeacd3084}} 
+\index{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext@{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext}!UpdateSuccess@{UpdateSuccess}}
+\index{UpdateSuccess@{UpdateSuccess}!SteerMyWheel.Core.Model.Workflows.WorkflowStateContext@{SteerMyWheel.Core.Model.Workflows.WorkflowStateContext}}
+\doxysubsubsection{\texorpdfstring{UpdateSuccess()}{UpdateSuccess()}}
+{\footnotesize\ttfamily void Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Workflow\+State\+Context.\+Update\+Success (\begin{DoxyParamCaption}\item[{bool}]{success }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Updates the success property.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em success} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Model/\+Workflows/Workflow\+State\+Context.\+cs\end{DoxyCompactItemize}

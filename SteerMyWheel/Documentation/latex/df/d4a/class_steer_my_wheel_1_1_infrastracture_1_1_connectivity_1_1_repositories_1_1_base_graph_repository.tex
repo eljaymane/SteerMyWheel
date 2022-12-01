@@ -1,0 +1,118 @@
+\hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository}{}\doxysection{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+Base\+Graph\+Repository\texorpdfstring{$<$}{<} T, ID \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository}\index{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}}
+Inheritance diagram for Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+Base\+Graph\+Repository\texorpdfstring{$<$}{<} T, ID \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{df/d4a/class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a47ad819b8c0cc91d54ade6e27c727d85}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a47ad819b8c0cc91d54ade6e27c727d85}} 
+{\bfseries Base\+Graph\+Repository} (\mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_neo_client_provider}{Neo\+Client\+Provider}} client)
+\item 
+abstract T \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a636b22a582136d43c5fd6d7e1627df77}{Create}} (T entity)
+\item 
+abstract T \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a776ce5735e62a9812705cc9d946d3efd}{Delete}} (T entity)
+\item 
+abstract T \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_ac53e44d564d268ae68759cf305e4f896}{Get}} (ID X)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a3c3d51e2b66a88456c3f3ebff9abb585}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a3c3d51e2b66a88456c3f3ebff9abb585}} 
+abstract T {\bfseries Get} (object entity)
+\item 
+abstract IEnumerable$<$ T $>$ \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a64c63eb31af52a6f426f435ad06e13eb}{Get\+All}} ()
+\item 
+abstract T \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_af5230f31a1ea3c61bdc5542acf74fbfb}{Update}} (T entity)
+\item 
+abstract IEnumerable$<$ T $>$ \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a1c5d1a72935685f6b75d8b68786b49b4}{Get\+All}} (object entity)
+\item 
+abstract Tuple$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_base_entity}{Base\+Entity}}$<$ ID $>$, object $>$ \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_ab215404cc4df7cb84616cb8bb0accbaa}{Link}} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_base_entity}{Base\+Entity}}$<$ ID $>$ active, object passive)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a0920b4fa05a4be61f11138cec2d81d99}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a0920b4fa05a4be61f11138cec2d81d99}} 
+abstract \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_base_entity}{Base\+Entity}}$<$ ID $>$ {\bfseries Create\+And\+Match} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_base_entity}{Base\+Entity}}$<$ ID $>$ new\+Script, string id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a4b8ad50977c670396c778bab5d8d8ebd}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a4b8ad50977c670396c778bab5d8d8ebd}} 
+\mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_neo_client_provider}{Neo\+Client\+Provider}} {\bfseries \+\_\+client}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a636b22a582136d43c5fd6d7e1627df77}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a636b22a582136d43c5fd6d7e1627df77}} 
+\index{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}!Create@{Create}}
+\index{Create@{Create}!SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}}
+{\footnotesize\ttfamily abstract T \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+Base\+Graph\+Repository}}$<$ T, ID $>$.Create (\begin{DoxyParamCaption}\item[{T}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{interface_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_i_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+IGraph\+Repository$<$ T, ID $>$}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a776ce5735e62a9812705cc9d946d3efd}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a776ce5735e62a9812705cc9d946d3efd}} 
+\index{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}!Delete@{Delete}}
+\index{Delete@{Delete}!SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}}
+\doxysubsubsection{\texorpdfstring{Delete()}{Delete()}}
+{\footnotesize\ttfamily abstract T \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+Base\+Graph\+Repository}}$<$ T, ID $>$.Delete (\begin{DoxyParamCaption}\item[{T}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{interface_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_i_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+IGraph\+Repository$<$ T, ID $>$}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_ac53e44d564d268ae68759cf305e4f896}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_ac53e44d564d268ae68759cf305e4f896}} 
+\index{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}!Get@{Get}}
+\index{Get@{Get}!SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily abstract T \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+Base\+Graph\+Repository}}$<$ T, ID $>$.Get (\begin{DoxyParamCaption}\item[{ID}]{X }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{interface_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_i_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+IGraph\+Repository$<$ T, ID $>$}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a64c63eb31af52a6f426f435ad06e13eb}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a64c63eb31af52a6f426f435ad06e13eb}} 
+\index{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}!GetAll@{GetAll}}
+\index{GetAll@{GetAll}!SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}}
+\doxysubsubsection{\texorpdfstring{GetAll()}{GetAll()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily abstract IEnumerable$<$ T $>$ \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+Base\+Graph\+Repository}}$<$ T, ID $>$.Get\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{interface_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_i_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+IGraph\+Repository$<$ T, ID $>$}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a1c5d1a72935685f6b75d8b68786b49b4}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_a1c5d1a72935685f6b75d8b68786b49b4}} 
+\index{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}!GetAll@{GetAll}}
+\index{GetAll@{GetAll}!SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}}
+\doxysubsubsection{\texorpdfstring{GetAll()}{GetAll()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily abstract IEnumerable$<$ T $>$ \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+Base\+Graph\+Repository}}$<$ T, ID $>$.Get\+All (\begin{DoxyParamCaption}\item[{object}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{interface_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_i_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+IGraph\+Repository$<$ T, ID $>$}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_ab215404cc4df7cb84616cb8bb0accbaa}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_ab215404cc4df7cb84616cb8bb0accbaa}} 
+\index{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}!Link@{Link}}
+\index{Link@{Link}!SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}}
+\doxysubsubsection{\texorpdfstring{Link()}{Link()}}
+{\footnotesize\ttfamily abstract Tuple$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_base_entity}{Base\+Entity}}$<$ ID $>$, object $>$ \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+Base\+Graph\+Repository}}$<$ T, ID $>$.Link (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_base_entity}{Base\+Entity}}$<$ ID $>$}]{active,  }\item[{object}]{passive }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{interface_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_i_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+IGraph\+Repository$<$ T, ID $>$}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_af5230f31a1ea3c61bdc5542acf74fbfb}\label{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository_af5230f31a1ea3c61bdc5542acf74fbfb}} 
+\index{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}!Update@{Update}}
+\index{Update@{Update}!SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$@{SteerMyWheel.Infrastracture.Connectivity.Repositories.BaseGraphRepository$<$ T, ID $>$}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily abstract T \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_base_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+Base\+Graph\+Repository}}$<$ T, ID $>$.Update (\begin{DoxyParamCaption}\item[{T}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{interface_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_i_graph_repository}{Steer\+My\+Wheel.\+Infrastracture.\+Connectivity.\+Repositories.\+IGraph\+Repository$<$ T, ID $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Infrastracture/\+Connectivity/\+Repositories/Base\+Graph\+Repository.\+cs\end{DoxyCompactItemize}

@@ -17,6 +17,7 @@ The idea is that we'll use blocks that represent the tasks of a workflow.
 ## Table of contents
 
 *[General info](#general-info)
+
 *[Setup](#setup)
 
 ## General info

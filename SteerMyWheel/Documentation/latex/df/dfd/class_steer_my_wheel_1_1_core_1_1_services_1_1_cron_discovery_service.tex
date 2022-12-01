@@ -1,0 +1,33 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Services.\+Cron\+Discovery\+Service Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service}\index{SteerMyWheel.Core.Services.CronDiscoveryService@{SteerMyWheel.Core.Services.CronDiscoveryService}}
+
+
+The service who\textquotesingle{}s role is to discover the cron file of a remote host, parse it and represents it\textquotesingle{}s elements on a graph database. This class uses a Reader\+State\+Context encapsulated in a Cron\+Reader instance. This class generates Cron\+Discovery\+Workers and queue them in a Workers\+Queue.   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service_a9ca1441586d7253362f83f4d56b32d24}\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service_a9ca1441586d7253362f83f4d56b32d24}} 
+{\bfseries Cron\+Discovery\+Service} (ILogger$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service}{Cron\+Discovery\+Service}} $>$ logger, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue}{Workers\+Queue}}$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker}{Cron\+Discovery\+Worker}} $>$ queue, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_reader}{Cron\+Reader}} cron\+Reader, \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client}{SSHClient}} client)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service_a471a4b7f67652137f22b834b411731a0}\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service_a471a4b7f67652137f22b834b411731a0}} 
+Task {\bfseries Discover} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_remote_host}{Remote\+Host}} host)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service_a95e41e292aff08aae70970659f19087c}\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service_a95e41e292aff08aae70970659f19087c}} 
+void {\bfseries set\+Logger\+Factory} (ILogger\+Factory logger\+Factory)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service_a56b3e8bbcd4166d2b8de552c480d631d}\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_cron_discovery_service_a56b3e8bbcd4166d2b8de552c480d631d}} 
+\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue}{Workers\+Queue}}$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_workers_1_1_discovery_1_1_cron_discovery_worker}{Cron\+Discovery\+Worker}} $>$ {\bfseries \+\_\+queue}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The service who\textquotesingle{}s role is to discover the cron file of a remote host, parse it and represents it\textquotesingle{}s elements on a graph database. This class uses a Reader\+State\+Context encapsulated in a Cron\+Reader instance. This class generates Cron\+Discovery\+Workers and queue them in a Workers\+Queue.  
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Services/Cron\+Discovery\+Service.\+cs\end{DoxyCompactItemize}

@@ -2,6 +2,9 @@
 
 namespace SteerMyWheel.Core.Model.Entities
 {
+    /// <summary>
+    /// Represents a remote host in which script executions are executed, or a task should be performed.
+    /// </summary>
     public class RemoteHost : BaseEntity<string>
     {
         public string Name { get; set; }
@@ -9,7 +12,9 @@ namespace SteerMyWheel.Core.Model.Entities
         public int SSHPort { get; set; }
         public string SSHUsername { get; set; }
         public string SSHPassword { get; set; }
-
+        /// <summary>
+        /// Connection method used by SSH. Default : username/password, SSL : Key based authentication.
+        /// </summary>
         public SSHConnectionMethod ConnectionMethod { get; set; } = SSHConnectionMethod.DEFAULT;
 
         public RemoteHost()
@@ -38,6 +43,11 @@ namespace SteerMyWheel.Core.Model.Entities
         public override bool Equals(BaseEntity<string> other)
         {
             return RemoteIP == ((RemoteHost)other).RemoteIP;
+        }
+
+        public override string GetID()
+        {
+            return RemoteIP;
         }
     }
 }

@@ -1,12 +1,16 @@
-﻿using System;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SteerMyWheel.Configuration;
 using SteerMyWheel.Core.Model.Entities;
+using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SteerMyWheel.Core.Model.CronReading
 {
+    /// <summary>
+    /// The parser used to process a cron file lines to retrieve all the executions and their role.
+    /// The parser expects the cron file to contain a commented line that explicites the role, followed by the cron lines...
+    /// </summary>
     public class CronParser
     {
         private static ILogger<CronParser> _logger;
@@ -20,11 +24,15 @@ namespace SteerMyWheel.Core.Model.CronReading
         {
             _logger = logger;
         }
-
         public void setContext(ReaderStateContext context)
         {
             _context = context;
         }
+        /// <summary>
+        /// Parses a cron line to determine wether it is a script line, a role line or a line to ignore.
+        /// </summary>
+        /// <param name="line">The line to be parsed</param>
+        /// <returns>The correct state that corresponds to the given line</returns>
         public IReaderState Parse(string line)
         {
             _logger.LogInformation("[{time}] CronParser => Parsing line : {line}", DateTime.UtcNow, line);
@@ -33,19 +41,31 @@ namespace SteerMyWheel.Core.Model.CronReading
             if (ParserConfig.shouldIgnore(line)) return new IgnoreReaderState();
             return null;
         }
-
+        /// <summary>
+        /// Extracts the role from a given line.
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public static string GetRole(string line)
         {
             return line.Replace('#', ' ').TrimStart();
         }
-
+        /// <summary>
+        /// Extracts the cron expression from a line
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public static string GetCron(string line)
         {
             line = line.Replace('#', ' ').TrimStart();
             string[] values = line.Split(' ');
             return values[0] + ' ' + values[1] + ' ' + values[2] + ' ' + values[3] + ' ' + values[4];
         }
-
+        /// <summary>
+        /// Gets the name of the referenced script from the given line.
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public static string GetName(string line)
         {
             line = line.Replace('#', ' ').TrimStart();
@@ -68,7 +88,11 @@ namespace SteerMyWheel.Core.Model.CronReading
             }
             return name.Trim();
         }
-
+        /// <summary>
+        /// Extracts the path of the script execution from the given line.
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public static string GetPath(string line)
         {
             line = line.Replace('#', ' ').TrimStart();
@@ -91,7 +115,11 @@ namespace SteerMyWheel.Core.Model.CronReading
             }
             return path.Trim();
         }
-
+        /// <summary>
+        /// Extracts the execution command from the given line.
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public static string GetExecCommand(string line)
         {
             return new string(line.Skip(GetCron(line).Length).ToArray()).TrimStart();

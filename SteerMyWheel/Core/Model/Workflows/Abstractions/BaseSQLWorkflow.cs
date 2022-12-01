@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows.Abstractions
@@ -64,10 +64,8 @@ namespace SteerMyWheel.Core.Model.Workflows.Abstractions
         public abstract override bool CanExecute();
 
 
-        public abstract override Task Execute();
 
-
-        public abstract override Task ExecuteAsync();
+        public abstract override Task ExecuteAsync(BaseWorkflowContext context);
 
     }
 }

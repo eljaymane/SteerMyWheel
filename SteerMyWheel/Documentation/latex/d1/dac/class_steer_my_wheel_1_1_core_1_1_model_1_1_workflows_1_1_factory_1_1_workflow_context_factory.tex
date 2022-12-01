@@ -1,0 +1,61 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Factory.\+Workflow\+Context\+Factory Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory}\index{SteerMyWheel.Core.Model.Workflows.Factory.WorkflowContextFactory@{SteerMyWheel.Core.Model.Workflows.Factory.WorkflowContextFactory}}
+
+
+A singleton service that generates and initializes a workflow context through Create\+Context   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory_a089ca0bbb5fa65015e8d928a94d8169b}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory_a089ca0bbb5fa65015e8d928a94d8169b}} 
+{\bfseries Workflow\+Context\+Factory} (ILogger\+Factory logger\+Factory)
+\item 
+\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context}{Workflow\+State\+Context}} \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory_a07e311004ceb93c339a8ad004e8d3512}{Create\+Context}} (Queue$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Base\+Workflow}} $>$ workflows, string Name)
+\begin{DoxyCompactList}\small\item\em Generates a context that contains the workflows in the given queue in the same order they have been enqued.  \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory}{Workflow\+Context\+Factory}} \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory_ac834d38204a1d6b4ca9ec92e4d37e6ed}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Returns the instance of the singleton.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A singleton service that generates and initializes a workflow context through Create\+Context  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory_a07e311004ceb93c339a8ad004e8d3512}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory_a07e311004ceb93c339a8ad004e8d3512}} 
+\index{SteerMyWheel.Core.Model.Workflows.Factory.WorkflowContextFactory@{SteerMyWheel.Core.Model.Workflows.Factory.WorkflowContextFactory}!CreateContext@{CreateContext}}
+\index{CreateContext@{CreateContext}!SteerMyWheel.Core.Model.Workflows.Factory.WorkflowContextFactory@{SteerMyWheel.Core.Model.Workflows.Factory.WorkflowContextFactory}}
+\doxysubsubsection{\texorpdfstring{CreateContext()}{CreateContext()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_workflow_state_context}{Workflow\+State\+Context}} Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Factory.\+Workflow\+Context\+Factory.\+Create\+Context (\begin{DoxyParamCaption}\item[{Queue$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Base\+Workflow}} $>$}]{workflows,  }\item[{string}]{Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Generates a context that contains the workflows in the given queue in the same order they have been enqued.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em workflows} & \mbox{\hyperlink{namespace_steer_my_wheel_1_1_core_1_1_model_1_1_workflows}{Workflows}} queue.\\
+\hline
+{\em Name} & Name of the context to be generated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory_ac834d38204a1d6b4ca9ec92e4d37e6ed}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory_ac834d38204a1d6b4ca9ec92e4d37e6ed}} 
+\index{SteerMyWheel.Core.Model.Workflows.Factory.WorkflowContextFactory@{SteerMyWheel.Core.Model.Workflows.Factory.WorkflowContextFactory}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!SteerMyWheel.Core.Model.Workflows.Factory.WorkflowContextFactory@{SteerMyWheel.Core.Model.Workflows.Factory.WorkflowContextFactory}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_factory_1_1_workflow_context_factory}{Workflow\+Context\+Factory}} Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Factory.\+Workflow\+Context\+Factory.\+Get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the instance of the singleton.  
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Model/\+Workflows/\+Factory/Workflow\+Context\+Factory.\+cs\end{DoxyCompactItemize}

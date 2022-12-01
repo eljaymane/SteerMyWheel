@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows.States
@@ -14,18 +12,31 @@ namespace SteerMyWheel.Core.Model.Workflows.States
         }
         public Task HandleAsync(BaseWorkflowContext context)
         {
+            context._ManualResetEvent.Reset();
             while (!context.CancellationToken.IsCancellationRequested && context.Workflow != null)
             {
                 context.CancellationToken.ThrowIfCancellationRequested();
-                if (context.Workflow.ExecutionDate >= DateTime.Now)
+                if (context.Workflow.ExecutionDate <= DateTime.Now)
                 {
-                    context.Workflow.Execute().Wait();
-                    context.Workflow = context.Workflow.Next;
-                    context.setState(new WorkflowRunningState());
+                    context.Workflow.Execute(context).Wait();
+                    if (context.Workflow.Next == null)
+                    {
+                        context.setState(new WorkflowFinishedState(true));
+                    }
+                    else
+                    {
+
+                        if (!context.CancellationToken.IsCancellationRequested)
+                        {
+                            context.Workflow = context.Workflow.Next;
+                            context.setState(new WorkflowRunningState());
+                            context._logger.LogInformation($"[{DateTime.UtcNow}] [Workflow : {context.Name}] Next task : {context.Workflow.Name} ");
+                        }
+                    }
                     return Task.CompletedTask;
                 }
             }
-
+            context._ManualResetEvent.Set();
             return Task.CompletedTask;
         }
     }

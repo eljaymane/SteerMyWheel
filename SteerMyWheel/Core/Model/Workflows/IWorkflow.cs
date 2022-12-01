@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows
 {
     public interface IWorkflow
     {
-        Task Execute();
-        Task ExecuteAsync();
+        Task Execute(BaseWorkflowContext context);
+        Task ExecuteAsync(BaseWorkflowContext context);
     }
 }

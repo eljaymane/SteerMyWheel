@@ -1,0 +1,30 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Services.\+Script\+Sync\+Service Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service}\index{SteerMyWheel.Core.Services.ScriptSyncService@{SteerMyWheel.Core.Services.ScriptSyncService}}
+
+
+A service who\textquotesingle{}s role is to sync between legacy gitlab repositories and new bitbucket repositories. It also downlaods the remote script files from the host to push unsaved changes to the repository. This class creates Git\+Migration\+Workers and enqueues them in a Workers\+Queue.   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service_a77fa5db7fc35ae4e3323bf28fd90ee6e}\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service_a77fa5db7fc35ae4e3323bf28fd90ee6e}} 
+{\bfseries Script\+Sync\+Service} (\mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_s_s_h_client}{SSHClient}} ssh\+Client, \mbox{\hyperlink{class_steer_my_wheel_1_1_configuration_1_1_global_config}{Global\+Config}} config, \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_bitbucket_client_provider}{Bitbucket\+Client\+Provider}} bit\+Client, \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_client_providers_1_1_neo_client_provider}{Neo\+Client\+Provider}} client, ILogger$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service}{Script\+Sync\+Service}} $>$ logger, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workers_queue_1_1_workers_queue}{Workers\+Queue}}$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_workers_1_1_migration_1_1_git_1_1_git_migration_worker}{Git\+Migration\+Worker}} $>$ queue, \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_global_entity_repository}{Global\+Entity\+Repository}} repositories)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service_a373f45f6482daf8d90cbd83a47c19fec}\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service_a373f45f6482daf8d90cbd83a47c19fec}} 
+void {\bfseries set\+Logger\+Factory} (ILogger\+Factory logger\+Factory)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service_a6049bc2505a76c3fe1ebe8e7379e9b69}\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service_a6049bc2505a76c3fe1ebe8e7379e9b69}} 
+Task {\bfseries generate\+Graph\+Repos} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_remote_host}{Remote\+Host}} host)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service_a9aa9772268163caef1e76ed9bc0b6d8c}\label{class_steer_my_wheel_1_1_core_1_1_services_1_1_script_sync_service_a9aa9772268163caef1e76ed9bc0b6d8c}} 
+Task {\bfseries sync\+Repos} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_remote_host}{Remote\+Host}} host)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A service who\textquotesingle{}s role is to sync between legacy gitlab repositories and new bitbucket repositories. It also downlaods the remote script files from the host to push unsaved changes to the repository. This class creates Git\+Migration\+Workers and enqueues them in a Workers\+Queue.  
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Services/Script\+Sync\+Service.\+cs\end{DoxyCompactItemize}

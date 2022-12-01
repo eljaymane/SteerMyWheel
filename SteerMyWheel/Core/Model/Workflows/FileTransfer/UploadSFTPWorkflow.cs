@@ -17,13 +17,13 @@ namespace SteerMyWheel.Core.Model.Workflows.FileTransfer
             return true;
         }
 
-        public override Task Execute()
+        public override Task Execute(BaseWorkflowContext context)
         {
             _sshClient.Upload(RemotePath, LocalPath).Wait();
-             return Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
-        public override async Task ExecuteAsync()
+        public override async Task ExecuteAsync(BaseWorkflowContext context)
         {
             await _sshClient.Upload(RemotePath, LocalPath);
         }

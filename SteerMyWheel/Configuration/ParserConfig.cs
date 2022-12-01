@@ -1,9 +1,6 @@
 ﻿using SteerMyWheel.Core.Model.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Transactions;
 
 namespace SteerMyWheel.Configuration
 {
@@ -20,11 +17,15 @@ namespace SteerMyWheel.Configuration
         public static bool isJava(string line) { return line.Contains("java"); }
         public static bool isStdoRedirect(string line) { return line.Contains(">"); }
 
-        public static List<string> IgnoreDirectories { get { return new List<string> {
+        public static List<string> IgnoreDirectories
+        {
+            get
+            {
+                return new List<string> {
             "Archivage","data","log","logs"
-            }; 
+            };
+            }
         }
-}
         public static bool shouldIgnore(string line)
         {
             return line.Replace("#", "").Replace("-", "").Trim() == "";

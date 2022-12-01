@@ -1,9 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Neo4j.Driver;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace SteerMyWheel.Configuration
 {
@@ -34,6 +29,8 @@ namespace SteerMyWheel.Configuration
         public string LocalReposDirectory { get { return LocalWorkingDirectory + @"repos\"; } }
         public string DefaultCommitMessage { get { return "[Automigration] Updated by SteerMyWheel"; } }
         public string DefaultRemoteName { get { return "origin"; } }
+
+        public int MaxWorfklowQueueCapacity { get { return 100; } }
         public GlobalConfig(IConfiguration config)
         {
             _config = config;

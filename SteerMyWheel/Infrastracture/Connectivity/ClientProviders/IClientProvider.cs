@@ -1,6 +1,4 @@
-﻿using Neo4jClient.Cypher;
-using Renci.SshNet;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace SteerMyWheel.Infrastracture.Connectivity.ClientProviders
 {

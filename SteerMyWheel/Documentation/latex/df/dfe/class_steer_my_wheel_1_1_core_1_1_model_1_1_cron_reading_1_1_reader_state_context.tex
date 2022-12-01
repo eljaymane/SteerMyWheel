@@ -1,0 +1,113 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Reader\+State\+Context Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context}\index{SteerMyWheel.Core.Model.CronReading.ReaderStateContext@{SteerMyWheel.Core.Model.CronReading.ReaderStateContext}}
+
+
+Represents the context of a cron reading process. It\textquotesingle{}s state is updated after parsing every line of the cron file using the \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser}{Cron\+Parser}} class   
+
+
+Inheritance diagram for Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Reader\+State\+Context\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{df/dfe/class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_ae43aa92cad608350c14d36027d42555b}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_ae43aa92cad608350c14d36027d42555b}} 
+{\bfseries Reader\+State\+Context} (ILogger$<$ \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context}{Reader\+State\+Context}} $>$ logger, \mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_global_entity_repository}{Global\+Entity\+Repository}} DAO)
+\item 
+void \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_a9d0647bacc3de5e82eacd9d0635540af}{Initialize}} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_remote_host}{Remote\+Host}} host)
+\begin{DoxyCompactList}\small\item\em Initializes the actual context by setting it\textquotesingle{}s state to the initial state. As an effect, the current host name is updated.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_ab1901fc15528ce508f70310dd4ca8820}{set\+State}} (\mbox{\hyperlink{interface_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_i_reader_state}{IReader\+State}} state)
+\begin{DoxyCompactList}\small\item\em Updates the state of the actual context.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_af2853269c419cbf7fdff3957bb8d4119}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_af2853269c419cbf7fdff3957bb8d4119}} 
+void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Free the ressource used by the actual context.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_add7d0b3a32827bb0df87c2cbfbbc03e1}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_add7d0b3a32827bb0df87c2cbfbbc03e1}} 
+Event\+Handler {\bfseries State\+Changed}
+\begin{DoxyCompactList}\small\item\em Raised whenever the state of the actual context changes.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_a3fdd7275dc2713b66a44762984cbf30c}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_a3fdd7275dc2713b66a44762984cbf30c}} 
+\mbox{\hyperlink{interface_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_i_reader_state}{IReader\+State}} {\bfseries current\+State}
+\begin{DoxyCompactList}\small\item\em Represents the current state of the cron reading context.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_af860b68bdb3c8f8ae8e457191f1ef7fe}{on\+State\+Changed}} (Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Handler of the State\+Changed event. Logs the new state and calls the handle method of the state.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_a68527f515f562b5180f97711f753da3a}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_a68527f515f562b5180f97711f753da3a}} 
+\mbox{\hyperlink{class_steer_my_wheel_1_1_infrastracture_1_1_connectivity_1_1_repositories_1_1_global_entity_repository}{Global\+Entity\+Repository}} {\bfseries \+\_\+\+DAO}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em A global graph repository of all the entities that inherit from Base\+Entity.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_a26c1731fbb01e8e19902ca5cf6998142}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_a26c1731fbb01e8e19902ca5cf6998142}} 
+string {\bfseries current\+Role}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The current role to be attributed to the newly read scrit executions.  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_ac24e70610760184fad3931d0261ea1e3}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_ac24e70610760184fad3931d0261ea1e3}} 
+string {\bfseries current\+Host\+Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The current host name to which the newly read script executions will be linked in the graph database.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the context of a cron reading process. It\textquotesingle{}s state is updated after parsing every line of the cron file using the \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_cron_parser}{Cron\+Parser}} class  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_a9d0647bacc3de5e82eacd9d0635540af}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_a9d0647bacc3de5e82eacd9d0635540af}} 
+\index{SteerMyWheel.Core.Model.CronReading.ReaderStateContext@{SteerMyWheel.Core.Model.CronReading.ReaderStateContext}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!SteerMyWheel.Core.Model.CronReading.ReaderStateContext@{SteerMyWheel.Core.Model.CronReading.ReaderStateContext}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily void Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Reader\+State\+Context.\+Initialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_entities_1_1_remote_host}{Remote\+Host}}}]{host }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes the actual context by setting it\textquotesingle{}s state to the initial state. As an effect, the current host name is updated.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em host} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_af860b68bdb3c8f8ae8e457191f1ef7fe}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_af860b68bdb3c8f8ae8e457191f1ef7fe}} 
+\index{SteerMyWheel.Core.Model.CronReading.ReaderStateContext@{SteerMyWheel.Core.Model.CronReading.ReaderStateContext}!onStateChanged@{onStateChanged}}
+\index{onStateChanged@{onStateChanged}!SteerMyWheel.Core.Model.CronReading.ReaderStateContext@{SteerMyWheel.Core.Model.CronReading.ReaderStateContext}}
+\doxysubsubsection{\texorpdfstring{onStateChanged()}{onStateChanged()}}
+{\footnotesize\ttfamily virtual void Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Reader\+State\+Context.\+on\+State\+Changed (\begin{DoxyParamCaption}\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Handler of the State\+Changed event. Logs the new state and calls the handle method of the state.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_ab1901fc15528ce508f70310dd4ca8820}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_reader_state_context_ab1901fc15528ce508f70310dd4ca8820}} 
+\index{SteerMyWheel.Core.Model.CronReading.ReaderStateContext@{SteerMyWheel.Core.Model.CronReading.ReaderStateContext}!setState@{setState}}
+\index{setState@{setState}!SteerMyWheel.Core.Model.CronReading.ReaderStateContext@{SteerMyWheel.Core.Model.CronReading.ReaderStateContext}}
+\doxysubsubsection{\texorpdfstring{setState()}{setState()}}
+{\footnotesize\ttfamily void Steer\+My\+Wheel.\+Core.\+Model.\+Cron\+Reading.\+Reader\+State\+Context.\+set\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interface_steer_my_wheel_1_1_core_1_1_model_1_1_cron_reading_1_1_i_reader_state}{IReader\+State}}}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Updates the state of the actual context.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Reader\+State\+Context\+Not\+Initialized\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Model/\+Cron\+Reading/Reader\+State\+Context.\+cs\end{DoxyCompactItemize}

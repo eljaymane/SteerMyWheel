@@ -1,12 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using Neo4jClient;
 using SteerMyWheel.Configuration;
-using SteerMyWheel.Core.Connectivity.ClientProviders;
 using SteerMyWheel.Infrastracture.Connectivity.ClientProviders;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace SteerMyWheel.Domain.Model.WorkerQueue
+namespace SteerMyWheel.Core.Model.WorkersQueue
 {
     public abstract class BaseWorker : IQueuable
     {
@@ -14,7 +13,7 @@ namespace SteerMyWheel.Domain.Model.WorkerQueue
         public GlobalConfig _globalConfig;
         public IClientProvider<GraphClient> _client;
         public IClientProvider<HttpClient> _BitClient;
-        public SSHClientProvider _sshClient;
+        public SSHClient _sshClient;
 
         public abstract Task doWork();
 
@@ -33,7 +32,7 @@ namespace SteerMyWheel.Domain.Model.WorkerQueue
             _BitClient = client;
         }
 
-        public virtual void setSSHClient(SSHClientProvider client)
+        public virtual void setSSHClient(SSHClient client)
         {
             _sshClient = client;
         }

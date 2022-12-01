@@ -1,0 +1,109 @@
+\hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow}{}\doxysection{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Abstract\+Monitor\+Files\+Workflow Class Reference}
+\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow}\index{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow}}
+
+
+Abstract base class of a workflow that monitor files either locally, or remotely.   
+
+
+Inheritance diagram for Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Abstract\+Monitor\+Files\+Workflow\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.898551cm]{d2/d17/class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a83d08a6d52603b52e1822c2fea179863}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a83d08a6d52603b52e1822c2fea179863}} 
+delegate bool {\bfseries File\+Exists\+Delegate} (string path)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a7043e529ae2d2b196245203a381aad53}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a7043e529ae2d2b196245203a381aad53}} 
+delegate bool {\bfseries Directory\+Exists\+Delegate} (string path)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a18f2d637158afe816c137a5e6cd85c04}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a18f2d637158afe816c137a5e6cd85c04}} 
+{\bfseries Abstract\+Monitor\+Files\+Workflow} (string\mbox{[}$\,$\mbox{]} Paths, string name, string description, Date\+Time execution\+Date, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Base\+Workflow}} next, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow}{Base\+Workflow}} previous)
+\item 
+override bool \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a512254858e8b55522cc4a38027e8b9ba}{Can\+Execute}} ()
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a58a5c3f8d0f5397af575f5532e44fe41}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a58a5c3f8d0f5397af575f5532e44fe41}} 
+bool {\bfseries Can\+Go\+Next} ()
+\item 
+override Task \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a13f79ddf6716c98adcd3cd6c91091c9c}{Execute}} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}} context)
+\item 
+abstract override Task \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a30bd8b6debca526c50245223bbc1d74b}{Execute\+Async}} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}} context)
+\item 
+virtual Task \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a26facb3e44d7ff6df61a0a8b9d46a891}{Monitor\+Async}} (File\+Exists\+Delegate \+\_\+\+File\+Exists, Directory\+Exists\+Delegate \+\_\+\+Directory\+Exists, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}} context)
+\begin{DoxyCompactList}\small\item\em The monitoring task that verifies if a file exists either locally or remotely.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_af084c31fd52bfd8879fce95646d96aaa}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_af084c31fd52bfd8879fce95646d96aaa}} 
+void {\bfseries on\+All\+Files\+Are\+Present} (\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}} context)
+\item 
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a74e3705360814bb71d487ea00bb2a77e}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a74e3705360814bb71d487ea00bb2a77e}} 
+void {\bfseries on\+File\+Is\+Present} (File\+Is\+Present\+Event\+Args e, \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}} context)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class of a workflow that monitor files either locally, or remotely.  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a512254858e8b55522cc4a38027e8b9ba}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a512254858e8b55522cc4a38027e8b9ba}} 
+\index{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow}!CanExecute@{CanExecute}}
+\index{CanExecute@{CanExecute}!SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow}}
+\doxysubsubsection{\texorpdfstring{CanExecute()}{CanExecute()}}
+{\footnotesize\ttfamily override bool Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Abstract\+Monitor\+Files\+Workflow.\+Can\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow}{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+Monitoring\+Workflow}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a13f79ddf6716c98adcd3cd6c91091c9c}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a13f79ddf6716c98adcd3cd6c91091c9c}} 
+\index{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow}!Execute@{Execute}}
+\index{Execute@{Execute}!SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily override Task Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Abstract\+Monitor\+Files\+Workflow.\+Execute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}}}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow}{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+Monitoring\+Workflow}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a30bd8b6debca526c50245223bbc1d74b}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a30bd8b6debca526c50245223bbc1d74b}} 
+\index{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow}!ExecuteAsync@{ExecuteAsync}}
+\index{ExecuteAsync@{ExecuteAsync}!SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow}}
+\doxysubsubsection{\texorpdfstring{ExecuteAsync()}{ExecuteAsync()}}
+{\footnotesize\ttfamily abstract override Task Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Abstract\+Monitor\+Files\+Workflow.\+Execute\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}}}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_base_monitoring_workflow}{Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Base\+Monitoring\+Workflow}}.
+
+\mbox{\Hypertarget{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a26facb3e44d7ff6df61a0a8b9d46a891}\label{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_abstractions_1_1_abstract_monitor_files_workflow_a26facb3e44d7ff6df61a0a8b9d46a891}} 
+\index{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow}!MonitorAsync@{MonitorAsync}}
+\index{MonitorAsync@{MonitorAsync}!SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow@{SteerMyWheel.Core.Model.Workflows.Abstractions.AbstractMonitorFilesWorkflow}}
+\doxysubsubsection{\texorpdfstring{MonitorAsync()}{MonitorAsync()}}
+{\footnotesize\ttfamily virtual Task Steer\+My\+Wheel.\+Core.\+Model.\+Workflows.\+Abstractions.\+Abstract\+Monitor\+Files\+Workflow.\+Monitor\+Async (\begin{DoxyParamCaption}\item[{File\+Exists\+Delegate}]{\+\_\+\+File\+Exists,  }\item[{Directory\+Exists\+Delegate}]{\+\_\+\+Directory\+Exists,  }\item[{\mbox{\hyperlink{class_steer_my_wheel_1_1_core_1_1_model_1_1_workflows_1_1_base_workflow_context}{Base\+Workflow\+Context}}}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The monitoring task that verifies if a file exists either locally or remotely.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+\+File\+Exists} & A function that takes a string (path) as input and outputs a bool\\
+\hline
+{\em directory\+Exists} & A function that takes a string (path) as input and outputs a bool\\
+\hline
+{\em context} & The workflow context\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Model/\+Workflows/\+Abstractions/Abstract\+Monitor\+Files\+Workflow.\+cs\end{DoxyCompactItemize}

@@ -1,9 +1,6 @@
 ﻿using SteerMyWheel.Infrastracture.Mailing;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SteerMyWheel.Core.Model.Workflows.Messaging
@@ -22,13 +19,13 @@ namespace SteerMyWheel.Core.Model.Workflows.Messaging
             return true;
         }
 
-        public override Task Execute()
+        public override Task Execute(BaseWorkflowContext context)
         {
             _client.SendAsync(message).Wait();
             return Task.CompletedTask;
         }
 
-        public async override Task ExecuteAsync()
+        public async override Task ExecuteAsync(BaseWorkflowContext context)
         {
             await _client.SendAsync(message);
         }
