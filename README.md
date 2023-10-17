@@ -1,7 +1,7 @@
 ## SteerMyWheel
 
 # Abstract
-This project aims to auto-detect the scripts running on the legacy "Trading expert" remote hosts, and automatically migrate them to the new bitbucket repository. 
+This project aims to auto-detect scripts running on remote hosts, and automatically sync them with any git repository. 
 
 It is based on a "CronReading" mechanism to detect executions, and from their path extract the repository name.
 All the gathered informations are stored in a graph database (Neo4j).
