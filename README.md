@@ -6,8 +6,10 @@ This project aims to auto-detect scripts running on remote hosts, and automatica
 It is based on a "CronReading" mechanism to detect executions, and from their path extract the repository name.
 All the gathered informations are stored in a graph database (Neo4j).
 
-# [WIP] Workflows : 
-The next version will handle workflows. Which means executing scheduled scripts via SSH in a chained fashion. Furthermore, this feature aims to replace all the scripts, because it is easier to maintain one app than a hundred. 
+# Workflows : 
+Worflows are now supported. Which means executing scheduled actions via SSH in a chained fashion. Furthermore, this feature aims to replace all the scripts, because it is easier to maintain one app than a hundred.
+Basic tasks (file execution,awaiting file to be available, time based exec, ssh transfer, ssh command exec) have already been implemented.
+See workflows folder ...
 
 The mechanism is magically simple : 
 Since every scripts performs the same tasks in a different order and for different data (request data via sql or sftp, process it, send it back somewhere or send a mail...)
